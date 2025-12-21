@@ -1,6 +1,7 @@
 using System;
-using _Scripts.Core.Utility;
 using UnityEngine;
+
+using _Scripts.Core.Utility;
 
 namespace Ksy.Scripts.StressSystem
 {
