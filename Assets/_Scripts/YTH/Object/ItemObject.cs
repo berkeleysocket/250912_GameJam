@@ -22,6 +22,7 @@ namespace _Scripts.YTH.Object
         [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
         [SerializeField] private ItemDataEventChannel addItemEventChannel;
         [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
+        [SerializeField] private AlertDataEventChannel alertDataEventChannel;
 
 
         private void Awake()
@@ -51,6 +52,7 @@ namespace _Scripts.YTH.Object
                 }
                 Logging.Log("Can Pick Up");
                 inputSO.OnInteracted += Add;
+                alertDataEventChannel.Raise(new($"- {ItemData.ItemName} -", ItemData.Description, 2.5f, 0.25f));
             }
         }
 
@@ -84,6 +86,7 @@ namespace _Scripts.YTH.Object
             {
                 addItemEventChannel.Raise(new(ItemData.ItemID));
                 Destroy(gameObject);
+                alertDataEventChannel.Raise(new("- 아이템을 획득했습니다. -", ItemData.ItemName, 2.5f, 0.25f));
                 Logging.Log("Add");
             }
             inventoryUpdateEventChannel.OnEvent -= OnInventoryUpdate;
