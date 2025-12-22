@@ -26,7 +26,7 @@ namespace Ksy.Scripts.Player
         public void FilpX(bool value)
         {
             _spRenderer.flipX = value;
-            IsFilp = value;
+            IsFilp = value;/////
         }
     }
 }
