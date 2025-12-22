@@ -30,7 +30,8 @@ namespace AJ._01.Scripts
         public Transform Player { get; private set; }
         [field:SerializeField]public Transform BossCallTransform { get; set; }
         public bool bossCall = false;
-        
+        public TraceChannel traceChannel;
+        [field:SerializeField]public bool FindPlayer { get; set; } 
         public float Speed
         {
             get => speed;
@@ -40,11 +41,11 @@ namespace AJ._01.Scripts
                 AgentCompo.speed = speed;
             }
         }
-
         public bool CanMove => canMove;
         public NavMeshAgent AgentCompo { get; private set; }
         public Animator AnimCompo { get; private set; }  
         public DirectorRenderer RendererCompo { get; private set; }
+        
         private void Awake()
         {
             AgentCompo = GetComponent<NavMeshAgent>();
@@ -64,12 +65,21 @@ namespace AJ._01.Scripts
         {
             if (changeTargetEventChannel != null)
                 changeTargetEventChannel.OnEvent += HandleChangeTarget;
+            if(traceChannel != null)
+                traceChannel.OnEvent += HandleFind;
+        }
+
+        private void HandleFind(Empty b)
+        {
+            FindPlayer = true;
         }
 
         private void OnDisable()
         {
             if (changeTargetEventChannel != null)
                 changeTargetEventChannel.OnEvent -= HandleChangeTarget;
+            if(traceChannel != null)
+                traceChannel.OnEvent -= HandleFind;
         }
     
         private void Update()

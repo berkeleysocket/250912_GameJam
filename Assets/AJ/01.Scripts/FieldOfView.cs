@@ -16,7 +16,7 @@ namespace AJ._01.Scripts
         [SerializeField] private int rayCount = 90;
         [SerializeField] private float viewDistance = 10f;
         [SerializeField] private LayerMask obstacleLayer;
-        [SerializeField] private LayerMask evidence;
+        public LayerMask evidence;
         private Transform _lastEvidence;
         
         
@@ -61,7 +61,7 @@ namespace AJ._01.Scripts
             RotateFov();
             DrawFOV();
         }
-        private bool TryGetEvidenceInFov(out Transform evidenceHit)
+        public bool TryGetEvidenceInFov(out Transform evidenceHit)
         {
             evidenceHit = null;
 

@@ -25,6 +25,8 @@ namespace AJ._01.Scripts.FSM
 
         public virtual void Update()
         {
+            if (Director.FindPlayer)
+                StateMachine.ChangeState(DirectorStateType.Looking);
             /*if (Director.bossCall)
                 Director.HandleChangeTarget(Director.BossCallTransform);
             else

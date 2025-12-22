@@ -7,6 +7,7 @@ namespace AJ._01.Scripts.FSM
     {
         Idle,
         Chase,
+        Looking
     }
 
     public class DirectorStateMachine

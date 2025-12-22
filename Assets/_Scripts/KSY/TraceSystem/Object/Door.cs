@@ -1,6 +1,7 @@
 using UnityEngine;
 using System;
-
+using _Scripts.Core.Structs;
+using AJ._01.Scripts;
 using Ksy.Scripts.TraceSystem;
 
 namespace Ksy.Scripts.Object
@@ -17,10 +18,8 @@ namespace Ksy.Scripts.Object
         public event Action OnOpend;
         public event Action OnClosed;
 
-
-
+        public TraceChannel traceChannel;
         public bool IsOpen {get; private set;}
-
         void Awake()
         {
             animator = GetComponent<Animator>();
@@ -34,6 +33,7 @@ namespace Ksy.Scripts.Object
             if(OpenColider != null)
                 OpenColider.isTrigger = true;
             OnOpend?.Invoke();
+            traceChannel.Raise(Empty.New);
         }
         public void Close()
         {

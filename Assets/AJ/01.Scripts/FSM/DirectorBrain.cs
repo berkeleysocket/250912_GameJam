@@ -16,6 +16,7 @@ namespace AJ._01.Scripts.FSM
         
             _stateMachine.AddState(DirectorStateType.Idle, new DirectorIdleState(_director, "Idle", _stateMachine));
             _stateMachine.AddState(DirectorStateType.Chase, new DirectorChaseState(_director, "Chase", _stateMachine));
+            _stateMachine.AddState(DirectorStateType.Looking, new DirectorLookingState(_director, "Looking", _stateMachine));
         }
         private void Start()
         {
