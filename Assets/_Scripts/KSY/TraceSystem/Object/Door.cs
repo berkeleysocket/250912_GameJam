@@ -7,10 +7,10 @@ namespace Ksy.Scripts.Object
 {
     public class Door : MonoBehaviour, ITraceReactive
     {
-        [SerializeField] private Animator animator;
+        private Animator animator;
         [SerializeField] private Dir openDir;
-        [SerializeField] private BoxCollider2D OpenColider;
-        [SerializeField] private SpriteRenderer FrameRenderer;
+        private BoxCollider2D OpenColider;
+        private SpriteRenderer FrameRenderer;
         
 
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
@@ -20,6 +20,13 @@ namespace Ksy.Scripts.Object
 
 
         public bool IsOpen {get; private set;}
+
+        void Awake()
+        {
+            animator = GetComponent<Animator>();
+            OpenColider = GetComponent<BoxCollider2D>();
+            FrameRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+        }
 
         public void Open()
         {
@@ -43,7 +50,7 @@ namespace Ksy.Scripts.Object
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(OpenColider.isTrigger)
+            if(OpenColider.isTrigger && !collision.isTrigger)
             {
                 // Debug.Log($"{collision.name}");
                 FrameRenderer.sortingOrder = 11;
@@ -51,7 +58,7 @@ namespace Ksy.Scripts.Object
         }
         void OnTriggerExit2D(Collider2D collision)
         {
-            if(OpenColider.isTrigger)
+            if(OpenColider.isTrigger && !collision.isTrigger)
             {
                 // Debug.Log($"{collision.name}");
                 FrameRenderer.sortingOrder = 0;
