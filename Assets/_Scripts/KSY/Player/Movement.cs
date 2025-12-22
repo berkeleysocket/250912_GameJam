@@ -1,13 +1,27 @@
+using Ksy.Scripts.StressSystem;
 using Ksy.Utility;
+using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Ksy.Scripts.Player
 {
     public class Movement : MonoBehaviour
     {
         [SerializeField] private Rigidbody2D body;
-        [SerializeField] private float maxSpeed = 5f;
-        public float currentVelocity {get; private set;} = 0f;
+        [SerializeField] public float MaxSpeed
+        {
+            get
+            {
+                return _maxSpeed;
+            }
+            set
+            {
+                _maxSpeed = Mathf.Clamp(value,1,5);
+            }
+        }
+        [SerializeField] private float _maxSpeed = 5f;
+        [SerializeField] private float currentVelocity = 0f;
         public NotifyValue<bool> Notify_IsMove {get; private set;} = new NotifyValue<bool>();
         public NotifyValue<Vector2> Notify_Dir {get; private set;} = new NotifyValue<Vector2>();
 
@@ -24,6 +38,9 @@ namespace Ksy.Scripts.Player
         private void Update()
         {
             currentVelocity = CalculateSpeed(Notify_Dir.Value);
+
+            if(Keyboard.current.spaceKey.wasPressedThisFrame) StressManager.Instance?.IncreaseStress(1);
+            if(Keyboard.current.gKey.wasPressedThisFrame) StressManager.Instance?.DecreaseStress(1);
         }
         private void FixedUpdate()
         {
@@ -58,7 +75,7 @@ namespace Ksy.Scripts.Player
                 currentVelocity -= _deacceleration * Time.deltaTime / 1.5f;
             }
 
-            return Mathf.Clamp(currentVelocity, 0, maxSpeed);
+            return Mathf.Clamp(currentVelocity, 0, MaxSpeed);
         }
     }
 }

@@ -1,6 +1,7 @@
 using UnityEngine;
 
 using _Scripts.Core.Input;
+using Ksy.Scripts.StressSystem;
 
 namespace Ksy.Scripts.Player
 {
@@ -25,6 +26,25 @@ namespace Ksy.Scripts.Player
             {
                 MovementCompo.Notify_IsMove.OnChangedValue += AnimationCompo.SetIsMove;
                 MovementCompo.Notify_Dir.OnChangedValue += AnimationCompo.SetMoveDir;
+            }
+            StressManager.Instance.StressIncreased += (args)=> MovementCompo.MaxSpeed -= args.applyValue;
+            StressManager.Instance.StressDecreased += (args)=> MovementCompo.MaxSpeed += args.applyValue;
+        }
+
+        void OnDisable()
+        {
+            if(InputEvent != null && MovementCompo != null)
+            {
+                InputEvent.OnMoved -= MovementCompo.Move;
+            }
+            if(MovementCompo != null && RednererCompo != null)
+            {
+                MovementCompo.Notify_Dir.OnChangedValue -= RednererCompo.FilpX;
+            }
+            if(MovementCompo != null && AnimationCompo != null)
+            {
+                MovementCompo.Notify_IsMove.OnChangedValue -= AnimationCompo.SetIsMove;
+                MovementCompo.Notify_Dir.OnChangedValue -= AnimationCompo.SetMoveDir;
             }
         }
     }

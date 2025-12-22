@@ -7,7 +7,7 @@ namespace Ksy.Scripts.StressSystem
             this.currnetValue = currnetValue;
             this.applyValue = applyValue;
         }
-        int currnetValue;
-        int applyValue;
+        public int currnetValue;
+        public int applyValue;
     }
 }

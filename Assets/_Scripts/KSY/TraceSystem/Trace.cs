@@ -1,7 +1,8 @@
-using System.Collections.Generic;
+ using System.Collections.Generic;
 using UnityEngine;
 
 using _Scripts.Core.Utility;
+using UnityEngine.InputSystem;
 
 namespace Ksy.Scripts.TraceSystem
 {
@@ -10,7 +11,15 @@ namespace Ksy.Scripts.TraceSystem
         public float findSize = 5f;
         public LayerMask findLayer;
 
-        public void Effect()
+        void Update()
+        {
+            if(Keyboard.current.spaceKey.wasPressedThisFrame)
+            {
+                Interaction(gameObject);
+            }
+        }
+
+        public void Interaction(GameObject interactor)
         {
             var traceReactiveObj = FindInteractionObject();
 
@@ -28,27 +37,31 @@ namespace Ksy.Scripts.TraceSystem
             Collider2D[] objects = Physics2D.OverlapBoxAll(pos, size, angle, findLayer);
 
             if(objects.Length == 0) return null;
-            List<float> distances = new List<float>(objects.Length);
-            Dictionary<float,Collider2D> objectAndDistances = new Dictionary<float, Collider2D>();
+            List<float> sortDistances = new List<float>(objects.Length);
+            Dictionary<float,ITraceReactive> objectAndDistances = new Dictionary<float, ITraceReactive>();
 
             foreach(var obj in objects)
             {
                 if(obj.transform == transform) continue;
 
                 var dis = Vector2.Distance(transform.position, obj.transform.position);
-                distances.Add(dis);
-                objectAndDistances.Add(dis,obj);
+
+                if(!objectAndDistances.ContainsKey(dis) && obj.TryGetComponent(out ITraceReactive sc))
+                {
+                    sortDistances.Add(dis);
+                    objectAndDistances.Add(dis,sc);
+                }
             }
 
-            distances.Sort();
+            sortDistances.Sort();
 
             if(objectAndDistances != null && objectAndDistances.Count != 0)
             {
-                float distance = distances[0];
+                float distance = sortDistances[0];
 
                 if(objectAndDistances.ContainsKey(distance))
                 {
-                    var sc = objectAndDistances[distance].GetComponent<ITraceReactive>();
+                    var sc = objectAndDistances[distance];
                     return sc;
                 }
             }

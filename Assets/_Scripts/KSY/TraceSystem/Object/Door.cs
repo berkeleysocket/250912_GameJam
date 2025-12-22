@@ -8,6 +8,7 @@ namespace Ksy.Scripts.Object
     public class Door : MonoBehaviour, ITraceReactive
     {
         public event Action OnOpend;
+        public event Action OnClosed;
 
         public bool IsOpen {get; private set;}
 
@@ -15,8 +16,15 @@ namespace Ksy.Scripts.Object
         {
             IsOpen = true;
             GetComponent<BoxCollider2D>().isTrigger = true;
+            OnOpend?.Invoke();
         }
-        public void TraceReactiveEffect()
+        public void Close()
+        {
+            IsOpen = false;
+            GetComponent<BoxCollider2D>().isTrigger = false;
+            OnClosed?.Invoke();
+        }
+        public void Reactive()
         {
             Open();
         }
