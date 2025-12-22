@@ -4,6 +4,7 @@ using _Scripts.Core.Utility;
 using _Scripts.YTH.Inventory;
 using Ksy.Scripts.Player;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 using UnityEngine.UI;
 
 namespace _Scripts.YTH.Item
@@ -13,84 +14,70 @@ namespace _Scripts.YTH.Item
         [field: SerializeField] public ItemDataSO ItemData { get; private set; }
 
         [Header("Item Object Settings")]
-        [SerializeField] private float pickupDistance = 2f;
-        [SerializeField] private float pickupTime = 1f;
+        [SerializeField] private float pickupDistance;
         [SerializeField] private InputSO inputSO;
         [SerializeField] private GameObject keyPrompt;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private CircleCollider2D itemCollider;
+
         [Header("Event Channels")]
         [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
         [SerializeField] private ItemDataEventChannel addItemEventChannel;
         [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
 
-        private Player m_player;
-
-        private float m_pickupTime;
-        private bool m_canPickup;
-        private bool m_requestSent;
-        private bool m_promptShown;
-
-        private float m_pickupDistanceSqr;
 
         private void Awake()
         {
-            m_player = FindAnyObjectByType<Player>();
-            m_pickupDistanceSqr = pickupDistance * pickupDistance;
-
-            inputSO.OnInteracted += TryPickUp;
-
-            // 초기 UI
-            if (keyPrompt) keyPrompt.SetActive(false);
+            spriteRenderer.sprite = ItemData.Icon;
+            keyPrompt.SetActive(false);
+            itemCollider.radius = pickupDistance;
         }
 
-        private void Update()
+        public void SetItemData(ItemDataSO itemData)
         {
-            if (!m_player) return;
+            ItemData = itemData;
+            spriteRenderer.sprite = ItemData.Icon;
+        }
 
-            // 거리 체크 (sqrt 제거)
-            Vector3 delta = m_player.transform.position - transform.position;
-            m_canPickup = delta.sqrMagnitude <= m_pickupDistanceSqr;
-
-            // 프롬프트는 상태 변할 때만
-            if (keyPrompt && m_promptShown != m_canPickup)
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
             {
-                m_promptShown = m_canPickup;
-                keyPrompt.SetActive(m_canPickup);
-            }
-            if (!m_requestSent && m_pickupTime >= pickupTime)
-            {
-                m_requestSent = true;
-                inventoryUpdateEventChannel.OnEvent += OnInventoryUpdate;
-                canAddItemEventChannel.Raise(new ItemData(ItemData.ItemID));
+                Logging.Log("Can Pick Up");
+                keyPrompt.SetActive(true);
+                inputSO.OnInteracted += Add;
             }
         }
 
-        private void OnDestroy()
+        private void OnTriggerExit2D(Collider2D collision)
         {
-            inputSO.OnInteracted -= TryPickUp;
-            inventoryUpdateEventChannel.OnEvent -= OnInventoryUpdate; // 안전하게 제거
+            if (collision.CompareTag("Player"))
+            {
+                Logging.Log("Can't Pick Up");
+                keyPrompt.SetActive(false);
+                inputSO.OnInteracted -= Add;
+            }
         }
 
-        private void TryPickUp(bool interacted)
+
+        public void Add()
         {
-            m_requestSent = true;
+            Logging.Log("Can Add");
             inventoryUpdateEventChannel.OnEvent += OnInventoryUpdate;
-            canAddItemEventChannel.Raise(new ItemData(ItemData.ItemID));
+            canAddItemEventChannel.Raise(new(ItemData.ItemID));
         }
 
         private void OnInventoryUpdate(bool active)
         {
-            inventoryUpdateEventChannel.OnEvent -= OnInventoryUpdate;
-
-            if (!active) // 인벤토리 꽉 찼다 등
+            if (active)
             {
-                // 다음 시도 가능하게 풀어주고, 게이지도 취향껏 유지/리셋
-                m_requestSent = false;
-                return;
+                addItemEventChannel.Raise(new(ItemData.ItemID));
+                Destroy(gameObject);
+                Logging.Log("Add");
             }
-
-            addItemEventChannel.Raise(new ItemData(ItemData.ItemID));
-            Destroy(gameObject);
+            inventoryUpdateEventChannel.OnEvent -= OnInventoryUpdate;
         }
+
     }
 
 }
