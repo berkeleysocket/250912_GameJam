@@ -17,7 +17,7 @@ namespace Ksy.Scripts.Player
         public void FilpX(Vector2 dir)
         {
             if (dir == Vector2.zero) return;
-            bool flip = dir.x < 0;
+            bool flip = !(dir.x < 0);
 
             _spRenderer.flipX = flip;
             IsFilp = flip;

@@ -6,7 +6,7 @@ namespace Ksy.Scripts.Player
     {
         private Animator _animator;
         private readonly int _hash_IsMove = Animator.StringToHash("IsMove");
-        private readonly int _hash_MoveDirX = Animator.StringToHash("MoveDirX");
+        private readonly int _hash_MoveDirX = Animator.StringToHash("MoveHorizontal");
         private readonly int _hash_MoveDirY = Animator.StringToHash("MoveDirY");        
 
         #region UnityEvent
@@ -22,7 +22,7 @@ namespace Ksy.Scripts.Player
         public void SetMoveDir(Vector2 dir)
         {
             if(dir == Vector2.zero) return;
-            _animator.SetFloat(_hash_MoveDirX, dir.x);
+            _animator.SetFloat(_hash_MoveDirX, Mathf.Abs(dir.x));
             _animator.SetFloat(_hash_MoveDirY, dir.y);
         }
     }
