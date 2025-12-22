@@ -1,6 +1,7 @@
  using System;
  using System.Collections.Generic;
-using UnityEngine;
+ using _Scripts.Core.Structs;
+ using UnityEngine;
 
 using _Scripts.Core.Utility;
 using AJ._01.Scripts;
@@ -15,6 +16,7 @@ namespace Ksy.Scripts.TraceSystem
         public LayerMask findLayer;
         public float distance = 2f;
         private int count = 0;
+        public TraceChannel traceChannel;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
@@ -22,7 +24,7 @@ namespace Ksy.Scripts.TraceSystem
             {
                 if (count >= 1)
                 {
-                    //director.SetMove(false);
+                    traceChannel.Raise(Empty.New);
                     Destroy(gameObject);
                 }
                 count++;
@@ -38,10 +40,11 @@ namespace Ksy.Scripts.TraceSystem
                 traceReactiveObj.Reactive();
                 if (count < 2)
                 {
+                    GetComponent<SpriteRenderer>().DOFade(0f, 0.5f);
                     Vector3 i = traceReactiveObj.GetGameObject().transform.position;
                     Vector3 j = (i - transform.position).normalized;
                     Vector2 dir = j.normalized;
-
+                    
                     Collider2D col = traceReactiveObj.GetGameObject().GetComponent<Collider2D>();
                     Vector2 extents = col.bounds.size;
                     float moveDistance = Mathf.Abs(dir.x) > Mathf.Abs(dir.y) ? extents.x : extents.y;

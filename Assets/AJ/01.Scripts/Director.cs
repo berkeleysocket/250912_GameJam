@@ -18,7 +18,7 @@ namespace AJ._01.Scripts
         {
             get
             {
-                if (target == null) return Player;
+                if (!IsValid(target)) return Player;
 
                 return target;
             }
@@ -30,6 +30,7 @@ namespace AJ._01.Scripts
         public Transform Player { get; private set; }
         [field:SerializeField]public Transform BossCallTransform { get; set; }
         public bool bossCall = false;
+        public float bossCallTime = 10f;
         public TraceChannel traceChannel;
         [field:SerializeField]public bool FindPlayer { get; set; } 
         public float Speed
@@ -87,6 +88,11 @@ namespace AJ._01.Scripts
             if (AgentCompo != null)
                 AgentCompo.isStopped = !canMove;
         }
+        private bool IsValid(Transform t)
+        {
+            return t != null && t.gameObject != null;
+        }
+
         public void HandleChangeTarget(Transform t)
         {
             Target = t;

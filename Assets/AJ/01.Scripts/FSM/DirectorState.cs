@@ -9,6 +9,7 @@ namespace AJ._01.Scripts.FSM
         protected readonly int AnimHash;
         private static readonly int MoveXHash = Animator.StringToHash("MoveX");
         private static readonly int MoveYHash = Animator.StringToHash("MoveY");
+        private float _timer;
         public DirectorState(Director director, string animName, DirectorStateMachine stateMachine)
         {
             Director = director;
@@ -21,16 +22,34 @@ namespace AJ._01.Scripts.FSM
             
             Director.AnimCompo.SetFloat(MoveXHash, 0f);
             Director.AnimCompo.SetFloat(MoveYHash, 0f);
+            _timer = 0f;
         }
 
         public virtual void Update()
         {
             if (Director.FindPlayer)
                 StateMachine.ChangeState(DirectorStateType.Looking);
-            /*if (Director.bossCall)
+            if (Director.bossCall)
+            {
+                Debug.Log("BossCall");
+                Director.SetMove(true);
                 Director.HandleChangeTarget(Director.BossCallTransform);
+                Director.UpdateAgentTarget();
+                if (Director.AgentCompo.remainingDistance <= Director.AgentCompo.stoppingDistance)
+                {
+                    Debug.Log("Boss Call");
+                    _timer += Time.deltaTime;
+                    if (_timer > Director.bossCallTime)
+                    {
+                        Director.HandleChangeTarget(Director.Player);
+                        Director.bossCall = false;
+                    }
+                }
+            }
             else
-                Director.HandleChangeTarget(Director.Player);*/
+            {
+                Director.HandleChangeTarget(Director.Player);
+            }
         }
         
 
