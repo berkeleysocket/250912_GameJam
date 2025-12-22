@@ -332,7 +332,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 9211567989666686257}
   m_Direction: 2
   m_Value: 1
-  m_Size: 1
+  m_Size: 0.24358974
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -507,7 +507,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &9166078536305472511
 RectTransform:
   m_ObjectHideFlags: 0
@@ -632,6 +632,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: a6d04c739d9ab6b408eb8f45f6b48ddc, type: 2}
   - {fileID: 11400000, guid: 044338c39ec87ce4e83ab614e0406b3b, type: 2}
   - {fileID: 11400000, guid: 30d78b5c4c85bed4f8c3b82abeaa0101, type: 2}
+  toggleGuideEventChannel: {fileID: 11400000, guid: f5d3ca6b2778a6947b81dc33b95263c3, type: 2}
 --- !u!1 &8963788334945452813
 GameObject:
   m_ObjectHideFlags: 0
