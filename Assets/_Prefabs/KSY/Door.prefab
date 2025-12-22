@@ -167,7 +167,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3649418933608808218}
   - component: {fileID: 290235339332921618}
-  m_Layer: 0
+  m_Layer: 28
   m_Name: Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -204,7 +204,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   openDir: 1
-  OpenColider: {fileID: 280399177849459218}
 --- !u!1 &5906807555554912491
 GameObject:
   m_ObjectHideFlags: 0

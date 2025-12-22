@@ -102,7 +102,7 @@ namespace AJ._01.Scripts
             AgentCompo.SetDestination(Target.position);
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out Trace trace))
             {

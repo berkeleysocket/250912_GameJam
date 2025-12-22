@@ -16,13 +16,13 @@ namespace Ksy.Scripts.TraceSystem
         public float distance = 2f;
         private int count = 0;
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent(out Director director))
             {
-                if (count >= 2)
+                if (count >= 1)
                 {
-                    director.SetMove(false);
+                    //director.SetMove(false);
                     Destroy(gameObject);
                 }
                 count++;
@@ -59,7 +59,6 @@ namespace Ksy.Scripts.TraceSystem
             float angle = 0f;
 
             Collider2D[] objects = Physics2D.OverlapBoxAll(pos, size, angle, findLayer);
-
             if(objects.Length == 0) return null;
             List<float> sortDistances = new List<float>(objects.Length);
             Dictionary<float,ITraceReactive> objectAndDistances = new Dictionary<float, ITraceReactive>();
@@ -69,8 +68,8 @@ namespace Ksy.Scripts.TraceSystem
                 if(obj.transform == transform) continue;
 
                 var dis = Vector2.Distance(transform.position, obj.transform.position);
-
-                if(!objectAndDistances.ContainsKey(dis) && obj.TryGetComponent(out ITraceReactive sc))
+                if (obj.transform.parent == null) continue;
+                if(!objectAndDistances.ContainsKey(dis) && obj.transform.parent.TryGetComponent(out ITraceReactive sc))
                 {
                     sortDistances.Add(dis);
                     objectAndDistances.Add(dis,sc);
@@ -79,17 +78,23 @@ namespace Ksy.Scripts.TraceSystem
 
             sortDistances.Sort();
 
-            if(objectAndDistances != null && objectAndDistances.Count != 0)
+            if(objectAndDistances.Count != 0)
             {
-                float distance = sortDistances[0];
+                float sortDistance = sortDistances[0];
 
-                if(objectAndDistances.ContainsKey(distance))
+                if(objectAndDistances.ContainsKey(sortDistance))
                 {
-                    var sc = objectAndDistances[distance];
+                    var sc = objectAndDistances[sortDistance];
                     return sc;
                 }
             }
             return null;
+        }
+
+        private void OnDrawGizmos()
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireCube(transform.position, Vector3.one * findSize);
         }
     }
 }

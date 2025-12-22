@@ -25,7 +25,6 @@ namespace AJ._01.Scripts.FSM.States
 
             if (dist > Director.AgentCompo.stoppingDistance)
             {
-                Director.SetMove(true);
                 Director.UpdateAgentTarget();
                 StateMachine.ChangeState(DirectorStateType.Chase);
                 return;

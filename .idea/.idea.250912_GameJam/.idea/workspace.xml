@@ -4,7 +4,23 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="" />
+    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene/NavMesh-NavMeshSurface.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene/NavMesh-NavMeshSurface.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/States/DirectorIdleState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/States/DirectorIdleState.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_IdleBack-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_IdleBack-Sheet.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_IdleFront-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_IdleFront-Sheet.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_IdleLeft_Right-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_IdleLeft_Right-Sheet.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_Run-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_Run-Sheet.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_RunBack.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_RunBack.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_RunFront-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/07.Sprite/Enemy/Enemy_RunFront-Sheet.png.meta" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Prefabs/KSY/Door.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Prefabs/KSY/Door.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/KSY/TraceSystem/Object/Door.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/KSY/TraceSystem/Object/Door.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/KSY/TraceSystem/Trace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/KSY/TraceSystem/Trace.cs" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Sprites/KSY/Player/Player_Idle_Left_Right-Sheet.png.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Sprites/KSY/Player/Player_Idle_Left_Right-Sheet.png.meta" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,7 +31,9 @@
   </component>
   <component name="HighlightingSettingsPerFile">
     <setting file="file://$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" root0="FORCE_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/25ce29052dfe4e49a635a42f7798806b1e0000/9b/15941dad/Component.cs" root0="FORCE_HIGHLIGHTING" />
     <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/DecompilerCache/decompiler/25ce29052dfe4e49a635a42f7798806b1e0000/9c/39c6bea2/Transform.cs" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$APPLICATION_CONFIG_DIR$/resharper-host/SourcesCache/d44b17e136d09081da1e8fd0e8c83fde60e11818b9f2442d7ed8cb733fae895e/System.Collections.Generic.cs" root0="SKIP_HIGHLIGHTING" />
   </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 1
@@ -102,6 +120,7 @@
       <workItem from="1766326063850" duration="2575000" />
       <workItem from="1766363024927" duration="7072000" />
       <workItem from="1766401911375" duration="1593000" />
+      <workItem from="1766409410455" duration="3472000" />
     </task>
     <servers />
   </component>
