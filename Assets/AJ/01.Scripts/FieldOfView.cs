@@ -6,6 +6,7 @@ using UnityEngine;
 
 namespace AJ._01.Scripts
 {
+    [AddComponentMenu("Director/FieldOfView")]
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
     public class FieldOfView : MonoBehaviour
@@ -16,8 +17,10 @@ namespace AJ._01.Scripts
         [SerializeField] private float viewDistance = 10f;
         [SerializeField] private LayerMask obstacleLayer;
         [SerializeField] private LayerMask evidence;
+        
         private bool isTargetInFov = false;
         [SerializeField] private ChangeTargetEventChannel onTargetInFov; 
+        
         private Mesh mesh;
 
         private void Awake()
@@ -27,18 +30,8 @@ namespace AJ._01.Scripts
 
         private void Start()
         {
-            mesh = new Mesh
-            {
-                name = "FOV"
-            };
+            mesh = new Mesh { name = "FOV" };
             GetComponent<MeshFilter>().mesh = mesh;
-        }
-        
-
-        private void RotateFov()
-        {
-            Vector2 dir = ((Vector2)director.AgentCompo.steeringTarget - (Vector2)transform.position).normalized;
-            transform.rotation = Quaternion.Euler(0, 0, GetAngleFromVector(dir));
         }
 
         private void Update()
@@ -51,6 +44,7 @@ namespace AJ._01.Scripts
             else if(!direct && isTargetInFov)
             {
                 isTargetInFov = false;
+                onTargetInFov.Raise(director.Player);
             }
         }
 
@@ -59,9 +53,15 @@ namespace AJ._01.Scripts
             RotateFov();
             DrawFOV();
         }
+        private void RotateFov()
+        {
+            Vector2 dir = ((Vector2)director.AgentCompo.steeringTarget - (Vector2)transform.position).normalized;
+            transform.rotation = Quaternion.Euler(0, 0, GetAngleFromVector(dir));
+        }
 
         private void DrawFOV()
         {
+            if (mesh == null) return;
             mesh.Clear();
             
             float startAngle = transform.eulerAngles.z + fov * 0.5f;
@@ -104,19 +104,20 @@ namespace AJ._01.Scripts
         }
         public bool IsInFov()
         {
+            if (director == null) return false;
+            if (director.Target == null) return false;
+            
             Vector2 dir = director.Target.position - transform.position;
             float dist = dir.magnitude;
 
             if (dist > viewDistance)
                 return false;
 
-            if (Vector2.Angle(transform.right, dir) > fov * 0.5f)
-                return false;
-
+            if (Vector2.Angle(transform.right, dir) > fov * 0.5f) return false;
+            
             RaycastHit2D block = Physics2D.Raycast(transform.position, dir.normalized, dist, obstacleLayer);
-            if (block.collider != null)
-                return false;
-
+            if (block.collider != null) return false;
+            
             RaycastHit2D hit = Physics2D.Raycast(transform.position,dir.normalized, dist,evidence);
             if (hit.collider != null)
             {
@@ -124,7 +125,6 @@ namespace AJ._01.Scripts
                 Logging.Log("FOV hit: " + hit.transform.name);
                 return true;
             }
-            
             return false;
         }
         private Vector2 GetVectorFromAngle(float angle)
