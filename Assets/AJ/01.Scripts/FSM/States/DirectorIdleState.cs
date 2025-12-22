@@ -20,17 +20,13 @@ namespace AJ._01.Scripts.FSM.States
         public override void Update()
         {
             base.Update();
-            Debug.Log("isOnNavMesh : " + Director.AgentCompo.isOnNavMesh);
-            Debug.Log("hasPath : " + Director.AgentCompo.hasPath);
-            Debug.Log("pathPending : " + Director.AgentCompo.pathPending);
-            Debug.Log("isStopped : " + Director.AgentCompo.isStopped);
-            Debug.Log("destination : " + Director.AgentCompo.destination);
+            UpdateAnimationBasedOnVelocity();
+            float dist = Vector2.Distance(Director.transform.position, Director.Target.position);
 
-            if (Director.Target.position.sqrMagnitude > Director.AgentCompo.stoppingDistance)
+            if (dist > Director.AgentCompo.stoppingDistance)
             {
-                Director.SetMove(true);
+                Director.SetMove(true);      
                 Director.UpdateAgentTarget();
-                Logging.Log("ChangeChaseState");
                 StateMachine.ChangeState(DirectorStateType.Chase);
                 return;
             }
