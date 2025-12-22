@@ -8,10 +8,10 @@ namespace Ksy.Scripts.StressSystem
     public class StressSystem : MonoSingleton<StressSystem>
     {
         //current value, parm value
-        public event Action<int,int> StressIncreased;
-        public event Action<int,int> StressDecreased;
-        public event Action<int,int> StressReachedMax;
-        public event Action<int,int> StressReachedMin;
+        public event Action<StressEventArgs> StressIncreased;
+        public event Action<StressEventArgs> StressDecreased;
+        public event Action<StressEventArgs> StressReachedMax;
+        public event Action<StressEventArgs> StressReachedMin;
 
         [field : SerializeField] public int CurrentStress {get; private set;}
         [field : SerializeField] public int InitStress {get; private set;} = 0;
@@ -37,8 +37,10 @@ namespace Ksy.Scripts.StressSystem
             after = CurrentStress;
             increaseValue = after - before;
 
-            StressIncreased.Invoke(CurrentStress, increaseValue);
-            if(CurrentStress == MaxStress) StressReachedMax.Invoke(CurrentStress, increaseValue);
+            var args = new StressEventArgs(CurrentStress, increaseValue);
+
+            StressIncreased.Invoke(args);
+            if(CurrentStress == MaxStress) StressReachedMax.Invoke(args);
         }   
         public void DecreaseStress(int value)
         {
@@ -53,8 +55,10 @@ namespace Ksy.Scripts.StressSystem
             after = CurrentStress;
             decreaseValue = before - after;
 
-            StressDecreased.Invoke(CurrentStress, decreaseValue);
-            if(CurrentStress == MinStress) StressReachedMin.Invoke(CurrentStress, decreaseValue);
+            var args = new StressEventArgs(CurrentStress, decreaseValue);
+
+            StressDecreased.Invoke(args);
+            if(CurrentStress == MinStress) StressReachedMin.Invoke(args);
         }
     }
 }
