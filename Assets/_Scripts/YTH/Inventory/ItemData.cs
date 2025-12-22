@@ -6,7 +6,6 @@ namespace _Scripts.Core.YTH.Inventory
     public class ItemData
     {
         public int itemID;
-        public int count;
 
         public ItemData(int itemID)
         {
