@@ -9,6 +9,7 @@ namespace AJ._01.Scripts.FSM
         private Director _director;
         private FieldOfView _fov;
         private LayerMask _evidenceMask;
+        public bool IsAnimationEnd { get; set; }
         private void Awake()
         {
             _director = GetComponent<Director>();
@@ -20,11 +21,16 @@ namespace AJ._01.Scripts.FSM
         private void Start()
         {
             _animator.OnTraceStart += FindPlayer;
-            _animator.OnTraceEnd += () => _director.FindPlayer = false;
+            _animator.OnTraceEnd += () =>
+            {
+                _director.FindPlayer = false;
+                IsAnimationEnd = true;
+            };
         }
 
         private void FindPlayer()
         {
+            IsAnimationEnd = false;
             _fov.evidence = LayerMask.NameToLayer("Player");
             var d = _fov.TryGetEvidenceInFov(out Transform s);
             _director.Target = s;

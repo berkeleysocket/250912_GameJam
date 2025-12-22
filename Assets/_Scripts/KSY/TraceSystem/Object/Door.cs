@@ -18,7 +18,6 @@ namespace Ksy.Scripts.Object
         public event Action OnOpend;
         public event Action OnClosed;
 
-        public TraceChannel traceChannel;
         public bool IsOpen {get; private set;}
         void Awake()
         {
@@ -33,7 +32,6 @@ namespace Ksy.Scripts.Object
             if(OpenColider != null)
                 OpenColider.isTrigger = true;
             OnOpend?.Invoke();
-            traceChannel.Raise(Empty.New);
         }
         public void Close()
         {
