@@ -107,7 +107,16 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""id"": ""852140f2-7766-474d-8707-702459ba45f3"",
                     ""expectedControlType"": """",
                     ""processors"": """",
-                    ""interactions"": ""Hold"",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Use"",
+                    ""type"": ""Button"",
+                    ""id"": ""aadab630-39c0-488b-90e4-0be99f275133"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
                     ""initialStateCheck"": false
                 },
                 {
@@ -123,6 +132,51 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""name"": ""Inventory"",
                     ""type"": ""Button"",
                     ""id"": ""e17f8979-cd9b-433d-bae3-dd488fe687da"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""One"",
+                    ""type"": ""Button"",
+                    ""id"": ""f61756b4-4bab-43c9-a6ab-cd23a8f3b9df"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Two"",
+                    ""type"": ""Button"",
+                    ""id"": ""281e8ee4-c3c2-4eaa-a5e3-333461c16d85"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Three"",
+                    ""type"": ""Button"",
+                    ""id"": ""d7a94c14-5cfd-4235-9b2e-d6d72d38f7b1"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Four"",
+                    ""type"": ""Button"",
+                    ""id"": ""b2714a59-b8ac-4e13-9062-3bd62bb311e7"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Five"",
+                    ""type"": ""Button"",
+                    ""id"": ""32282e5f-3c1e-46a2-93fd-a8ed5fc5bc99"",
                     ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
@@ -209,12 +263,78 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""ad057a6b-941a-41ee-81f1-a36e1fa67593"",
+                    ""path"": ""<Keyboard>/q"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard&Mouse"",
+                    ""action"": ""Use"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""00e1c33c-125d-4f10-855f-7a072d8f6483"",
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""cc76d12b-65e5-4123-b54f-a124e4a755b9"",
+                    ""path"": ""<Keyboard>/1"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""One"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1a0b5e90-198b-4ed7-b6c8-b0bfa5fb357a"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Two"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""648abaf8-179a-4a1c-b531-2ad0538db7a4"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Three"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5476a405-0f1c-43a2-9a0a-84e5b097f054"",
+                    ""path"": ""<Keyboard>/4"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Four"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e137fb95-76b5-41be-91f7-ec09ac403eca"",
+                    ""path"": ""<Keyboard>/5"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Five"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -804,8 +924,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player = asset.FindActionMap("Player", throwIfNotFound: true);
         m_Player_Move = m_Player.FindAction("Move", throwIfNotFound: true);
         m_Player_Interact = m_Player.FindAction("Interact", throwIfNotFound: true);
+        m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_One = m_Player.FindAction("One", throwIfNotFound: true);
+        m_Player_Two = m_Player.FindAction("Two", throwIfNotFound: true);
+        m_Player_Three = m_Player.FindAction("Three", throwIfNotFound: true);
+        m_Player_Four = m_Player.FindAction("Four", throwIfNotFound: true);
+        m_Player_Five = m_Player.FindAction("Five", throwIfNotFound: true);
         // UI
         m_UI = asset.FindActionMap("UI", throwIfNotFound: true);
         m_UI_Navigate = m_UI.FindAction("Navigate", throwIfNotFound: true);
@@ -901,8 +1027,14 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private List<IPlayerActions> m_PlayerActionsCallbackInterfaces = new List<IPlayerActions>();
     private readonly InputAction m_Player_Move;
     private readonly InputAction m_Player_Interact;
+    private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_One;
+    private readonly InputAction m_Player_Two;
+    private readonly InputAction m_Player_Three;
+    private readonly InputAction m_Player_Four;
+    private readonly InputAction m_Player_Five;
     /// <summary>
     /// Provides access to input actions defined in input action map "Player".
     /// </summary>
@@ -923,6 +1055,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// </summary>
         public InputAction @Interact => m_Wrapper.m_Player_Interact;
         /// <summary>
+        /// Provides access to the underlying input action "Player/Use".
+        /// </summary>
+        public InputAction @Use => m_Wrapper.m_Player_Use;
+        /// <summary>
         /// Provides access to the underlying input action "Player/Sprint".
         /// </summary>
         public InputAction @Sprint => m_Wrapper.m_Player_Sprint;
@@ -930,6 +1066,26 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Inventory".
         /// </summary>
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/One".
+        /// </summary>
+        public InputAction @One => m_Wrapper.m_Player_One;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Two".
+        /// </summary>
+        public InputAction @Two => m_Wrapper.m_Player_Two;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Three".
+        /// </summary>
+        public InputAction @Three => m_Wrapper.m_Player_Three;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Four".
+        /// </summary>
+        public InputAction @Four => m_Wrapper.m_Player_Four;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Five".
+        /// </summary>
+        public InputAction @Five => m_Wrapper.m_Player_Five;
         /// <summary>
         /// Provides access to the underlying input action map instance.
         /// </summary>
@@ -962,12 +1118,30 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @Use.started += instance.OnUse;
+            @Use.performed += instance.OnUse;
+            @Use.canceled += instance.OnUse;
             @Sprint.started += instance.OnSprint;
             @Sprint.performed += instance.OnSprint;
             @Sprint.canceled += instance.OnSprint;
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @One.started += instance.OnOne;
+            @One.performed += instance.OnOne;
+            @One.canceled += instance.OnOne;
+            @Two.started += instance.OnTwo;
+            @Two.performed += instance.OnTwo;
+            @Two.canceled += instance.OnTwo;
+            @Three.started += instance.OnThree;
+            @Three.performed += instance.OnThree;
+            @Three.canceled += instance.OnThree;
+            @Four.started += instance.OnFour;
+            @Four.performed += instance.OnFour;
+            @Four.canceled += instance.OnFour;
+            @Five.started += instance.OnFive;
+            @Five.performed += instance.OnFive;
+            @Five.canceled += instance.OnFive;
         }
 
         /// <summary>
@@ -985,12 +1159,30 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @Use.started -= instance.OnUse;
+            @Use.performed -= instance.OnUse;
+            @Use.canceled -= instance.OnUse;
             @Sprint.started -= instance.OnSprint;
             @Sprint.performed -= instance.OnSprint;
             @Sprint.canceled -= instance.OnSprint;
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @One.started -= instance.OnOne;
+            @One.performed -= instance.OnOne;
+            @One.canceled -= instance.OnOne;
+            @Two.started -= instance.OnTwo;
+            @Two.performed -= instance.OnTwo;
+            @Two.canceled -= instance.OnTwo;
+            @Three.started -= instance.OnThree;
+            @Three.performed -= instance.OnThree;
+            @Three.canceled -= instance.OnThree;
+            @Four.started -= instance.OnFour;
+            @Four.performed -= instance.OnFour;
+            @Four.canceled -= instance.OnFour;
+            @Five.started -= instance.OnFive;
+            @Five.performed -= instance.OnFive;
+            @Five.canceled -= instance.OnFive;
         }
 
         /// <summary>
@@ -1306,6 +1498,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInteract(InputAction.CallbackContext context);
         /// <summary>
+        /// Method invoked when associated input action "Use" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnUse(InputAction.CallbackContext context);
+        /// <summary>
         /// Method invoked when associated input action "Sprint" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
         /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
@@ -1319,6 +1518,41 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "One" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnOne(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Two" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnTwo(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Three" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnThree(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Four" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFour(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Five" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnFive(InputAction.CallbackContext context);
     }
     /// <summary>
     /// Interface to implement callback methods for all input action callbacks associated with input actions defined by "UI" which allows adding and removing callbacks.

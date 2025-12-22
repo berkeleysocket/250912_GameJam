@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Core.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
@@ -11,8 +12,10 @@ namespace _Scripts.Core.Input
         public Controls Controls { get; private set; }
         public event Action<Vector2> OnMoved;
         public event Action<bool> OnSprinted;
-        public event Action<bool> OnInteracted;
+        public event Action<int> OnNumbersPressed;
         public event Action OnInventoryed;
+        public event Action OnInteracted;
+        public event Action OnUsed;
 
         public Vector2 MoveDir { get; private set; }
 
@@ -37,8 +40,7 @@ namespace _Scripts.Core.Input
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if (context.performed) OnInteracted?.Invoke(true);
-            if (context.canceled) OnInteracted?.Invoke(false);
+            if (context.performed) OnInteracted?.Invoke();
         }
 
         public void OnSprint(InputAction.CallbackContext context)
@@ -50,6 +52,36 @@ namespace _Scripts.Core.Input
         public void OnInventory(InputAction.CallbackContext context)
         {
             if (context.performed) OnInventoryed?.Invoke();
+        }
+
+        public void OnUse(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnUsed?.Invoke();
+        }
+
+        public void OnOne(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnNumbersPressed?.Invoke(1);
+        }
+
+        public void OnTwo(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnNumbersPressed?.Invoke(2);
+        }
+
+        public void OnThree(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnNumbersPressed?.Invoke(3);
+        }
+
+        public void OnFour(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnNumbersPressed?.Invoke(4);
+        }
+
+        public void OnFive(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnNumbersPressed?.Invoke(5);
         }
     }
 }
