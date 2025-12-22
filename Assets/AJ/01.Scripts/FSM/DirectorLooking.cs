@@ -25,9 +25,9 @@ namespace AJ._01.Scripts.FSM
 
         private void FindPlayer()
         {
-            var d = _fov.TryGetEvidenceInFov(out Transform s);
             _fov.evidence = LayerMask.NameToLayer("Player");
-            
+            var d = _fov.TryGetEvidenceInFov(out Transform s);
+            _director.Target = s;
         }
     }
 }
