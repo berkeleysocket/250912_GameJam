@@ -9,7 +9,9 @@ namespace Ksy.Scripts.Object
     {
         [SerializeField] private Animator animator;
         [SerializeField] private Dir openDir;
-        [SerializeField] private BoxCollider2D sheet;
+        [SerializeField] private BoxCollider2D OpenColider;
+        [SerializeField] private SpriteRenderer FrameRenderer;
+        
 
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
@@ -22,15 +24,15 @@ namespace Ksy.Scripts.Object
         public void Open()
         {
             IsOpen = true;
-            if(sheet != null)
-                sheet.isTrigger = true;
+            if(OpenColider != null)
+                OpenColider.isTrigger = true;
             OnOpend?.Invoke();
         }
         public void Close()
         {
             IsOpen = false;
-            if(sheet != null)
-                sheet.isTrigger = false;
+            if(OpenColider != null)
+                OpenColider.isTrigger = false;
             OnClosed?.Invoke();
         }
         [ContextMenu("Reactive")]
@@ -38,6 +40,22 @@ namespace Ksy.Scripts.Object
         {
             animator?.SetBool(_hash_Open,true);
             Open();
+        }
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if(OpenColider.isTrigger)
+            {
+                // Debug.Log($"{collision.name}");
+                FrameRenderer.sortingOrder = 11;
+            }
+        }
+        void OnTriggerExit2D(Collider2D collision)
+        {
+            if(OpenColider.isTrigger)
+            {
+                // Debug.Log($"{collision.name}");
+                FrameRenderer.sortingOrder = 0;
+            }
         }
     }
 }
