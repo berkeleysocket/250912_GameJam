@@ -1,3 +1,5 @@
+using _Scripts.Core.Utility;
+
 namespace AJ._01.Scripts.FSM.States
 {
     public class DirectorIdleState : DirectorState
@@ -10,12 +12,16 @@ namespace AJ._01.Scripts.FSM.States
         public override void Enter()
         {
             base.Enter();
+            Logging.Log("Idle");
             Director.SetMove(true);
         }
         public override void Update()
         {
             base.Update();
-            Director.UpdateAgentTarget();
+            if (Director.Target != null && Director.CanMove)
+            {
+                StateMachine.ChangeState(DirectorStateType.Chase);
+            }
         }
         public override void Exit()
         {
