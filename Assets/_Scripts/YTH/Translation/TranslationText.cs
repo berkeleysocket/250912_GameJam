@@ -8,6 +8,13 @@ namespace _Scripts.YTH.Translation
     {
         [SerializeField] private List<TranslationDataSO> translationDatas;
 
+        public TranslationDataSO GetRandomTranslationData()
+        {
+            if (translationDatas.Count == 0) return null;
+            int randomIndex = Random.Range(0, translationDatas.Count);
+            return translationDatas[randomIndex];
+        }
+
         public Sprite GetTranslationSprite(int key)
         {
             foreach (var data in translationDatas)
