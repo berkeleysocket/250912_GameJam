@@ -7,8 +7,6 @@ namespace AJ._01.Scripts.FSM.States
     {
         private static readonly int MoveXHash = Animator.StringToHash("MoveX");
         private static readonly int MoveYHash = Animator.StringToHash("MoveY");
-
-        private readonly DirectorRenderer _renderer;
         public DirectorChaseState(Director director, string animName, DirectorStateMachine stateMachine) : base(director, animName, stateMachine)
         {
             
@@ -17,15 +15,27 @@ namespace AJ._01.Scripts.FSM.States
         public override void Enter()
         {
             base.Enter();
-            Logging.Log("Enter");
+            Logging.Log("Chase");
             Director.AnimCompo.SetFloat(MoveXHash, 0f);
             Director.AnimCompo.SetFloat(MoveYHash, 0f);
+            Director.SetMove(true);
         }
         public override void Update()
         {
             base.Update();
+            /*if (Director.AgentCompo.remainingDistance <= Director.AgentCompo.stoppingDistance)
+            {
+                Logging.Log("Idle");
+                StateMachine.ChangeState(DirectorStateType.Idle);
+                return;
+            }*/
+            
             Director.UpdateAgentTarget();
+            UpdateAnimationBasedOnVelocity();
+        }
 
+        private void UpdateAnimationBasedOnVelocity()
+        {
             var agent = Director.AgentCompo;
             if (agent == null) return;
 
@@ -45,10 +55,8 @@ namespace AJ._01.Scripts.FSM.States
 
             Director.AnimCompo.SetFloat(MoveXHash, x);
             Director.AnimCompo.SetFloat(MoveYHash, y);
-
-            if (_renderer != null)
-                _renderer.Flip(v);
         }
+
         public override void Exit()
         {
             Director.AnimCompo.SetFloat(MoveXHash, 0f);

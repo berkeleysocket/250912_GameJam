@@ -1,4 +1,5 @@
 using _Scripts.Core.Utility;
+using UnityEngine;
 
 namespace AJ._01.Scripts.FSM.States
 {
@@ -13,14 +14,25 @@ namespace AJ._01.Scripts.FSM.States
         {
             base.Enter();
             Logging.Log("Idle");
-            Director.SetMove(true);
+            Director.SetMove(false);
+            Director.UpdateAgentTarget();
         }
         public override void Update()
         {
             base.Update();
-            if (Director.Target != null && Director.CanMove)
+            Debug.Log("isOnNavMesh : " + Director.AgentCompo.isOnNavMesh);
+            Debug.Log("hasPath : " + Director.AgentCompo.hasPath);
+            Debug.Log("pathPending : " + Director.AgentCompo.pathPending);
+            Debug.Log("isStopped : " + Director.AgentCompo.isStopped);
+            Debug.Log("destination : " + Director.AgentCompo.destination);
+
+            if (Director.Target.position.sqrMagnitude > Director.AgentCompo.stoppingDistance)
             {
+                Director.SetMove(true);
+                Director.UpdateAgentTarget();
+                Logging.Log("ChangeChaseState");
                 StateMachine.ChangeState(DirectorStateType.Chase);
+                return;
             }
         }
         public override void Exit()

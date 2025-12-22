@@ -72,9 +72,9 @@ namespace AJ._01.Scripts
             if (Physics2D.Raycast(transform.position, dir.normalized, dist, obstacleLayer).collider != null)
                 return false;
 
-            var hit = Physics2D.Raycast(transform.position, dir.normalized, dist, evidence);
+            var hit = Physics2D.BoxCast(transform.position, dir.normalized * dist,dir.sqrMagnitude, dir ,dist,evidence);
             if (hit.collider == null) return false;
-
+    
             evidenceHit = hit.transform;
             return true;
         }
