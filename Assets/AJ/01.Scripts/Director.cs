@@ -57,14 +57,14 @@ namespace AJ._01.Scripts
                 changeTargetEventChannel.OnEvent -= HandleChangeTarget;
         }
 
-        private void HandleChangeTarget(Transform t)
-        {
-            Target = t;
-        }
         private void Update()
         {
             if (AgentCompo != null)
                 AgentCompo.isStopped = !canMove;
+        }
+        private void HandleChangeTarget(Transform t)
+        {
+            Target = t;
         }
 
         private void LateUpdate()

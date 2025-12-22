@@ -17,8 +17,9 @@ namespace AJ._01.Scripts
         [SerializeField] private float viewDistance = 10f;
         [SerializeField] private LayerMask obstacleLayer;
         [SerializeField] private LayerMask evidence;
+        private Transform _lastEvidence;
         
-        private bool isTargetInFov = false;
+        private bool _isTargetInFov = false;
         [SerializeField] private ChangeTargetEventChannel onTargetInFov; 
         
         private Mesh mesh;
@@ -36,14 +37,17 @@ namespace AJ._01.Scripts
 
         private void Update()
         {
-            bool direct = IsInFov();
-            if (direct && !isTargetInFov)
+            bool seen = TryGetEvidenceInFov(out Transform evidenceHit);
+            if (seen && !_isTargetInFov)
             {
-                isTargetInFov = true;
+                _isTargetInFov = true;
+                _lastEvidence = evidenceHit;
+                onTargetInFov.Raise(evidenceHit); 
             }
-            else if(!direct && isTargetInFov)
+            else if (!seen && _isTargetInFov)
             {
-                isTargetInFov = false;
+                _isTargetInFov = false;
+                _lastEvidence = null;
                 onTargetInFov.Raise(director.Player);
             }
         }
@@ -53,12 +57,27 @@ namespace AJ._01.Scripts
             RotateFov();
             DrawFOV();
         }
-        private void RotateFov()
+        private bool TryGetEvidenceInFov(out Transform evidenceHit)
         {
-            Vector2 dir = ((Vector2)director.AgentCompo.steeringTarget - (Vector2)transform.position).normalized;
-            transform.rotation = Quaternion.Euler(0, 0, GetAngleFromVector(dir));
-        }
+            evidenceHit = null;
 
+            if (director == null || director.Target == null) return false;
+
+            Vector2 dir = director.Target.position - transform.position;
+            float dist = dir.magnitude;
+
+            if (dist > viewDistance) return false;
+            if (Vector2.Angle(transform.right, dir) > fov * 0.5f) return false;
+
+            if (Physics2D.Raycast(transform.position, dir.normalized, dist, obstacleLayer).collider != null)
+                return false;
+
+            var hit = Physics2D.Raycast(transform.position, dir.normalized, dist, evidence);
+            if (hit.collider == null) return false;
+
+            evidenceHit = hit.transform;
+            return true;
+        }
         private void DrawFOV()
         {
             if (mesh == null) return;
@@ -102,30 +121,10 @@ namespace AJ._01.Scripts
             mesh.triangles = triangles;
             mesh.RecalculateBounds();
         }
-        public bool IsInFov()
+        private void RotateFov()
         {
-            if (director == null) return false;
-            if (director.Target == null) return false;
-            
-            Vector2 dir = director.Target.position - transform.position;
-            float dist = dir.magnitude;
-
-            if (dist > viewDistance)
-                return false;
-
-            if (Vector2.Angle(transform.right, dir) > fov * 0.5f) return false;
-            
-            RaycastHit2D block = Physics2D.Raycast(transform.position, dir.normalized, dist, obstacleLayer);
-            if (block.collider != null) return false;
-            
-            RaycastHit2D hit = Physics2D.Raycast(transform.position,dir.normalized, dist,evidence);
-            if (hit.collider != null)
-            {
-                onTargetInFov.Raise(hit.transform);
-                Logging.Log("FOV hit: " + hit.transform.name);
-                return true;
-            }
-            return false;
+            Vector2 dir = ((Vector2)director.AgentCompo.steeringTarget - (Vector2)transform.position).normalized;
+            transform.rotation = Quaternion.Euler(0, 0, GetAngleFromVector(dir));
         }
         private Vector2 GetVectorFromAngle(float angle)
         {

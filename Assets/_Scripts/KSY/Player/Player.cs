@@ -24,11 +24,8 @@ namespace Ksy.Scripts.Player
             }
             if(MovementCompo != null && AnimationCompo != null)
             {
-                MovementCompo.Notify_CurrentVelocity.OnChangedValue += AnimationCompo.SetVelocityParm;
-            }
-            if(AnimationCompo != null && RednererCompo != null)
-            {
-                //RednererCompo.Notify_IsFlip.OnChangedValue += AnimationCompo.SetFlipYParm;
+                MovementCompo.Notify_IsMove.OnChangedValue += AnimationCompo.SetIsMove;
+                MovementCompo.Notify_Dir.OnChangedValue += AnimationCompo.SetMoveDir;
             }
         }
     }
