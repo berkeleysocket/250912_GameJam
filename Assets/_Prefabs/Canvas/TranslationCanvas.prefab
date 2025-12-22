@@ -536,7 +536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b065053f24b304da6d757014285707, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  inputSO: {fileID: 0}
+  inputSO: {fileID: 11400000, guid: 262d5d1924d13f84a80c468f9dfbbbbe, type: 2}
   panel: {fileID: 3836635225921976641}
   content: {fileID: 3524393501978935117}
   iconPrefab: {fileID: 2346264920014986291, guid: 61df86666782d5f44b11d6be7e373cd2, type: 3}
