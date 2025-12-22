@@ -2,6 +2,7 @@ using System;
 using _Scripts.Core.Events;
 using _Scripts.Core.Utility;
 using AJ._01.Scripts.FSM;
+using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.AI;
 using UnityEngine.Serialization;
@@ -16,6 +17,9 @@ namespace AJ._01.Scripts
         [SerializeField] private bool canMove = true;
         [SerializeField] private ChangeTargetEventChannel changeTargetEventChannel;
         public Transform Player { get; private set; }
+        [field:SerializeField]public Transform BossCallTransform { get; set; }
+        public bool bossCall = false;
+        
         public float Speed
         {
             get => speed;
@@ -56,15 +60,15 @@ namespace AJ._01.Scripts
             if (changeTargetEventChannel != null)
                 changeTargetEventChannel.OnEvent -= HandleChangeTarget;
         }
-
-        private void HandleChangeTarget(Transform t)
-        {
-            Target = t;
-        }
+    
         private void Update()
         {
             if (AgentCompo != null)
                 AgentCompo.isStopped = !canMove;
+        }
+        public void HandleChangeTarget(Transform t)
+        {
+            Target = t;
         }
 
         private void LateUpdate()

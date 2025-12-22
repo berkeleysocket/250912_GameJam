@@ -17,10 +17,13 @@ namespace AJ._01.Scripts.FSM
         {   
             Director.AnimCompo.SetBool(AnimHash, true);
         }
+
         public virtual void Update()
         {
-            if(Director.AgentCompo.speed <= 0f)
-                StateMachine.ChangeState(DirectorStateType.Idle);
+            if (Director.bossCall)
+                Director.HandleChangeTarget(Director.BossCallTransform);
+            else
+                Director.HandleChangeTarget(Director.Player);
         }
         public virtual void Exit()
         {

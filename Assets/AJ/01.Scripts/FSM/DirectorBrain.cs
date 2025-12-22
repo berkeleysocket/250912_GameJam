@@ -19,7 +19,7 @@ namespace AJ._01.Scripts.FSM
         }
         private void Start()
         {
-            _stateMachine.Initialized(DirectorStateType.Idle);
+            _stateMachine.Initialized(DirectorStateType.Chase);
         }
         private void Update()
         {

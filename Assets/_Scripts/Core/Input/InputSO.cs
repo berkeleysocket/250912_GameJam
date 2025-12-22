@@ -11,7 +11,7 @@ namespace _Scripts.Core.Input
         public Controls Controls { get; private set; }
         public event Action<Vector2> OnMoved;
         public event Action<bool> OnSprinted;
-        public event Action OnInteracted;
+        public event Action<bool> OnInteracted;
         public event Action OnInventoryed;
 
         public Vector2 MoveDir { get; private set; }
@@ -37,7 +37,8 @@ namespace _Scripts.Core.Input
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if (context.performed) OnInteracted?.Invoke();
+            if (context.performed) OnInteracted?.Invoke(true);
+            if (context.canceled) OnInteracted?.Invoke(false);
         }
 
         public void OnSprint(InputAction.CallbackContext context)
