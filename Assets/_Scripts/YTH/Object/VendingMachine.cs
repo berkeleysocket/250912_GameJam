@@ -1,6 +1,7 @@
 using _Scripts.Core.Events;
 using _Scripts.Core.Input;
 using _Scripts.YTH.Inventory;
+using DG.Tweening;
 using UnityEngine;
 
 namespace _Scripts.YTH.Object
@@ -24,11 +25,27 @@ namespace _Scripts.YTH.Object
         private bool m_CanSell = false;
         private bool m_playerinRange = false;
 
+        private void Awake()
+        {
+            keyPrompt.transform.localScale = Vector3.zero;
+            keyPrompt.SetActive(false);
+            m_playerinRange = false;
+            m_CanSell = false;
+            m_CanBuy = false;
+        }
+
         private void OnTriggerEnter2D(Collider2D collision)
         {
             if (collision.CompareTag("Player"))
             {
-                keyPrompt.SetActive(true);
+                if (keyPrompt != null)
+                {
+                    Sequence seq = DOTween.Sequence();
+                    keyPrompt.transform.DOKill();
+                    keyPrompt.transform.localScale = Vector3.zero;
+                    seq.AppendCallback(() => keyPrompt.SetActive(true));
+                    seq.Append(keyPrompt.transform.DOScale(1f, 0.2f).SetEase(Ease.OutCubic));
+                }
                 m_playerinRange = true;
                 inputSO.OnInteracted += Use;
             }            
@@ -38,7 +55,13 @@ namespace _Scripts.YTH.Object
         {
             if (collision.CompareTag("Player"))
             {
-                keyPrompt.SetActive(false);
+                if (keyPrompt != null)
+                {
+                    Sequence seq = DOTween.Sequence();
+                    keyPrompt.transform.DOKill();
+                    seq.Append(keyPrompt.transform.DOScale(0f, 0.2f).SetEase(Ease.OutCubic));
+                    seq.AppendCallback(() => keyPrompt.SetActive(false));
+                }
                 m_playerinRange = false;
                 inputSO.OnInteracted -= Use;
             }

@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+using _Scripts.YTH.UseEffect;
 using UnityEngine;
 
 namespace _Scripts.YTH.Inventory
@@ -10,7 +12,10 @@ namespace _Scripts.YTH.Inventory
         [field:SerializeField, TextArea] public string Description { get; private set; }
         [field:SerializeField] public Sprite Icon { get; private set; }
         [field:SerializeField] public int ItemID { get; private set; }
+        [field:SerializeField] public List<UseEffectBaseSO> UseEffects { get; private set; }
 
+
+        public bool IsConsumable => UseEffects.Count > 0;
         public override string ToString() => ItemName;
         public override int GetHashCode() => ItemID;
 
