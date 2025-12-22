@@ -5,17 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/ChangeTargetEventChannel.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/ChangeTargetEventChannel.cs.meta" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene/NavMesh-NavMeshSurface.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene/NavMesh-NavMeshSurface.asset" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene/NavMesh-NavMeshSurface.asset.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene/NavMesh-NavMeshSurface.asset.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Core/Events/EmptyEvnetChannel.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Core/Events/EmptyEventChannel.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/Core/Events/EmptyEvnetChannel.cs.meta" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/Core/Events/EmptyEventChannel.cs.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" beforeDir="false" afterPath="$PROJECT_DIR$/ProjectSettings/TagManager.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -112,7 +105,7 @@
       <option name="presentableId" value="Default" />
       <updated>1766326063236</updated>
       <workItem from="1766326063850" duration="2575000" />
-      <workItem from="1766363024927" duration="6615000" />
+      <workItem from="1766363024927" duration="7072000" />
     </task>
     <servers />
   </component>
