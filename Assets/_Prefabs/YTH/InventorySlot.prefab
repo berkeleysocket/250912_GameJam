@@ -89,3 +89,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InventoryItem>k__BackingField: {fileID: 0}
+  selectedColor: {r: 1, g: 0.7921569, b: 0.5568628, a: 1}
+  unSelectedColor: {r: 0.63529414, g: 0.63529414, b: 0.63529414, a: 1}
+  slotImage: {fileID: 8460512645580244631}
