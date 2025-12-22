@@ -42,6 +42,9 @@ namespace Ksy.Scripts.Object
                 OpenColider.isTrigger = false;
             OnClosed?.Invoke();
         }
+
+        public GameObject GetGameObject() => gameObject; 
+
         [ContextMenu("Reactive")]
         public void Reactive()
         {

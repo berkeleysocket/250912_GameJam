@@ -4,12 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM.meta" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" afterDir="false" />
-    </list>
+    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -106,6 +101,7 @@
       <updated>1766326063236</updated>
       <workItem from="1766326063850" duration="2575000" />
       <workItem from="1766363024927" duration="7072000" />
+      <workItem from="1766401911375" duration="1593000" />
     </task>
     <servers />
   </component>

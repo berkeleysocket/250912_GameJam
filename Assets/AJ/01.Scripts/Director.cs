@@ -1,7 +1,9 @@
 using System;
 using _Scripts.Core.Events;
+using _Scripts.Core.Structs;
 using _Scripts.Core.Utility;
 using AJ._01.Scripts.FSM;
+using Ksy.Scripts.TraceSystem;
 using NUnit.Framework.Constraints;
 using UnityEngine;
 using UnityEngine.AI;
@@ -9,10 +11,19 @@ using UnityEngine.Serialization;
 
 namespace AJ._01.Scripts
 {
-    [AddComponentMenu("Director/Director")]
-    public class Director : MonoBehaviour 
+    public class Director : MonoBehaviour
     {
-        [field:SerializeField] public Transform Target { get; private set; }
+        [SerializeField] private Transform target;
+        public Transform Target
+        {
+            get
+            {
+                if (target == null) return Player;
+
+                return target;
+            }
+            set => target = value;
+        }
         [SerializeField] private float speed;
         [SerializeField] private bool canMove = true;
         [SerializeField] private ChangeTargetEventChannel changeTargetEventChannel;
@@ -83,8 +94,20 @@ namespace AJ._01.Scripts
         }
         public void UpdateAgentTarget()
         {
-            if (Target == null) return;
+            if (Target == null) 
+            {
+                Target = Player;
+                return;
+            }
             AgentCompo.SetDestination(Target.position);
+        }
+
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            if (other.gameObject.TryGetComponent(out Trace trace))
+            {
+                trace.Interaction(gameObject);
+            }
         }
     }
 }

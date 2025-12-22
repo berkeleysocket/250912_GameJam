@@ -19,9 +19,11 @@ namespace AJ._01.Scripts
         [SerializeField] private LayerMask evidence;
         private Transform _lastEvidence;
         
-        private bool _isTargetInFov = false;
-        [SerializeField] private ChangeTargetEventChannel onTargetInFov; 
         
+        private bool _isTargetInFov = false;
+        [SerializeField] private ChangeTargetEventChannel onTargetInFov;
+        public TraceChannel traceChannel; 
+        private float _stoppingDistance;
         private Mesh mesh;
 
         private void Awake()
@@ -33,6 +35,7 @@ namespace AJ._01.Scripts
         {
             mesh = new Mesh { name = "FOV" };
             GetComponent<MeshFilter>().mesh = mesh;
+            _stoppingDistance = director.AgentCompo.stoppingDistance;
         }
 
         private void Update()
@@ -41,14 +44,15 @@ namespace AJ._01.Scripts
             if (seen && !_isTargetInFov)
             {
                 _isTargetInFov = true;
+                director.AgentCompo.stoppingDistance = .5f;
                 _lastEvidence = evidenceHit;
-                onTargetInFov.Raise(evidenceHit); 
+                onTargetInFov.Raise(evidenceHit);
             }
             else if (!seen && _isTargetInFov)
             {
                 _isTargetInFov = false;
                 _lastEvidence = null;
-                onTargetInFov.Raise(director.Player);
+                director.AgentCompo.stoppingDistance = _stoppingDistance;
             }
         }
 
@@ -61,22 +65,24 @@ namespace AJ._01.Scripts
         {
             evidenceHit = null;
 
-            if (director == null || director.Target == null) return false;
+            if (director == null) return false;
+            Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, viewDistance, evidence);
+            foreach (var col in hits)
+            {
+                Vector2 toTarget = col.transform.position - transform.position;
+                float dist = toTarget.magnitude;
 
-            Vector2 dir = director.Target.position - transform.position;
-            float dist = dir.magnitude;
+                if (Vector2.Angle(transform.right, toTarget) > fov * 0.5f)
+                    continue;
 
-            if (dist > viewDistance) return false;
-            if (Vector2.Angle(transform.right, dir) > fov * 0.5f) return false;
+                if (Physics2D.Raycast(transform.position,toTarget.normalized, dist,obstacleLayer))
+                    continue;
 
-            if (Physics2D.Raycast(transform.position, dir.normalized, dist, obstacleLayer).collider != null)
-                return false;
+                evidenceHit = col.transform;
+                return true;
+            }
 
-            var hit = Physics2D.BoxCast(transform.position, dir.normalized * dist,dir.sqrMagnitude, dir ,dist,evidence);
-            if (hit.collider == null) return false;
-    
-            evidenceHit = hit.transform;
-            return true;
+            return false;
         }
         private void DrawFOV()
         {

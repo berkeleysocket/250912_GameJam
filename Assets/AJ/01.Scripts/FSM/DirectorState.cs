@@ -25,10 +25,10 @@ namespace AJ._01.Scripts.FSM
 
         public virtual void Update()
         {
-            if (Director.bossCall)
+            /*if (Director.bossCall)
                 Director.HandleChangeTarget(Director.BossCallTransform);
             else
-                Director.HandleChangeTarget(Director.Player);
+                Director.HandleChangeTarget(Director.Player);*/
         }
         
 

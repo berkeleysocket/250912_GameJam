@@ -1,7 +1,10 @@
+ using System;
  using System.Collections.Generic;
 using UnityEngine;
 
 using _Scripts.Core.Utility;
+using AJ._01.Scripts;
+using DG.Tweening;
 using UnityEngine.InputSystem;
 
 namespace Ksy.Scripts.TraceSystem
@@ -10,12 +13,19 @@ namespace Ksy.Scripts.TraceSystem
     {
         public float findSize = 5f;
         public LayerMask findLayer;
+        public float distance = 2f;
+        private int count = 0;
 
-        void Update()
+        private void OnCollisionEnter2D(Collision2D other)
         {
-            if(Keyboard.current.spaceKey.wasPressedThisFrame)
+            if (other.gameObject.TryGetComponent(out Director director))
             {
-                Interaction(gameObject);
+                if (count >= 2)
+                {
+                    director.SetMove(false);
+                    Destroy(gameObject);
+                }
+                count++;
             }
         }
 
@@ -23,8 +33,22 @@ namespace Ksy.Scripts.TraceSystem
         {
             var traceReactiveObj = FindInteractionObject();
 
-            if(traceReactiveObj != null)
+            if (traceReactiveObj != null)
+            {
                 traceReactiveObj.Reactive();
+                if (count < 2)
+                {
+                    Vector3 i = traceReactiveObj.GetGameObject().transform.position;
+                    Vector3 j = (i - transform.position).normalized;
+                    Vector2 dir = j.normalized;
+
+                    Collider2D col = traceReactiveObj.GetGameObject().GetComponent<Collider2D>();
+                    Vector2 extents = col.bounds.size;
+                    float moveDistance = Mathf.Abs(dir.x) > Mathf.Abs(dir.y) ? extents.x : extents.y;
+
+                    transform.position += (Vector3)(dir * (moveDistance * distance));
+                }
+            }
             else
                 Logging.Log("traceReactiveObj is null");
         }
