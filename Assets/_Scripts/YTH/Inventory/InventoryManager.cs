@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Core.Events;
 using _Scripts.Core.Input;
-using _Scripts.Core.Utility;
 using DG.Tweening;
 using UnityEngine;
 
@@ -12,6 +11,7 @@ namespace _Scripts.YTH.Inventory
     {
         public bool IsEmpty => m_inventorySlots.Count == 0;
         public RectTransform Rect => m_rectTransform ??= inventory.GetComponent<RectTransform>();
+        public InventorySlot SelectedSlot => m_selectedSlot;
 
         [Header("Inventory Settings")]
         [SerializeField] private InventoryItem prefab;
@@ -29,8 +29,8 @@ namespace _Scripts.YTH.Inventory
 
         private List<InventorySlot> m_inventorySlots;
         private bool m_acvite;
-        private RectTransform m_rectTransform;
-    
+        private RectTransform m_rectTransform;     
+        private InventorySlot m_selectedSlot = new();
 
         private void Awake()
         {
@@ -41,6 +41,8 @@ namespace _Scripts.YTH.Inventory
             itemAddEventChannel.OnEvent += TryAddItem;
             itemRemoveEventChannel.OnEvent += TryRemoveItem;
             inputSO.OnInventoryed += OnInventory;
+            inputSO.OnNumbersPressed += SelecteSlot;
+            inputSO.OnUsed += UseSelectedItem;
         }
 
         private void Start()
@@ -51,6 +53,7 @@ namespace _Scripts.YTH.Inventory
             }
             
             inventoryManagerEventChannel.Raise(this);
+            SelecteSlot(1);
         }
 
         private void OnDestroy()
@@ -60,6 +63,38 @@ namespace _Scripts.YTH.Inventory
             itemAddEventChannel.OnEvent -= TryAddItem;
             itemRemoveEventChannel.OnEvent -= TryRemoveItem;
             inputSO.OnInventoryed -= OnInventory;
+            inputSO.OnNumbersPressed -= SelecteSlot;
+            inputSO.OnUsed -= UseSelectedItem;
+        }
+
+        public void SelecteSlot(int index)
+        {
+            int count = index - 1;
+
+            if (m_inventorySlots[count] != null)
+            {
+                foreach (var slot in m_inventorySlots)
+                {
+                    slot.UnSelect();
+                }
+
+                m_inventorySlots[count].Select();
+                m_selectedSlot = m_inventorySlots[count];
+            }
+        }
+
+        public void UseSelectedItem()
+        {
+            if (m_selectedSlot.InventoryItem != null)
+            {
+                if (m_selectedSlot.InventoryItem.Item.IsConsumable)
+                {
+                    foreach (var effect in m_selectedSlot.InventoryItem.Item.UseEffects)
+                    {
+                        effect.ApplyEffect(this.gameObject);
+                    }
+                }
+            }
         }
 
         public void CanAddItem(ItemData item)
