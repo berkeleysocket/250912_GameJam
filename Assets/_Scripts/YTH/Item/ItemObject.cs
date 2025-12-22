@@ -1,5 +1,6 @@
 using _Scripts.Core.Events;
 using _Scripts.Core.Input;
+using _Scripts.Core.Utility;
 using _Scripts.YTH.Inventory;
 using Ksy.Scripts.Player;
 using UnityEngine;
@@ -9,15 +10,19 @@ namespace _Scripts.YTH.Item
     public class ItemObject : MonoBehaviour
     {
         [field:SerializeField] public ItemDataSO ItemData { get; private set; }
-        [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
-        [SerializeField] private ItemDataEventChannel addItemEventChannel;
-        [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
+        [Header("Item Object Settings")]
         [SerializeField] private float pickupDistance = 2f;
         [SerializeField] private float pickupTime;
         [SerializeField] private InputSO inputSO;
+
+        [Header("Event Channels")]
+        [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
+        [SerializeField] private ItemDataEventChannel addItemEventChannel;
+        [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
         
-        private float m_pickupTime;
+        [SerializeField] private float m_pickupTime;
         private bool m_canPickup;
+        private bool m_interacted;
         private float m_distance;
         private Player m_player;
 
@@ -38,6 +43,17 @@ namespace _Scripts.YTH.Item
             {
                 m_pickupTime -= Time.deltaTime;
                 m_pickupTime = Mathf.Clamp(m_pickupTime, 0f, pickupTime);
+                return;
+            }
+
+            if (m_interacted && m_canPickup)
+            {    
+                m_pickupTime += Time.deltaTime;
+                if (m_pickupTime >= pickupTime)
+                {
+                    inventoryUpdateEventChannel.OnEvent += OnInventoryUpdate;
+                    canAddItemEventChannel.Raise(new ItemData(ItemData.ItemID));
+                }
             }
             
         }
@@ -49,15 +65,7 @@ namespace _Scripts.YTH.Item
 
         private void TryPickUp(bool interacted)
         {
-            if (interacted && m_canPickup)
-            {    
-                m_pickupTime += Time.deltaTime;
-                if (m_pickupTime >= pickupTime)
-                {
-                    inventoryUpdateEventChannel.OnEvent += OnInventoryUpdate;
-                    canAddItemEventChannel.Raise(new ItemData(ItemData.ItemID));
-                }
-            }
+            m_interacted = interacted;
         }
 
 
