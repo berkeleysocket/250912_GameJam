@@ -17,7 +17,7 @@ namespace Ksy.Scripts.Player
             }
             set
             {
-                _maxSpeed = Mathf.Clamp(value,1,5);
+                _maxSpeed = Mathf.Clamp(value,1,15);
             }
         }
         [SerializeField] private float _maxSpeed = 5f;
@@ -40,7 +40,7 @@ namespace Ksy.Scripts.Player
             currentVelocity = CalculateSpeed(Notify_Dir.Value);
 
             if(Keyboard.current.spaceKey.wasPressedThisFrame) StressManager.Instance?.IncreaseStress(1);
-            if(Keyboard.current.gKey.wasPressedThisFrame) StressManager.Instance?.DecreaseStress(1);
+            if(Keyboard.current.fKey.wasPressedThisFrame) StressManager.Instance?.DecreaseStress(1);
         }
         private void FixedUpdate()
         {
