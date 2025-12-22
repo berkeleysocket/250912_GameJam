@@ -749,10 +749,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 885515451465885083, guid: 4b745c5021206154d8ef5f56aaeaea01, type: 3}
-      propertyPath: body
-      value: 
-      objectReference: {fileID: 1637474346}
     - target: {fileID: 2040223147969862050, guid: 4b745c5021206154d8ef5f56aaeaea01, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1230,11 +1226,6 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!50 &1637474346 stripped
-Rigidbody2D:
-  m_CorrespondingSourceObject: {fileID: 3416986953189639008, guid: 4b745c5021206154d8ef5f56aaeaea01, type: 3}
-  m_PrefabInstance: {fileID: 1005343550}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1710029550
 GameObject:
   m_ObjectHideFlags: 0
