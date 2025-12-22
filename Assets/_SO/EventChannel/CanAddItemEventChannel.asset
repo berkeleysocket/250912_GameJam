@@ -9,8 +9,6 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d686f0aadd1e95e43bc3e6c260ebdb50, type: 3}
-  m_Name: ItemDatabaseSO
+  m_Script: {fileID: 11500000, guid: 1ebd17ab895564e41ba4f9c6c5231aeb, type: 3}
+  m_Name: CanAddItemEventChannel
   m_EditorClassIdentifier: 
-  <ItemDataList>k__BackingField:
-  - {fileID: 11400000, guid: a2e77df87ceff4548886ec0acde1bcf6, type: 2}
