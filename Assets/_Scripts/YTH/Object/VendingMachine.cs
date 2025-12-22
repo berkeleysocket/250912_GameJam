@@ -20,6 +20,7 @@ namespace _Scripts.YTH.Object
         [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
         [SerializeField] private ItemDataEventChannel addItemEventChannel;
         [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
+        [SerializeField] private AlertDataEventChannel alertDataEventChannel;
 
         private bool m_CanBuy = false;
         private bool m_CanSell = false;
@@ -45,6 +46,7 @@ namespace _Scripts.YTH.Object
                     keyPrompt.transform.localScale = Vector3.zero;
                     seq.AppendCallback(() => keyPrompt.SetActive(true));
                     seq.Append(keyPrompt.transform.DOScale(1f, 0.2f).SetEase(Ease.OutCubic));
+                    alertDataEventChannel.Raise(new($"- {resultItem.ItemName} 자판기 -", $"{costItem.ItemName}으로 구매 가능합니다.", 2.5f, 0.25f));
                 }
                 m_playerinRange = true;
                 inputSO.OnInteracted += Use;
@@ -77,6 +79,7 @@ namespace _Scripts.YTH.Object
                 {
                     removeItemEventChannel.Raise(new ItemData(costItem.ItemID));
                     addItemEventChannel.Raise(new ItemData(resultItem.ItemID));
+                    alertDataEventChannel.Raise(new($"- 아이템을 구매했습니다 -", $"{resultItem.ItemName}", 2.5f, 0.25f));
                 }
             }
         }
