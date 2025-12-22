@@ -5,8 +5,6 @@ namespace AJ._01.Scripts.FSM.States
 {
     public class DirectorChaseState : DirectorState
     {
-        private static readonly int MoveXHash = Animator.StringToHash("MoveX");
-        private static readonly int MoveYHash = Animator.StringToHash("MoveY");
         public DirectorChaseState(Director director, string animName, DirectorStateMachine stateMachine) : base(director, animName, stateMachine)
         {
             
@@ -16,51 +14,24 @@ namespace AJ._01.Scripts.FSM.States
         {
             base.Enter();
             Logging.Log("Chase");
-            Director.AnimCompo.SetFloat(MoveXHash, 0f);
-            Director.AnimCompo.SetFloat(MoveYHash, 0f);
             Director.SetMove(true);
         }
         public override void Update()
         {
             base.Update();
-            /*if (Director.AgentCompo.remainingDistance <= Director.AgentCompo.stoppingDistance)
+            if (Director.AgentCompo.remainingDistance <= Director.AgentCompo.stoppingDistance)
             {
                 Logging.Log("Idle");
                 StateMachine.ChangeState(DirectorStateType.Idle);
                 return;
-            }*/
+            }
             
             Director.UpdateAgentTarget();
             UpdateAnimationBasedOnVelocity();
         }
 
-        private void UpdateAnimationBasedOnVelocity()
-        {
-            var agent = Director.AgentCompo;
-            if (agent == null) return;
-
-            Vector2 v = agent.velocity;
-
-            if (v.sqrMagnitude < 0.0001f)
-            {
-                Director.AnimCompo.SetFloat(MoveXHash, 0f);
-                Director.AnimCompo.SetFloat(MoveYHash, 0f);
-                return;
-            }
-
-            Vector2 dir = v.normalized;
-
-            float x = dir.x;
-            float y = dir.y;
-
-            Director.AnimCompo.SetFloat(MoveXHash, x);
-            Director.AnimCompo.SetFloat(MoveYHash, y);
-        }
-
         public override void Exit()
         {
-            Director.AnimCompo.SetFloat(MoveXHash, 0f);
-            Director.AnimCompo.SetFloat(MoveYHash, 0f);
             base.Exit();
         }
     }
