@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {
     public class InventorySlot : MonoBehaviour
     {

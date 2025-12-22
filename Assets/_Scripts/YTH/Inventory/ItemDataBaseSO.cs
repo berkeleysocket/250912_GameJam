@@ -6,7 +6,7 @@ using UnityEditor;
 #endif
 using UnityEngine;
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {
     [CreateAssetMenu(fileName = "ItemDatabaseSO", menuName = "SO/Item/Database")]
     public class ItemDatabaseSO : ScriptableObject {

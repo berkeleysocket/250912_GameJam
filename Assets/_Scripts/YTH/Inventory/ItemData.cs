@@ -1,6 +1,6 @@
 using System;
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {
     [Serializable]
     public class ItemData

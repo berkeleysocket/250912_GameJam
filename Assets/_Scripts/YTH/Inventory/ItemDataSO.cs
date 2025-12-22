@@ -1,7 +1,6 @@
-using System.Collections.Generic;
 using UnityEngine;
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {
     [CreateAssetMenu(fileName = "ItemDataSO", menuName = "SO/Item/ItemData")]
     public class ItemDataSO : ScriptableObject

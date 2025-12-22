@@ -2,7 +2,7 @@ using _Scripts.Core.Utility;
 using UnityEngine;
 
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {
     public class ItemDatabase : MonoSingleton<ItemDatabase> {
         public ItemDatabaseSO ItemDatabaseSO => itemDatabaseSO ??= Resources.Load<ItemDatabaseSO>("ItemDatabaseSO");
