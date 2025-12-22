@@ -47,6 +47,9 @@ TagManager:
   - name: BackWall
     uniqueID: 887317239
     locked: 0
+  - name: Prop
+    uniqueID: 585328861
+    locked: 0
   - name: Player
     uniqueID: 2081495297
     locked: 0
