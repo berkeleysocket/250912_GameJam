@@ -2,12 +2,10 @@ using _Scripts.Core.Events;
 using _Scripts.Core.Input;
 using _Scripts.Core.Utility;
 using _Scripts.YTH.Inventory;
-using Ksy.Scripts.Player;
+using DG.Tweening;
 using UnityEngine;
-using UnityEngine.PlayerLoop;
-using UnityEngine.UI;
 
-namespace _Scripts.YTH.Item
+namespace _Scripts.YTH.Object
 {    
     public class ItemObject : MonoBehaviour
     {
@@ -43,8 +41,15 @@ namespace _Scripts.YTH.Item
         {
             if (collision.CompareTag("Player"))
             {
+                if (keyPrompt != null)
+                {
+                    Sequence seq = DOTween.Sequence();
+                    keyPrompt.transform.DOKill();
+                    keyPrompt.transform.localScale = Vector3.zero;
+                    seq.AppendCallback(() => keyPrompt.SetActive(true));
+                    seq.Append(keyPrompt.transform.DOScale(1f, 0.2f).SetEase(Ease.OutCubic));
+                }
                 Logging.Log("Can Pick Up");
-                keyPrompt.SetActive(true);
                 inputSO.OnInteracted += Add;
             }
         }
@@ -53,8 +58,14 @@ namespace _Scripts.YTH.Item
         {
             if (collision.CompareTag("Player"))
             {
+                if (keyPrompt != null)
+                {
+                    Sequence seq = DOTween.Sequence();
+                    keyPrompt.transform.DOKill();
+                    seq.Append(keyPrompt.transform.DOScale(0f, 0.2f).SetEase(Ease.OutCubic));
+                    seq.AppendCallback(() => keyPrompt.SetActive(false));
+                }
                 Logging.Log("Can't Pick Up");
-                keyPrompt.SetActive(false);
                 inputSO.OnInteracted -= Add;
             }
         }

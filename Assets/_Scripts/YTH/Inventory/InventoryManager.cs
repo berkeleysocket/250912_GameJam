@@ -154,16 +154,23 @@ namespace _Scripts.YTH.Inventory
             
             if (m_acvite)
             {
-                Sequence sequence = DOTween.Sequence();
-                sequence.AppendCallback(() => inventory.SetActive(m_acvite));
-                sequence.Append(Rect.DOAnchorPosY(0, 0.2f).SetEase(Ease.OutCubic));
+                if (Rect != null)
+                {    
+                    Sequence sequence = DOTween.Sequence();
+                    Rect.DOKill();
+                    sequence.AppendCallback(() => inventory.SetActive(m_acvite));
+                    sequence.Append(Rect.DOAnchorPosY(0, 0.2f).SetEase(Ease.OutCubic));
+                }
             }
             else
             {
-                Sequence sequence = DOTween.Sequence();
-
-                sequence.Append(Rect.DOAnchorPosY(150, 0.2f).SetEase(Ease.OutCubic));
-                sequence.AppendCallback(() => inventory.SetActive(m_acvite));
+                if (Rect != null)
+                { 
+                    Sequence sequence = DOTween.Sequence();
+                    Rect.DOKill();
+                    sequence.Append(Rect.DOAnchorPosY(150, 0.2f).SetEase(Ease.OutCubic));
+                    sequence.AppendCallback(() => inventory.SetActive(m_acvite));
+                }
             }
         }
     }

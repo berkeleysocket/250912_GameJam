@@ -12,8 +12,9 @@ namespace _Scripts.Core.Input
         public Controls Controls { get; private set; }
         public event Action<Vector2> OnMoved;
         public event Action<bool> OnSprinted;
-        public event Action OnInteracted;
         public event Action OnInventoryed;
+        public event Action OnInteracted;
+        public event Action OnUsed;
 
         public Vector2 MoveDir { get; private set; }
 
@@ -38,11 +39,7 @@ namespace _Scripts.Core.Input
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if (context.performed)
-            {
-                Logging.Log("Interacted Input Received");
-                OnInteracted?.Invoke();
-            }
+            if (context.performed) OnInteracted?.Invoke();
         }
 
         public void OnSprint(InputAction.CallbackContext context)
@@ -54,6 +51,11 @@ namespace _Scripts.Core.Input
         public void OnInventory(InputAction.CallbackContext context)
         {
             if (context.performed) OnInventoryed?.Invoke();
+        }
+
+        public void OnUse(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnUsed?.Invoke();
         }
     }
 }
