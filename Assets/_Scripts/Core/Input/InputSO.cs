@@ -1,4 +1,5 @@
 using System;
+using _Scripts.Core.Utility;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using static Controls;
@@ -11,7 +12,7 @@ namespace _Scripts.Core.Input
         public Controls Controls { get; private set; }
         public event Action<Vector2> OnMoved;
         public event Action<bool> OnSprinted;
-        public event Action<bool> OnInteracted;
+        public event Action OnInteracted;
         public event Action OnInventoryed;
 
         public Vector2 MoveDir { get; private set; }
@@ -37,8 +38,11 @@ namespace _Scripts.Core.Input
 
         public void OnInteract(InputAction.CallbackContext context)
         {
-            if (context.performed) OnInteracted?.Invoke(true);
-            if (context.canceled) OnInteracted?.Invoke(false);
+            if (context.performed)
+            {
+                Logging.Log("Interacted Input Received");
+                OnInteracted?.Invoke();
+            }
         }
 
         public void OnSprint(InputAction.CallbackContext context)

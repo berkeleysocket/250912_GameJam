@@ -13,4 +13,5 @@ MonoBehaviour:
   m_Name: ItemDatabaseSO
   m_EditorClassIdentifier: 
   <ItemDataList>k__BackingField:
+  - {fileID: 11400000, guid: 4f9a70a864385ef429ed3cea8437a429, type: 2}
   - {fileID: 11400000, guid: a2e77df87ceff4548886ec0acde1bcf6, type: 2}
