@@ -1,5 +1,7 @@
 using System.Collections.Generic;
+using _Scripts.Core.Events;
 using _Scripts.Core.Input;
+using _Scripts.Core.Structs;
 using _Scripts.YTH.Translation;
 using DG.Tweening;
 using UnityEngine;
@@ -12,6 +14,9 @@ namespace _Scripts.YTH.Guide
         [SerializeField] private RectTransform guide;
         [SerializeField] private InputSO inputSO;
         [SerializeField] private List<TranslationDataSO> guideDataList;
+
+        [Header("Event Channel")]
+        [SerializeField] private EmptyEventChannel toggleGuideEventChannel;
         
         private GuideSlot[] m_guideSlots;
         private bool m_isGuideActive = false;
@@ -33,15 +38,17 @@ namespace _Scripts.YTH.Guide
                 }
             }
 
-            inputSO.OnGuidePressed += ToggleGuide;
+            inputSO.OnGuidePressed += () => ToggleGuide(new Empty());
+            toggleGuideEventChannel.OnEvent += ToggleGuide;
         }
 
         private void OnDestroy()
         {
-            inputSO.OnGuidePressed -= ToggleGuide;
+            inputSO.OnGuidePressed -= () => ToggleGuide(new Empty());
+            toggleGuideEventChannel.OnEvent -= ToggleGuide;
         }
 
-        public void ToggleGuide()
+        public void ToggleGuide(Empty empty)
         {
             m_isGuideActive = !m_isGuideActive;
             
