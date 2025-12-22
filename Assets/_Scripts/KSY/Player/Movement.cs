@@ -7,7 +7,8 @@ namespace Ksy.Scripts.Player
     public class Movement : MonoBehaviour
     {
         [SerializeField] private float _maxSpeed = 5f;
-        public NotifyValue<float> Notify_CurrentVelocity {get; private set;} = new NotifyValue<float>();
+        public float currentVelocity {get; private set;} = 0f;
+        public NotifyValue<bool> Notify_IsMove {get; private set;} = new NotifyValue<bool>();
         public NotifyValue<Vector2> Notify_Dir {get; private set;} = new NotifyValue<Vector2>();
         private Rigidbody2D _body;
 
@@ -22,16 +23,20 @@ namespace Ksy.Scripts.Player
         }
         private void Update()
         {
-            Notify_CurrentVelocity.Value = CalculateSpeed(Notify_Dir.Value);
+            currentVelocity = CalculateSpeed(Notify_Dir.Value);
         }
         private void FixedUpdate()
         {
-            _body.linearVelocity = (Notify_Dir.Value * Notify_CurrentVelocity.Value);
+            _body.linearVelocity = (Notify_Dir.Value * currentVelocity);
         }
         #endregion
         public void Move(Vector2 dir)
         {
             Notify_Dir.Value = dir;
+
+            if(dir != Vector2.zero)
+                Notify_IsMove.Value = true;
+            else Notify_IsMove.Value = false;
         }
         public void MoveHorizontal(float xDir)
         {
@@ -45,14 +50,14 @@ namespace Ksy.Scripts.Player
         {
             if(inputDir.sqrMagnitude > 0)
             {
-                Notify_CurrentVelocity.Value += _acceleration * Time.deltaTime / 1.5f;
+                currentVelocity += _acceleration * Time.deltaTime / 1.5f;
             }
             else
             {
-                Notify_CurrentVelocity.Value -= _deacceleration * Time.deltaTime / 1.5f;
+                currentVelocity -= _deacceleration * Time.deltaTime / 1.5f;
             }
 
-            return Mathf.Clamp(Notify_CurrentVelocity.Value, 0, _maxSpeed);
+            return Mathf.Clamp(currentVelocity, 0, _maxSpeed);
         }
     }
 }

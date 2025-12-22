@@ -51,7 +51,7 @@ MonoBehaviour:
   <Body>k__BackingField: {fileID: 2847135391211342614}
   <MovementCompo>k__BackingField: {fileID: 7650689815842275299}
   <RednererCompo>k__BackingField: {fileID: 7650758397733097871}
-  <AnimationCompo>k__BackingField: {fileID: 0}
+  <AnimationCompo>k__BackingField: {fileID: 3756595430484980308}
 --- !u!50 &2847135391211342614
 Rigidbody2D:
   serializedVersion: 5
