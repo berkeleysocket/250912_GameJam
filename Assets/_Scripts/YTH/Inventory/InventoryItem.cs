@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {
     public class InventoryItem : MonoBehaviour
     {

@@ -6,7 +6,7 @@ using _Scripts.Core.Utility;
 using DG.Tweening;
 using UnityEngine;
 
-namespace _Scripts.Core.YTH.Inventory
+namespace _Scripts.YTH.Inventory
 {    
     public class InventoryManager : MonoBehaviour
     {
@@ -21,10 +21,11 @@ namespace _Scripts.Core.YTH.Inventory
         [Header("Event Channel")]
         [SerializeField] private ItemDataEventChannel itemAddEventChannel;
         [SerializeField] private ItemDataEventChannel itemRemoveEventChannel;
+        [SerializeField] private ItemDataEventChannel itemCanAddEventChannel;
+        [SerializeField] private ItemDataEventChannel itemCanRemoveEventChannel;
         [SerializeField] private InventoryManagerEventChannel inventoryManagerEventChannel;
-        [SerializeField] private BoolEventChannel CanAddItemEventChannel;
-        [SerializeField] private BoolEventChannel CanRemoveItemEventChannel;
         [SerializeField] private BoolEventChannel InventoryOpenEventChannel;
+        [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
 
         private List<InventorySlot> m_inventorySlots;
         private bool m_acvite;
@@ -35,6 +36,8 @@ namespace _Scripts.Core.YTH.Inventory
         {
             m_inventorySlots = GetComponentsInChildren<InventorySlot>().ToList();
 
+            itemCanAddEventChannel.OnEvent += CanAddItem;
+            itemCanRemoveEventChannel.OnEvent += CanRemoveItem;
             itemAddEventChannel.OnEvent += TryAddItem;
             itemRemoveEventChannel.OnEvent += TryRemoveItem;
             inputSO.OnInventoryed += OnInventory;
@@ -52,6 +55,8 @@ namespace _Scripts.Core.YTH.Inventory
 
         private void OnDestroy()
         {
+            itemCanAddEventChannel.OnEvent -= CanAddItem;
+            itemCanRemoveEventChannel.OnEvent -= CanRemoveItem;
             itemAddEventChannel.OnEvent -= TryAddItem;
             itemRemoveEventChannel.OnEvent -= TryRemoveItem;
             inputSO.OnInventoryed -= OnInventory;
@@ -63,38 +68,45 @@ namespace _Scripts.Core.YTH.Inventory
             {
                 if (slot.InventoryItem == null)
                 {
-                    CanAddItemEventChannel.Raise(true);
+                    InventoryUpdateEventChannel.Raise(true);
                     return;
                 }
             }
 
-            CanAddItemEventChannel.Raise(false);
+            InventoryUpdateEventChannel.Raise(false);
             return;   
         }
 
         public void CanRemoveItem(ItemData item)
         {
-            if (IsEmpty) return;
+            if (IsEmpty)
+            {
+                InventoryUpdateEventChannel.Raise(false);
+                return;
+            }
 
             var itemDataSO = ItemDatabase.GetItemDataSO(item.itemID);
 
             foreach (var slot in m_inventorySlots)
             {
+                if (slot.InventoryItem == null)
+                {
+                    continue;
+                }
                 if (slot.InventoryItem.Item == itemDataSO)
                 {
-                    CanRemoveItemEventChannel.Raise(true);
+                    InventoryUpdateEventChannel.Raise(true);
                     return;
                 }
             }
 
-            CanRemoveItemEventChannel.Raise(false);
+            InventoryUpdateEventChannel.Raise(false);
             return;
         }
 
         public void TryAddItem(ItemData item)
         {
             var itemDataSO = ItemDatabase.GetItemDataSO(item.itemID);
-            Logging.Log($"Trying to add item: {itemDataSO.ItemName}");
 
             foreach (var slot in m_inventorySlots)
             {
@@ -105,7 +117,6 @@ namespace _Scripts.Core.YTH.Inventory
                 }
             }
 
-            Logging.LogWarning("No empty inventory slots available!");
         }
 
         public void TryRemoveItem(ItemData item)
@@ -116,9 +127,13 @@ namespace _Scripts.Core.YTH.Inventory
 
             foreach (var slot in m_inventorySlots)
             {
+                if (slot.InventoryItem == null)
+                {
+                    continue;
+                }
                 if (slot.InventoryItem.Item == itemDataSO)
                 {
-                    Destroy(slot.InventoryItem);
+                    Destroy(slot.InventoryItem.gameObject);
                     return;
                 }
             }
