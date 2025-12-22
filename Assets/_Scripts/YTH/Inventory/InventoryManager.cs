@@ -21,10 +21,11 @@ namespace _Scripts.Core.YTH.Inventory
         [Header("Event Channel")]
         [SerializeField] private ItemDataEventChannel itemAddEventChannel;
         [SerializeField] private ItemDataEventChannel itemRemoveEventChannel;
+        [SerializeField] private EmptyEvnetChannel itemCanAddEventChannel;
+        [SerializeField] private EmptyEvnetChannel itemCanRemoveEventChannel;
         [SerializeField] private InventoryManagerEventChannel inventoryManagerEventChannel;
-        [SerializeField] private BoolEventChannel CanAddItemEventChannel;
-        [SerializeField] private BoolEventChannel CanRemoveItemEventChannel;
         [SerializeField] private BoolEventChannel InventoryOpenEventChannel;
+        [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
 
         private List<InventorySlot> m_inventorySlots;
         private bool m_acvite;
@@ -63,12 +64,12 @@ namespace _Scripts.Core.YTH.Inventory
             {
                 if (slot.InventoryItem == null)
                 {
-                    CanAddItemEventChannel.Raise(true);
+                    InventoryUpdateEventChannel.Raise(true);
                     return;
                 }
             }
 
-            CanAddItemEventChannel.Raise(false);
+            InventoryUpdateEventChannel.Raise(false);
             return;   
         }
 
@@ -82,12 +83,12 @@ namespace _Scripts.Core.YTH.Inventory
             {
                 if (slot.InventoryItem.Item == itemDataSO)
                 {
-                    CanRemoveItemEventChannel.Raise(true);
+                    InventoryUpdateEventChannel.Raise(true);
                     return;
                 }
             }
 
-            CanRemoveItemEventChannel.Raise(false);
+            InventoryUpdateEventChannel.Raise(false);
             return;
         }
 
