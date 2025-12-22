@@ -4,79 +4,80 @@ using _Scripts.Core.Utility;
 using _Scripts.YTH.Inventory;
 using Ksy.Scripts.Player;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
+using UnityEngine.UI;
 
 namespace _Scripts.YTH.Item
 {    
     public class ItemObject : MonoBehaviour
     {
-        [field:SerializeField] public ItemDataSO ItemData { get; private set; }
+        [field: SerializeField] public ItemDataSO ItemData { get; private set; }
+
         [Header("Item Object Settings")]
-        [SerializeField] private float pickupDistance = 2f;
-        [SerializeField] private float pickupTime;
+        [SerializeField] private float pickupDistance;
         [SerializeField] private InputSO inputSO;
+        [SerializeField] private GameObject keyPrompt;
+        [SerializeField] private SpriteRenderer spriteRenderer;
+        [SerializeField] private CircleCollider2D itemCollider;
 
         [Header("Event Channels")]
         [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
         [SerializeField] private ItemDataEventChannel addItemEventChannel;
         [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
-        
-        [SerializeField] private float m_pickupTime;
-        private bool m_canPickup;
-        private bool m_interacted;
-        private float m_distance;
-        private Player m_player;
 
 
         private void Awake()
         {
-            m_player = FindAnyObjectByType<Player>();
-
-            inputSO.OnInteracted += TryPickUp;
+            spriteRenderer.sprite = ItemData.Icon;
+            keyPrompt.SetActive(false);
+            itemCollider.radius = pickupDistance;
         }
 
-        private void Update()
+        public void SetItemData(ItemDataSO itemData)
         {
-            m_distance = Vector3.Distance(transform.position, m_player.transform.position);
-            m_canPickup = m_distance <= pickupDistance;
+            ItemData = itemData;
+            spriteRenderer.sprite = ItemData.Icon;
+        }
 
-            if (!m_canPickup)
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
             {
-                m_pickupTime -= Time.deltaTime;
-                m_pickupTime = Mathf.Clamp(m_pickupTime, 0f, pickupTime);
-                return;
+                Logging.Log("Can Pick Up");
+                keyPrompt.SetActive(true);
+                inputSO.OnInteracted += Add;
             }
+        }
 
-            if (m_interacted && m_canPickup)
-            {    
-                m_pickupTime += Time.deltaTime;
-                if (m_pickupTime >= pickupTime)
-                {
-                    inventoryUpdateEventChannel.OnEvent += OnInventoryUpdate;
-                    canAddItemEventChannel.Raise(new ItemData(ItemData.ItemID));
-                }
+        private void OnTriggerExit2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Player"))
+            {
+                Logging.Log("Can't Pick Up");
+                keyPrompt.SetActive(false);
+                inputSO.OnInteracted -= Add;
             }
-            
         }
 
-        private void OnDestroy()
+
+        public void Add()
         {
-            inputSO.OnInteracted -= TryPickUp;
+            Logging.Log("Can Add");
+            inventoryUpdateEventChannel.OnEvent += OnInventoryUpdate;
+            canAddItemEventChannel.Raise(new(ItemData.ItemID));
         }
-
-        private void TryPickUp(bool interacted)
-        {
-            m_interacted = interacted;
-        }
-
 
         private void OnInventoryUpdate(bool active)
         {
             if (active)
             {
-                addItemEventChannel.Raise(new ItemData(ItemData.ItemID));
+                addItemEventChannel.Raise(new(ItemData.ItemID));
                 Destroy(gameObject);
+                Logging.Log("Add");
             }
             inventoryUpdateEventChannel.OnEvent -= OnInventoryUpdate;
         }
+
     }
+
 }
