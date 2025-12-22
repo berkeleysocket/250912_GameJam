@@ -10,8 +10,9 @@ GameObject:
   m_Component:
   - component: {fileID: 2040223147969862050}
   - component: {fileID: 1853488934935108832}
-  - component: {fileID: 2847135391211342614}
-  - component: {fileID: 7650689815842275299}
+  - component: {fileID: 885515451465885083}
+  - component: {fileID: 3416986953189639008}
+  - component: {fileID: 8339490875302675770}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -48,11 +49,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   <InputEvent>k__BackingField: {fileID: 11400000, guid: 262d5d1924d13f84a80c468f9dfbbbbe, type: 2}
-  <Body>k__BackingField: {fileID: 2847135391211342614}
-  <MovementCompo>k__BackingField: {fileID: 7650689815842275299}
+  <MovementCompo>k__BackingField: {fileID: 885515451465885083}
   <RednererCompo>k__BackingField: {fileID: 7650758397733097871}
   <AnimationCompo>k__BackingField: {fileID: 3756595430484980308}
---- !u!50 &2847135391211342614
+--- !u!114 &885515451465885083
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 122914039364372891}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 03adcbd83ac2bdd408a8675cfdb54e32, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  body: {fileID: 0}
+  maxSpeed: 5
+--- !u!50 &3416986953189639008
 Rigidbody2D:
   serializedVersion: 5
   m_ObjectHideFlags: 0
@@ -78,20 +92,44 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
---- !u!114 &7650689815842275299
-MonoBehaviour:
+  m_Constraints: 4
+--- !u!70 &8339490875302675770
+CapsuleCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 122914039364372891}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 03adcbd83ac2bdd408a8675cfdb54e32, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _maxSpeed: 5
+  serializedVersion: 3
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_CompositeOperation: 0
+  m_CompositeOrder: 0
+  m_Offset: {x: 0, y: 0}
+  m_Size: {x: 0.36, y: 1.2}
+  m_Direction: 0
 --- !u!1 &590720282071962140
 GameObject:
   m_ObjectHideFlags: 0

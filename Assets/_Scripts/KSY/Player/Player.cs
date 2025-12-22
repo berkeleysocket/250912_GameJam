@@ -7,7 +7,6 @@ namespace Ksy.Scripts.Player
     public class Player : MonoBehaviour
     {
         [field: SerializeField] public InputSO InputEvent {get; private set;}
-        [field: SerializeField] public Rigidbody2D Body {get; private set;}
         [field: SerializeField] public Movement MovementCompo {get; private set;}
         [field: SerializeField] public RendererX RednererCompo {get; private set;}
         [field: SerializeField] public AnimationX AnimationCompo {get; private set;}
