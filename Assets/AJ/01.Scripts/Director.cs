@@ -1,15 +1,17 @@
+using System;
+using _Scripts.Core.Events;
 using UnityEngine;
 using UnityEngine.AI;
 
 namespace AJ._01.Scripts
 {
-    public class Director : MonoBehaviour
+    public class Director : MonoBehaviour 
     {
         [field:SerializeField] public Transform Target { get; private set; }
         [field:SerializeField] public NavMeshAgent AgentCompo { get; private set; }
-
-        [SerializeField] private bool canMove = true;
         [SerializeField] private float speed;
+        [SerializeField] private bool canMove = true;
+        [SerializeField] private ChangeTargetEventChannel emptyEventChannel;
         public float Speed
         {
             get => speed;
@@ -22,15 +24,21 @@ namespace AJ._01.Scripts
 
         private void Awake()
         {
-            AgentCompo.speed = speed;
+            AgentCompo.speed = speed;   
             AgentCompo.updateRotation = false;
             AgentCompo.updateUpAxis = false;
+            emptyEventChannel.OnEvent += (t) => Target = t;
         }
-
         private void Update()
         {
-            if (canMove)
-                AgentCompo.SetDestination(Target.position);
+            AgentCompo.isStopped = !canMove;
+
+            UpdateAgentTarget();
+        }
+
+        private void UpdateAgentTarget()
+        {
+            AgentCompo.SetDestination(Target.position);
         }
     }
 }
