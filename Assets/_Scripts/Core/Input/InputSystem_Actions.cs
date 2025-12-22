@@ -138,6 +138,15 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
+                    ""name"": ""Guide"",
+                    ""type"": ""Button"",
+                    ""id"": ""e52450c3-927d-415f-89f4-827d4c9977f6"",
+                    ""expectedControlType"": """",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
                     ""name"": ""One"",
                     ""type"": ""Button"",
                     ""id"": ""f61756b4-4bab-43c9-a6ab-cd23a8f3b9df"",
@@ -335,6 +344,17 @@ public partial class @Controls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Five"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a600e83b-1c80-4176-bbe2-814a201118b9"",
+                    ""path"": ""<Keyboard>/t"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Guide"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -927,6 +947,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         m_Player_Use = m_Player.FindAction("Use", throwIfNotFound: true);
         m_Player_Sprint = m_Player.FindAction("Sprint", throwIfNotFound: true);
         m_Player_Inventory = m_Player.FindAction("Inventory", throwIfNotFound: true);
+        m_Player_Guide = m_Player.FindAction("Guide", throwIfNotFound: true);
         m_Player_One = m_Player.FindAction("One", throwIfNotFound: true);
         m_Player_Two = m_Player.FindAction("Two", throwIfNotFound: true);
         m_Player_Three = m_Player.FindAction("Three", throwIfNotFound: true);
@@ -1030,6 +1051,7 @@ public partial class @Controls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Use;
     private readonly InputAction m_Player_Sprint;
     private readonly InputAction m_Player_Inventory;
+    private readonly InputAction m_Player_Guide;
     private readonly InputAction m_Player_One;
     private readonly InputAction m_Player_Two;
     private readonly InputAction m_Player_Three;
@@ -1066,6 +1088,10 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// Provides access to the underlying input action "Player/Inventory".
         /// </summary>
         public InputAction @Inventory => m_Wrapper.m_Player_Inventory;
+        /// <summary>
+        /// Provides access to the underlying input action "Player/Guide".
+        /// </summary>
+        public InputAction @Guide => m_Wrapper.m_Player_Guide;
         /// <summary>
         /// Provides access to the underlying input action "Player/One".
         /// </summary>
@@ -1127,6 +1153,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Inventory.started += instance.OnInventory;
             @Inventory.performed += instance.OnInventory;
             @Inventory.canceled += instance.OnInventory;
+            @Guide.started += instance.OnGuide;
+            @Guide.performed += instance.OnGuide;
+            @Guide.canceled += instance.OnGuide;
             @One.started += instance.OnOne;
             @One.performed += instance.OnOne;
             @One.canceled += instance.OnOne;
@@ -1168,6 +1197,9 @@ public partial class @Controls: IInputActionCollection2, IDisposable
             @Inventory.started -= instance.OnInventory;
             @Inventory.performed -= instance.OnInventory;
             @Inventory.canceled -= instance.OnInventory;
+            @Guide.started -= instance.OnGuide;
+            @Guide.performed -= instance.OnGuide;
+            @Guide.canceled -= instance.OnGuide;
             @One.started -= instance.OnOne;
             @One.performed -= instance.OnOne;
             @One.canceled -= instance.OnOne;
@@ -1518,6 +1550,13 @@ public partial class @Controls: IInputActionCollection2, IDisposable
         /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
         /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
         void OnInventory(InputAction.CallbackContext context);
+        /// <summary>
+        /// Method invoked when associated input action "Guide" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
+        /// </summary>
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.started" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.performed" />
+        /// <seealso cref="UnityEngine.InputSystem.InputAction.canceled" />
+        void OnGuide(InputAction.CallbackContext context);
         /// <summary>
         /// Method invoked when associated input action "One" is either <see cref="UnityEngine.InputSystem.InputAction.started" />, <see cref="UnityEngine.InputSystem.InputAction.performed" /> or <see cref="UnityEngine.InputSystem.InputAction.canceled" />.
         /// </summary>
