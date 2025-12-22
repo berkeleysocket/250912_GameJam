@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 885515451465885083}
   - component: {fileID: 3416986953189639008}
   - component: {fileID: 2514025944678085371}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -144,7 +144,7 @@ GameObject:
   - component: {fileID: 3756595430484980308}
   - component: {fileID: 822218744913922268}
   - component: {fileID: 4474571470095823246}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: Visual
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -208,7 +208,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2081495297
-  m_SortingLayer: 3
+  m_SortingLayer: 4
   m_SortingOrder: 0
   m_Sprite: {fileID: -8077557582830815924, guid: 6676a9546dad0994fa5efb2346a9c1e5, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
