@@ -12,8 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921fb2106432afb47bb0e6012968159c, type: 3}
   m_Name: Coin
   m_EditorClassIdentifier: 
-  <ItemName>k__BackingField: Coin
-  <Description>k__BackingField: sdsd
+  <ItemName>k__BackingField: "\uB3D9\uC804"
+  <Description>k__BackingField: "\uC790\uD310\uAE30\uC5D0\uC11C \uC0AC\uC6A9\uD560
+    \uC218 \uC788\uC744\uAC70 \uAC19\uB2E4."
   <Icon>k__BackingField: {fileID: -3042775341902697147, guid: 0e4323864247ccb468920618594c2050, type: 3}
-  <ItemID>k__BackingField: 2
+  <ItemID>k__BackingField: 10001
   <UseEffects>k__BackingField: []

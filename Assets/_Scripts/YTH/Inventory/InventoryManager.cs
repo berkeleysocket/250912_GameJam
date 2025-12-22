@@ -26,6 +26,7 @@ namespace _Scripts.YTH.Inventory
         [SerializeField] private InventoryManagerEventChannel inventoryManagerEventChannel;
         [SerializeField] private BoolEventChannel InventoryOpenEventChannel;
         [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
+        [SerializeField] private AlertDataEventChannel alertDataEventChannel;
 
         private List<InventorySlot> m_inventorySlots;
         private bool m_acvite;
@@ -70,16 +71,22 @@ namespace _Scripts.YTH.Inventory
         public void SelecteSlot(int index)
         {
             int count = index - 1;
+            var inventorySlot = m_inventorySlots[count];
 
-            if (m_inventorySlots[count] != null)
+            if (inventorySlot != null)
             {
                 foreach (var slot in m_inventorySlots)
                 {
                     slot.UnSelect();
                 }
 
-                m_inventorySlots[count].Select();
-                m_selectedSlot = m_inventorySlots[count];
+                inventorySlot.Select();
+                m_selectedSlot = inventorySlot;
+            }
+            
+            if (inventorySlot.InventoryItem != null)
+            {
+                alertDataEventChannel.Raise(new($"- {inventorySlot.InventoryItem.Item.ItemName} -", $"{inventorySlot.InventoryItem.Item.Description}", 1.5f, 0.2f));
             }
         }
 
@@ -92,6 +99,8 @@ namespace _Scripts.YTH.Inventory
                     foreach (var effect in m_selectedSlot.InventoryItem.Item.UseEffects)
                     {
                         effect.ApplyEffect(this.gameObject);
+                        Destroy(m_selectedSlot.InventoryItem.gameObject);
+                        alertDataEventChannel.Raise(new($"- 아이템을 사용했습니다. -", $"{m_selectedSlot.InventoryItem.Item.ItemName}", 1.5f, 0.2f));
                     }
                 }
             }
