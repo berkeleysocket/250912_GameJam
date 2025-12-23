@@ -30,7 +30,6 @@ namespace Ksy.Scripts._Player
         public NotifyValue<bool> notify_IsMove {get; private set;} = new NotifyValue<bool>();
         public NotifyValue<Vector2> notify_Dir {get; private set;} = new NotifyValue<Vector2>();
 
-        //private List<Coroutine> _movementBuffs = new List<Coroutine>();
         private Rigidbody2D _body;
         private float _acceleration = 50;
         private float _deacceleration = 50;
@@ -40,15 +39,11 @@ namespace Ksy.Scripts._Player
         private void Awake()
         {
             if(!gameObject.TryGetComponent(out _body)) _body = gameObject.AddComponent<Rigidbody2D>();
-            speedDataEventChannel.OnEvent += SpeedUp;
+                speedDataEventChannel.OnEvent += SpeedUp;
         }
         private void Update()
         {
             currentVelocity = CalculateSpeed(notify_Dir.Value);
-
-            if(Keyboard.current.spaceKey.wasPressedThisFrame) StressManager.Instance?.IncreaseStress(1);
-            if(Keyboard.current.fKey.wasPressedThisFrame) StressManager.Instance?.DecreaseStress(1);
-            if(Keyboard.current.eKey.wasPressedThisFrame) SpeedUp(new SpeedData(1f, 3f));
         }
         private void FixedUpdate()
         {

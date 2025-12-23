@@ -1,13 +1,22 @@
 fileFormatVersion: 2
-guid: 3a3e9b33c55a12a47a07c72ffcea6066
+guid: cdd244f13ed6a5747a8c18f741dfdfd4
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: 2243986369602382286
-    second: Player_IdleFront-Sheet_0
+      213: 6074149901007281734
+    second: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_0"
   - first:
-      213: 7810483684913557579
-    second: Player_IdleFront-Sheet_1
+      213: 5511813538313790445
+    second: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_1"
+  - first:
+      213: -2999517841024106601
+    second: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_2"
+  - first:
+      213: 3928116201213914792
+    second: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_3"
+  - first:
+      213: -464297379756552363
+    second: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_4"
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +63,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 100
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +84,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -103,45 +112,45 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_IdleFront-Sheet_0
+      name: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_2"
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 9
-        height: 30
+        x: 22
+        y: 16
+        width: 14
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ec9e7f8c6bd342f10800000000000000
-      internalID: 2243986369602382286
+      spriteID: 79fbf4c6a629f56d0800000000000000
+      internalID: -2999517841024106601
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Player_IdleFront-Sheet_1
+      name: "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_4"
       rect:
         serializedVersion: 2
-        x: 43
-        y: 0
-        width: 9
-        height: 31
+        x: 36
+        y: 16
+        width: 15
+        height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       customData: 
       outline: []
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: b40b14b9789646c60800000000000000
-      internalID: 7810483684913557579
+      spriteID: 55f47793efb7e89f0800000000000000
+      internalID: -464297379756552363
       vertices: []
       indices: 
       edges: []
@@ -150,7 +159,7 @@ TextureImporter:
     customData: 
     physicsShape: []
     bones: []
-    spriteID: 
+    spriteID: b974271246df90d4d8aedfd4b300734c
     internalID: 0
     vertices: []
     indices: 
@@ -160,8 +169,11 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Player_IdleFront-Sheet_0: 2243986369602382286
-      Player_IdleFront-Sheet_1: 7810483684913557579
+      "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_0": 6074149901007281734
+      "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_1": 5511813538313790445
+      "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_2": -2999517841024106601
+      "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_3": 3928116201213914792
+      "\uAE40\uBD80\uC7A5\uC774 \uC65C\uADF8\uB798 2_4": -464297379756552363
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

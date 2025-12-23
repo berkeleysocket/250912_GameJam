@@ -1,13 +1,10 @@
 fileFormatVersion: 2
-guid: fb4834b6e63afb54f93218c66d7b62cf
+guid: b31a181779591b3448ff8e5814162fc9
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -3048793598648258548
-    second: Player_IdleBack_0
-  - first:
-      213: -2239244093462605951
-    second: Player_IdleBack_1
+      213: -8680908943309279474
+    second: SettingUI_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -54,7 +51,7 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spritePixelsToUnits: 25
+  spritePixelsToUnits: 32
   spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
@@ -75,7 +72,7 @@ TextureImporter:
   platformSettings:
   - serializedVersion: 4
     buildTarget: DefaultTexturePlatform
-    maxTextureSize: 256
+    maxTextureSize: 2048
     resizeAlgorithm: 0
     textureFormat: -1
     textureCompression: 1
@@ -103,13 +100,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Player_IdleBack_0
+      name: SettingUI_0
       rect:
         serializedVersion: 2
-        x: 11
-        y: 0
-        width: 9
-        height: 30
+        x: 0
+        y: 1
+        width: 15
+        height: 15
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -118,30 +115,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: c00f51f006280b5d0800000000000000
-      internalID: -3048793598648258548
-      vertices: []
-      indices: 
-      edges: []
-      weights: []
-    - serializedVersion: 2
-      name: Player_IdleBack_1
-      rect:
-        serializedVersion: 2
-        x: 43
-        y: 0
-        width: 9
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      customData: 
-      outline: []
-      physicsShape: []
-      tessellationDetail: -1
-      bones: []
-      spriteID: 18f05cb6c5b9ce0e0800000000000000
-      internalID: -2239244093462605951
+      spriteID: e0fe98a3f47378780800000000000000
+      internalID: -8680908943309279474
       vertices: []
       indices: 
       edges: []
@@ -160,8 +135,7 @@ TextureImporter:
     spriteCustomMetadata:
       entries: []
     nameFileIdTable:
-      Player_IdleBack_0: -3048793598648258548
-      Player_IdleBack_1: -2239244093462605951
+      SettingUI_0: -8680908943309279474
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
