@@ -74,9 +74,9 @@ MonoBehaviour:
   traceChannel: {fileID: 11400000, guid: 275c420bffc617b43950cdb916be1af7, type: 2}
   <FindPlayer>k__BackingField: 0
   <FieldOfview>k__BackingField: {fileID: 8409651453279168911}
-  velocity: {x: 0, y: 0}
   directorSpeedUpEventChannel: {fileID: 11400000, guid: 3f67325d2deb25345a7857fb2084022f, type: 2}
   directorSpeedDownEventChannel: {fileID: 11400000, guid: 8966853b134551a4b9c3ed7f46048607, type: 2}
+  walkSound: {fileID: 8300000, guid: e82ecb3488eb4ab48972bc7bb63c2240, type: 3}
 --- !u!114 &7050656808867294501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -205,7 +205,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 1684882100003799344, guid: e129f9750280a8a4f9eeb74b379e3ac3, type: 2}
   m_audioClip: {fileID: 0}
   m_Resource: {fileID: 0}
-  m_PlayOnAwake: 1
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -214,8 +214,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
+  MinDistance: 2.18
+  MaxDistance: 4.184275
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -250,7 +250,7 @@ AudioSource:
     m_Curve:
     - serializedVersion: 3
       time: 0
-      value: 0
+      value: 1
       inSlope: 0
       outSlope: 0
       tangentMode: 0
