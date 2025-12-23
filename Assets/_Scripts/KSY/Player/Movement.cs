@@ -1,3 +1,5 @@
+using System.Collections;
+using System.Collections.Generic;
 using Ksy.Scripts.StressSystem;
 using Ksy.Utility;
 using Unity.VisualScripting.Dependencies.NCalc;
@@ -8,23 +10,26 @@ namespace Ksy.Scripts.Player
 {
     public class Movement : MonoBehaviour
     {
-        [SerializeField] private Rigidbody2D body;
-        [SerializeField] public float MaxSpeed
+        [SerializeField] private float currentSpeed = 5f;
+        [SerializeField] private float maxSpeed = 15f;
+        [SerializeField] private float currentVelocity = 0f;
+        public float CurrentSpeed
         {
             get
             {
-                return _maxSpeed;
+                return currentSpeed;
             }
             set
             {
-                _maxSpeed = Mathf.Clamp(value,1,15);
+                currentSpeed = Mathf.Clamp(value,1,maxSpeed);
             }
         }
-        [SerializeField] private float _maxSpeed = 5f;
-        [SerializeField] private float currentVelocity = 0f;
-        public NotifyValue<bool> Notify_IsMove {get; private set;} = new NotifyValue<bool>();
-        public NotifyValue<Vector2> Notify_Dir {get; private set;} = new NotifyValue<Vector2>();
 
+        public NotifyValue<bool> notify_IsMove {get; private set;} = new NotifyValue<bool>();
+        public NotifyValue<Vector2> notify_Dir {get; private set;} = new NotifyValue<Vector2>();
+
+        private List<Coroutine> _movementBuffs = new List<Coroutine>();
+        private Rigidbody2D _body;
         private float _acceleration = 50;
         private float _deacceleration = 50;
 
@@ -32,37 +37,45 @@ namespace Ksy.Scripts.Player
         #region UnityEvent
         private void Awake()
         {
-            if(body == null)
-                body = GetComponent<Rigidbody2D>();
+            if(!gameObject.TryGetComponent(out _body)) _body = gameObject.AddComponent<Rigidbody2D>();
         }
         private void Update()
         {
-            currentVelocity = CalculateSpeed(Notify_Dir.Value);
+            currentVelocity = CalculateSpeed(notify_Dir.Value);
 
             if(Keyboard.current.spaceKey.wasPressedThisFrame) StressManager.Instance?.IncreaseStress(1);
             if(Keyboard.current.fKey.wasPressedThisFrame) StressManager.Instance?.DecreaseStress(1);
+            if(Keyboard.current.eKey.wasPressedThisFrame) SpeedUp(1f,3f);
         }
         private void FixedUpdate()
         {
-            if(body != null)
-                body.linearVelocity = (Notify_Dir.Value * currentVelocity);
+            if(_body != null)
+                _body.linearVelocity = (notify_Dir.Value * currentVelocity);
         }
         #endregion
         public void Move(Vector2 dir)
         {
-            Notify_Dir.Value = dir;
+            notify_Dir.Value = dir;
 
             if(dir != Vector2.zero)
-                Notify_IsMove.Value = true;
-            else Notify_IsMove.Value = false;
+                notify_IsMove.Value = true;
+            else notify_IsMove.Value = false;
         }
-        public void MoveHorizontal(float xDir)
+        public void SpeedUp(float speed, float duration)
         {
-            Notify_Dir.Value = new Vector2(xDir, Notify_Dir.Value.y);
+            if(this.currentSpeed >= maxSpeed) return;
+
+            var buff = StartCoroutine(_speedUp(speed,duration));
+            _movementBuffs.Add(buff);
         }
-        public void MoveVertical(float yDir)
+        private IEnumerator _speedUp(float speed, float duration)
         {
-            Notify_Dir.Value = new Vector2(Notify_Dir.Value.x, yDir);
+            float beforeSpeed = CurrentSpeed;
+            CurrentSpeed += speed;
+
+            yield return new WaitForSeconds(duration);
+
+            CurrentSpeed -= speed;
         }
         private float CalculateSpeed(Vector2 inputDir)
         {
@@ -75,7 +88,7 @@ namespace Ksy.Scripts.Player
                 currentVelocity -= _deacceleration * Time.deltaTime / 1.5f;
             }
 
-            return Mathf.Clamp(currentVelocity, 0, MaxSpeed);
+            return Mathf.Clamp(currentVelocity, 0, CurrentSpeed);
         }
     }
 }

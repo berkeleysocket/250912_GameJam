@@ -20,15 +20,15 @@ namespace Ksy.Scripts.Player
             }
             if(MovementCompo != null && RednererCompo != null)
             {
-                MovementCompo.Notify_Dir.OnChangedValue += RednererCompo.FilpX;
+                MovementCompo.notify_Dir.OnChangedValue += RednererCompo.FilpX;
             }
             if(MovementCompo != null && AnimationCompo != null)
             {
-                MovementCompo.Notify_IsMove.OnChangedValue += AnimationCompo.SetIsMove;
-                MovementCompo.Notify_Dir.OnChangedValue += AnimationCompo.SetMoveDir;
+                MovementCompo.notify_IsMove.OnChangedValue += AnimationCompo.SetIsMove;
+                MovementCompo.notify_Dir.OnChangedValue += AnimationCompo.SetMoveDir;
             }
-            StressManager.Instance.StressIncreased += (args)=> MovementCompo.MaxSpeed -= args.applyValue;
-            StressManager.Instance.StressDecreased += (args)=> MovementCompo.MaxSpeed += args.applyValue;
+            StressManager.Instance.StressIncreased += (args)=> MovementCompo.CurrentSpeed -= args.applyValue;
+            StressManager.Instance.StressDecreased += (args)=> MovementCompo.CurrentSpeed += args.applyValue;
         }
 
         void OnDisable()
@@ -39,12 +39,12 @@ namespace Ksy.Scripts.Player
             }
             if(MovementCompo != null && RednererCompo != null)
             {
-                MovementCompo.Notify_Dir.OnChangedValue -= RednererCompo.FilpX;
+                MovementCompo.notify_Dir.OnChangedValue -= RednererCompo.FilpX;
             }
             if(MovementCompo != null && AnimationCompo != null)
             {
-                MovementCompo.Notify_IsMove.OnChangedValue -= AnimationCompo.SetIsMove;
-                MovementCompo.Notify_Dir.OnChangedValue -= AnimationCompo.SetMoveDir;
+                MovementCompo.notify_IsMove.OnChangedValue -= AnimationCompo.SetIsMove;
+                MovementCompo.notify_Dir.OnChangedValue -= AnimationCompo.SetMoveDir;
             }
         }
     }
