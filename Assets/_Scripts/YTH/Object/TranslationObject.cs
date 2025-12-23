@@ -4,6 +4,7 @@ using _Scripts.Core.Structs;
 using _Scripts.Core.Utility;
 using DG.Tweening;
 using UnityEngine;
+using UnityEngine.PlayerLoop;
 
 namespace _Scripts.YTH.Object
 {    
@@ -18,6 +19,7 @@ namespace _Scripts.YTH.Object
         [Header("Event Channels")]
         [SerializeField] private AlertDataEventChannel alertDataEventChannel;
         [SerializeField] private EmptyEventChannel toggleTranslationEventChannel;
+        [SerializeField] private EmptyEventChannel doneTranslationEventChannel;
 
 
 
@@ -25,6 +27,11 @@ namespace _Scripts.YTH.Object
         {
             keyPrompt.SetActive(false);
             itemCollider.radius = pickupDistance;
+        }
+
+        private void OnDestroy()
+        {
+            doneTranslationEventChannel.OnEvent -= Done;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -40,8 +47,9 @@ namespace _Scripts.YTH.Object
                     seq.Append(keyPrompt.transform.DOScale(1f, 0.2f).SetEase(Ease.OutCubic));
                 }
                 Logging.Log("Can Pick Up");
-                inputSO.OnInteracted += () => toggleTranslationEventChannel.Raise(new Empty());
+                inputSO.OnInteracted += ToggleTranslation;
                 alertDataEventChannel.Raise(new($"- 번역 업무 -", "F키를 눌러 업무를 시작하세요.", 2.5f, 0.25f));
+                doneTranslationEventChannel.OnEvent += Done;
             }
         }
 
@@ -57,8 +65,19 @@ namespace _Scripts.YTH.Object
                     seq.AppendCallback(() => keyPrompt.SetActive(false));
                 }
                 Logging.Log("Can't Pick Up");
-                inputSO.OnInteracted -= () => toggleTranslationEventChannel.Raise(new Empty());
+                inputSO.OnInteracted -= ToggleTranslation;
+                doneTranslationEventChannel.OnEvent -= Done;
             }
+        }
+
+        private void ToggleTranslation()
+        {
+            toggleTranslationEventChannel.Raise(new Empty());
+        }
+
+        private void Done(Empty empty)
+        {
+            Destroy(this.gameObject);
         }
 
     }

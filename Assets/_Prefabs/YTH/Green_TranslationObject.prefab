@@ -167,6 +167,7 @@ MonoBehaviour:
   inputSO: {fileID: 11400000, guid: 262d5d1924d13f84a80c468f9dfbbbbe, type: 2}
   alertDataEventChannel: {fileID: 11400000, guid: a2177a797e00e654ca09e9cd77c836c9, type: 2}
   toggleTranslationEventChannel: {fileID: 11400000, guid: cda4eb1d39f0b124f983cfd94c643cf2, type: 2}
+  doneTranslationEventChannel: {fileID: 11400000, guid: 5ac23d8c59223484ea83d6b8dd2eb9a3, type: 2}
 --- !u!1 &8116131351042698070
 GameObject:
   m_ObjectHideFlags: 0
