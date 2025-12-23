@@ -34,6 +34,11 @@ namespace Ksy.Scripts._Player
             {
                 MovementCompo.notify_IsMove.OnChangedValue += WalkSound;
             }
+            if(StressManager.Instance != null)
+            {
+                StressManager.Instance.StressIncreased += (args)=> MovementCompo.maxSpeed -= 1;
+                StressManager.Instance.StressDecreased += (args)=> MovementCompo.maxSpeed += 1;
+            }
         }
 
         void OnDisable()
