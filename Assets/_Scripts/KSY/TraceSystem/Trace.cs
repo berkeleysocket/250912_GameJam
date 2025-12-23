@@ -37,7 +37,7 @@ namespace Ksy.Scripts.TraceSystem
 
             if (traceReactiveObj != null)
             {
-                traceReactiveObj.Reactive();
+                traceReactiveObj.Reactive(interactor);
                 if (count < 2)
                 {
                     GetComponent<SpriteRenderer>().DOFade(0f, 0.5f);

@@ -8,61 +8,58 @@ namespace Ksy.Scripts.Object
 {
     public class Door : MonoBehaviour, ITraceReactive
     {
-        private Animator animator;
-        [SerializeField] private Dir openDir;
-        private BoxCollider2D OpenColider;
-        private SpriteRenderer FrameRenderer;
-        
-
+        [SerializeField] private bool NeedKey = false;
+        [SerializeField] private bool NeedBoss = false;
+        private Animator _animator;
+        private BoxCollider2D _colider;
+        private SpriteRenderer _frameReanderer;
+        public bool IsOpen {get; private set;}
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
         public event Action OnClosed;
 
-        public bool IsOpen {get; private set;}
         void Awake()
         {
-            animator = GetComponent<Animator>();
-            OpenColider = GetComponent<BoxCollider2D>();
-            FrameRenderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            _animator = GetComponent<Animator>();
+            _colider = GetComponent<BoxCollider2D>();
+            _frameReanderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         }
 
-        public void Open()
+        public void Open(GameObject actor)
         {
             IsOpen = true;
-            if(OpenColider != null)
-                OpenColider.isTrigger = true;
+            if(_colider != null)
+                _colider.isTrigger = true;
             OnOpend?.Invoke();
         }
         public void Close()
         {
             IsOpen = false;
-            if(OpenColider != null)
-                OpenColider.isTrigger = false;
+            if(_colider != null)
+                _colider.isTrigger = false;
             OnClosed?.Invoke();
         }
 
         public GameObject GetGameObject() => gameObject; 
 
         [ContextMenu("Reactive")]
-        public void Reactive()
+        public void Reactive(GameObject reactor)
         {
-            animator?.SetBool(_hash_Open,true);
-            Open();
+            _animator?.SetBool(_hash_Open,true);
+            Open(reactor);
         }
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if(OpenColider.isTrigger && !collision.isTrigger)
+            if(_colider.isTrigger && !collision.isTrigger)
             {
-                // Debug.Log($"{collision.name}");
-                FrameRenderer.sortingOrder = 11;
+                _frameReanderer.sortingOrder = 11;
             }
         }
         void OnTriggerExit2D(Collider2D collision)
         {
-            if(OpenColider.isTrigger && !collision.isTrigger)
+            if(_colider.isTrigger && !collision.isTrigger)
             {
-                // Debug.Log($"{collision.name}");
-                FrameRenderer.sortingOrder = 0;
+                _frameReanderer.sortingOrder = 0;
             }
         }
     }
