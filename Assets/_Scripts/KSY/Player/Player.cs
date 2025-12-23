@@ -53,9 +53,9 @@ namespace Ksy.Scripts._Player
             }
         }
 
-        private void OnTriggerEnter2D(Collider2D other) 
-        {
-            if (other.CompareTag("Director"))
+        private void OnTriggerEnter2D(Collider2D collision)
+        {     
+            if (collision.CompareTag("Director"))
             {
                 gameOverEventChannel.Raise(new());
             }
