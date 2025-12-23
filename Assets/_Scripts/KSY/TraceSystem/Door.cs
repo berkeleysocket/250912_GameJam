@@ -23,6 +23,7 @@ namespace Ksy.Scripts.Object
         public bool IsOpen {get; private set;}
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
+        public event Action OnFailedOpen;
         private AudioSource audioSourceCompo;
             
 
@@ -33,14 +34,15 @@ namespace Ksy.Scripts.Object
             audioSourceCompo = GetComponent<AudioSource>();
             _frameReanderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
-            if(audioSourceCompo != null)
+            if(audioSourceCompo != null &&  audioSourceCompo.clip != null)
             {
-                OnOpend += ()=> audioSourceCompo.PlayOneShot(audioSourceCompo.clip);
+                OnOpend += audioSourceCompo.Play;
             }
         }
 
         public void Open(GameObject actor)
         {
+            if(IsOpen) return;
             if(actor != null && actor.tag == "Player")
             {
                 if(NeedKey)
@@ -52,12 +54,14 @@ namespace Ksy.Scripts.Object
                     }
                     else
                     {
+                        OnFailedOpen?.Invoke();
                         alertDataEventChannel.Raise(new AlertData("- 잠긴 문입니다. -", "열쇠가 필요합니다.", 2.5f, 0.5f));
                         return;
                     }
                 }
                 else if(NeedDirector)
                 {
+                    OnFailedOpen?.Invoke();
                     alertDataEventChannel.Raise(new AlertData("- 잠긴 문입니다. -", "다른 누군가가 열 수 있을지도...", 2.5f, 0.5f));
                     return;
                 }
@@ -69,6 +73,10 @@ namespace Ksy.Scripts.Object
                 IsOpen = true;
                 _colider.isTrigger = true;
                 OnOpend?.Invoke();
+            }
+            else
+            {
+                OnFailedOpen?.Invoke();
             }
         }
         

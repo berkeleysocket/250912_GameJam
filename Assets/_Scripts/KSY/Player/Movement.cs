@@ -1,8 +1,6 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
-using Ksy.Scripts.StressSystem;
 using Ksy.Utility;
 using _Scripts.Core.Structs;
 using _Scripts.Core.Events;
@@ -13,7 +11,6 @@ namespace Ksy.Scripts._Player
     {
         [SerializeField] private SpeedDataEventChannel speedDataEventChannel;
         [SerializeField] private float currentSpeed = 5f;
-        [SerializeField] private float maxSpeed = 15f;
         [SerializeField] private float currentVelocity = 0f;
         public float CurrentSpeed
         {
@@ -26,7 +23,7 @@ namespace Ksy.Scripts._Player
                 currentSpeed = Mathf.Clamp(value,1,maxSpeed);
             }
         }
-
+        public float maxSpeed = 15f;
         public NotifyValue<bool> notify_IsMove {get; private set;} = new NotifyValue<bool>();
         public NotifyValue<Vector2> notify_Dir {get; private set;} = new NotifyValue<Vector2>();
 
