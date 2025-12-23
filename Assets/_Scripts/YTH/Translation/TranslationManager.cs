@@ -23,9 +23,10 @@ namespace _Scripts.YTH.Translation
         [SerializeField] private Transform content;
         [SerializeField] private Image iconPrefab;
         [SerializeField] private TMP_InputField inputField;
-        [SerializeField] private int level = 5;
+        [SerializeField] private int level = 3;
         [SerializeField] private AudioClip checkSound;
         [SerializeField] private AudioClip xSound;
+        [SerializeField] private Image line;
 
         [Header("Event Channel")]
         [SerializeField] private IntEventChannel levelEventChannel;
@@ -41,16 +42,48 @@ namespace _Scripts.YTH.Translation
         private List<TranslationDataSO> translationDatas = new();
         private bool m_isTranslationActive = false;
         private int m_currentTranslation = 0;
+        private bool m_working;
+        private float m_endTime;
+        private float m_time = 0;
 
         private void Awake()
         {
             panel.gameObject.SetActive(m_isTranslationActive);
             panel.anchoredPosition = new Vector2(0, 1000);
+
+            line.fillAmount = 0;
             
             toggleTranslationEventChannel.OnEvent += ToggleTranslation;
             levelEventChannel.OnEvent += SetLevel;
             levelDownEventChannel.OnEvent += DownLevel;
             levelUpEventChannel.OnEvent += UpLevel;
+        }
+
+        private void Update()
+        {
+            if (m_working)
+            {   
+                m_time += Time.unscaledDeltaTime;
+                
+                line.fillAmount = 1 - ( m_time / m_endTime );
+                if (m_time >= m_endTime)
+                {
+                    titleDataEventChannel.Raise(new TitleData(
+                        failIcon,
+                        "- 실패했습니다. -", 
+                        $"업무 난이도가 상승합니다. 남은 업무 : {6-m_currentTranslation}개", 
+                        xSound,
+                        2.5f,
+                        0.5f
+                    ));
+                    UpLevel(new());
+                    UpLevel(new());
+                    ToggleTranslation(new Empty());
+                    doneTranslationEventChannel.Raise(new Empty());
+                    directorSpeedUpEventChannel.Raise(new Empty());
+                    m_working = false;
+                }
+            }
         }
 
         private void OnDestroy()
@@ -63,6 +96,10 @@ namespace _Scripts.YTH.Translation
         
         public void Work()
         {
+            m_endTime = (5 * level) + 20;
+            m_time = 0;
+            m_working = true;
+
             translationDatas.Clear();
             foreach (Transform child in content)
             {
@@ -101,12 +138,12 @@ namespace _Scripts.YTH.Translation
                     2.5f,
                     0.5f
                 ));
+                UpLevel(new());
                 ToggleTranslation(new Empty());
                 doneTranslationEventChannel.Raise(new Empty());
             }
             else
             {
-                UpLevel(new());
                 titleDataEventChannel.Raise(new TitleData(
                     failIcon,
                     "- 실패했습니다. -", 
@@ -116,6 +153,7 @@ namespace _Scripts.YTH.Translation
                     0.5f
                 ));
                 UpLevel(new());
+                UpLevel(new());
                 ToggleTranslation(new Empty());
                 doneTranslationEventChannel.Raise(new Empty());
                 directorSpeedUpEventChannel.Raise(new Empty());
@@ -123,6 +161,7 @@ namespace _Scripts.YTH.Translation
 
             }
 
+            m_working = false;
             m_currentTranslation++;
             currentTranslationEventChannel.Raise(m_currentTranslation);
 
@@ -163,23 +202,25 @@ namespace _Scripts.YTH.Translation
             {
                 if (panel != null)
                 {    
-                    Sequence sequence = DOTween.Sequence();
+                    Sequence sequence = DOTween.Sequence().SetUpdate(true);
                     panel.DOKill();
-                    sequence.AppendCallback(() => panel.gameObject.SetActive(m_isTranslationActive));
-                    sequence.Append(panel.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutCubic));
-                    sequence.AppendCallback(() => inputSO.Controls.Disable());
-                    sequence.AppendCallback(() => Work());
+                    sequence.AppendCallback(() => panel.gameObject.SetActive(m_isTranslationActive)).SetUpdate(true);
+                    sequence.Append(panel.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutCubic)).SetUpdate(true);
+                    sequence.AppendCallback(() => inputSO.Controls.Disable()).SetUpdate(true);
+                    sequence.AppendCallback(() => Work()).SetUpdate(true);
+                    sequence.AppendCallback(() => Time.timeScale = 0);
                 }
             }
             else
             {
                 if (panel != null)
                 { 
-                    Sequence sequence = DOTween.Sequence();
+                    Sequence sequence = DOTween.Sequence().SetUpdate(true);
                     panel.DOKill();
-                    sequence.Append(panel.DOAnchorPosY(1000, 0.25f).SetEase(Ease.OutCubic));
-                    sequence.AppendCallback(() => panel.gameObject.SetActive(m_isTranslationActive));
-                    sequence.AppendCallback(() => inputSO.Controls.Enable());
+                    sequence.Append(panel.DOAnchorPosY(1000, 0.25f).SetEase(Ease.OutCubic)).SetUpdate(true);
+                    sequence.AppendCallback(() => panel.gameObject.SetActive(m_isTranslationActive)).SetUpdate(true);
+                    sequence.AppendCallback(() => inputSO.Controls.Enable()).SetUpdate(true);
+                    sequence.AppendCallback(() => Time.timeScale = 1);
                 }
             }
         }
