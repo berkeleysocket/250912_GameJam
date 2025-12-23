@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 8519435451361171008}
   - component: {fileID: 7265479950014852066}
   - component: {fileID: 1847980304084909993}
+  - component: {fileID: 3946541158092035876}
   m_Layer: 31
   m_Name: Director
   m_TagString: Untagged
@@ -66,12 +67,12 @@ MonoBehaviour:
   target: {fileID: 0}
   speed: 5
   canMove: 1
-  changeTargetEventChannel: {fileID: 11400000, guid: 8817584ee0791674b9ffe32435d6c2e3, type: 2}
   <BossCallTransform>k__BackingField: {fileID: 0}
   bossCall: 0
   bossCallTime: 10
   traceChannel: {fileID: 11400000, guid: 275c420bffc617b43950cdb916be1af7, type: 2}
   <FindPlayer>k__BackingField: 0
+  <FieldOfview>k__BackingField: {fileID: 8409651453279168911}
 --- !u!114 &7050656808867294501
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -170,6 +171,24 @@ NavMeshAgent:
   m_BaseOffset: 0.5
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3946541158092035876
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5797115692529418688}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66777a6b5cf8456881cd873641b779e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  showGizmos: 1
+  detectionDistance: 1.5
+  detectionRadius: 0.5
+  doorLayer:
+    serializedVersion: 2
+    m_Bits: 268435456
 --- !u!1 &7866558414678459343
 GameObject:
   m_ObjectHideFlags: 0
@@ -246,9 +265,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 2081495297
+  m_SortingLayer: 4
+  m_SortingOrder: 3
   m_Sprite: {fileID: 749978687356632213, guid: 67862176c0a13614bb3f94f8a752a0cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -405,14 +424,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e14d9da651be37346b6a71d61bc5c9d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  showFov: 0
+  showDebug: 0
   fov: 45
   rayCount: 90
-  viewDistance: 50
+  viewDistance: 5
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 1073741824
   evidence:
     serializedVersion: 2
     m_Bits: 536870912
-  onTargetInFov: {fileID: 11400000, guid: 8817584ee0791674b9ffe32435d6c2e3, type: 2}
   traceChannel: {fileID: 11400000, guid: 275c420bffc617b43950cdb916be1af7, type: 2}

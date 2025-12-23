@@ -30,10 +30,10 @@ namespace AJ._01.Scripts.FSM
         private void FindPlayer()
         {
             IsAnimationEnd = false;
-            _fov.evidence = LayerMask.NameToLayer("Player");
+            /*_fov.evidence = LayerMask.NameToLayer("Player");
             var d = _fov.TryGetEvidenceInFov(out Transform s);
             if (d)
-                _director.Target = s;
+                _director.Target = s;*/
         }
     }
 }

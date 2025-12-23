@@ -6,11 +6,14 @@ using UnityEngine;
 
 namespace AJ._01.Scripts
 {
-    [AddComponentMenu("Director/FieldOfView")]
+    [AddComponentMenu("Director/FOV")]
     [RequireComponent(typeof(MeshFilter))]
     [RequireComponent(typeof(MeshRenderer))]
     public class FieldOfView : MonoBehaviour
     {
+        [SerializeField] private bool showFov = true;
+        [SerializeField] private bool showDebug = true;
+        
         private Director director;
         [Range(0, 360)] [SerializeField] private float fov = 45f;
         [SerializeField] private int rayCount = 90;
@@ -21,7 +24,7 @@ namespace AJ._01.Scripts
         
         
         private bool _isTargetInFov = false;
-        [SerializeField] private ChangeTargetEventChannel onTargetInFov;
+        public Action<Transform> onTargetInFov;
         public TraceChannel traceChannel; 
         private float _stoppingDistance;
         private Mesh mesh;
@@ -34,7 +37,7 @@ namespace AJ._01.Scripts
         private void Start()
         {
             mesh = new Mesh { name = "FOV" };
-            GetComponent<MeshFilter>().mesh = mesh;
+            GetComponent<MeshFilter>().mesh = mesh; 
             _stoppingDistance = director.AgentCompo.stoppingDistance;
         }
 
@@ -46,7 +49,7 @@ namespace AJ._01.Scripts
                 _isTargetInFov = true;
                 director.AgentCompo.stoppingDistance = .5f;
                 _lastEvidence = evidenceHit;
-                onTargetInFov.Raise(evidenceHit);
+                onTargetInFov?.Invoke(evidenceHit);
             }
             else if (!seen && _isTargetInFov)
             {
@@ -58,27 +61,63 @@ namespace AJ._01.Scripts
 
         private void LateUpdate()
         {
-            RotateFov();
-            DrawFOV();
+            if (showFov)
+            {
+                RotateFov();
+                DrawFOV();
+            }
         }
         public bool TryGetEvidenceInFov(out Transform evidenceHit)
         {
             evidenceHit = null;
 
             if (director == null) return false;
+            
             Collider2D[] hits = Physics2D.OverlapCircleAll(transform.position, viewDistance, evidence);
+            
+            Transform closestEvidence = null;
+            float closestDistance = float.MaxValue;
+            
             foreach (var col in hits)
             {
-                Vector2 toTarget = col.transform.position - transform.position;
+                if (col == null || col.transform == null) continue;
+                
+                Vector2 toTarget = (Vector2)col.transform.position - (Vector2)transform.position;
                 float dist = toTarget.magnitude;
-
-                if (Vector2.Angle(transform.right, toTarget) > fov * 0.5f)
+                
+                Vector2 moveDir = ((Vector2)director.AgentCompo.steeringTarget - (Vector2)transform.position).normalized;
+                float angleToTarget = Vector2.Angle(moveDir, toTarget);
+                float halfFov = fov * 0.5f;
+                
+                if (showDebug)
+                {
+                    Debug.DrawRay(transform.position, toTarget, Color.yellow, 0.1f);
+                    Debug.DrawRay(transform.position, moveDir * 2f, Color.blue, 0.1f);
+                }
+                
+                if (angleToTarget > halfFov) continue;
+                
+                RaycastHit2D obstacleHit = Physics2D.Raycast(transform.position, toTarget.normalized, dist, obstacleLayer );
+                
+                if (obstacleHit.collider != null)
+                {
+                    if(showDebug)
+                        Debug.DrawRay(transform.position, toTarget.normalized * dist, Color.red, 0.1f);
                     continue;
-
-                if (Physics2D.Raycast(transform.position,toTarget.normalized, dist,obstacleLayer))
-                    continue;
-
-                evidenceHit = col.transform;
+                }
+                
+                if (dist < closestDistance)
+                {
+                    closestDistance = dist;
+                    closestEvidence = col.transform;
+                }
+                if(showDebug)
+                    Debug.DrawRay(transform.position, toTarget, Color.green, 0.1f);
+            }
+            
+            if (closestEvidence != null)
+            {
+                evidenceHit = closestEvidence;
                 return true;
             }
 

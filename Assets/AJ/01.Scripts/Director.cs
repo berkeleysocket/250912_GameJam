@@ -1,13 +1,9 @@
-using System;
-using _Scripts.Core.Events;
 using _Scripts.Core.Structs;
-using _Scripts.Core.Utility;
 using AJ._01.Scripts.FSM;
 using Ksy.Scripts.TraceSystem;
-using NUnit.Framework.Constraints;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.Serialization;
 
 namespace AJ._01.Scripts
 {
@@ -18,21 +14,18 @@ namespace AJ._01.Scripts
         {
             get
             {
-                if (!IsValid(target)) return Player;
+                if (!IsValid(target))
+                {
+                    if(FieldOfview == null) GetComponentInChildren<FieldOfView>();
+                    FieldOfview.TryGetEvidenceInFov(out Transform t);
+                    return t != null ? t : Player;
+                }
 
                 return target;
             }
             set => target = value;
         }
         [SerializeField] private float speed;
-        [SerializeField] private bool canMove = true;
-        [SerializeField] private ChangeTargetEventChannel changeTargetEventChannel;
-        public Transform Player { get; private set; }
-        [field:SerializeField]public Transform BossCallTransform { get; set; }
-        public bool bossCall = false;
-        public float bossCallTime = 10f;
-        public TraceChannel traceChannel;
-        [field:SerializeField]public bool FindPlayer { get; set; } 
         public float Speed
         {
             get => speed;
@@ -42,6 +35,17 @@ namespace AJ._01.Scripts
                 AgentCompo.speed = speed;
             }
         }
+        [SerializeField] private bool canMove = true;
+        public Transform Player { get; private set; }
+        [field:SerializeField]public Transform BossCallTransform { get; set; }
+        public bool bossCall = false;
+        public float bossCallTime = 10f;
+        public TraceChannel traceChannel;
+        [field:SerializeField]public bool FindPlayer { get; set; } 
+        
+        [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
+        [SerializeField] private Vector2 velocity;
+        
         public bool CanMove => canMove;
         public NavMeshAgent AgentCompo { get; private set; }
         public Animator AnimCompo { get; private set; }  
@@ -52,6 +56,7 @@ namespace AJ._01.Scripts
             AgentCompo = GetComponent<NavMeshAgent>();
             AnimCompo = GetComponentInChildren<Animator>();
             RendererCompo = GetComponentInChildren<DirectorRenderer>();
+            FieldOfview = GetComponentInChildren<FieldOfView>();
             Player = Target;
             if(AgentCompo != null)
             {
@@ -64,8 +69,7 @@ namespace AJ._01.Scripts
 
         private void OnEnable()
         {
-            if (changeTargetEventChannel != null)
-                changeTargetEventChannel.OnEvent += HandleChangeTarget;
+            FieldOfview.onTargetInFov += HandleChangeTarget;
             if(traceChannel != null)
                 traceChannel.OnEvent += HandleFind;
         }
@@ -77,8 +81,7 @@ namespace AJ._01.Scripts
 
         private void OnDisable()
         {
-            if (changeTargetEventChannel != null)
-                changeTargetEventChannel.OnEvent -= HandleChangeTarget;
+            FieldOfview.onTargetInFov -= HandleChangeTarget;
             if(traceChannel != null)
                 traceChannel.OnEvent -= HandleFind;
         }
@@ -87,6 +90,7 @@ namespace AJ._01.Scripts
         {
             if (AgentCompo != null)
                 AgentCompo.isStopped = !canMove;
+            velocity = AgentCompo.velocity;
         }
         private bool IsValid(Transform t)
         {
@@ -110,11 +114,6 @@ namespace AJ._01.Scripts
         }
         public void UpdateAgentTarget()
         {
-            if (Target == null) 
-            {
-                Target = Player;
-                return;
-            }
             AgentCompo.SetDestination(Target.position);
         }
 
