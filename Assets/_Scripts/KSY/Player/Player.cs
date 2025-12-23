@@ -7,7 +7,6 @@ namespace Ksy.Scripts._Player
 {
     public class Player : MonoBehaviour
     {
-        public static int keyCount = 0;
         [field: SerializeField] public InputSO InputEvent {get; private set;}
         [field: SerializeField] public Movement MovementCompo {get; private set;}
         [field: SerializeField] public RendererX RednererCompo {get; private set;}

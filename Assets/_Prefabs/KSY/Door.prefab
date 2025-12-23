@@ -50,6 +50,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NeedKey: 0
   NeedDirector: 0
+  alertDataEventChannel: {fileID: 11400000, guid: a2177a797e00e654ca09e9cd77c836c9, type: 2}
 --- !u!212 &1719769861799182280
 SpriteRenderer:
   m_ObjectHideFlags: 0
