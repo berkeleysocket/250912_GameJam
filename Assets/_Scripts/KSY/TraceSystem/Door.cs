@@ -23,13 +23,20 @@ namespace Ksy.Scripts.Object
         public bool IsOpen {get; private set;}
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
+        private AudioSource audioSourceCompo;
             
 
         void Awake()
         {
             _animator = GetComponent<Animator>();
             _colider = GetComponent<BoxCollider2D>();
+            audioSourceCompo = GetComponent<AudioSource>();
             _frameReanderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+
+            if(audioSourceCompo != null)
+            {
+                OnOpend += ()=> audioSourceCompo.PlayOneShot(audioSourceCompo.clip);
+            }
         }
 
         public void Open(GameObject actor)
@@ -55,12 +62,14 @@ namespace Ksy.Scripts.Object
                     return;
                 }
             }
-            _animator?.SetBool(_hash_Open,true);
 
-            IsOpen = true;
             if(_colider != null)
+            {
+                _animator?.SetBool(_hash_Open,true);
+                IsOpen = true;
                 _colider.isTrigger = true;
-            OnOpend?.Invoke();
+                OnOpend?.Invoke();
+            }
         }
         
         public void Check()
