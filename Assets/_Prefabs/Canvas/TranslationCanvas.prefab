@@ -474,6 +474,7 @@ MonoBehaviour:
   xSound: {fileID: 8300000, guid: fdf8d5ba08da1b648b62d24093a5d8df, type: 3}
   openSound: {fileID: 8300000, guid: 325b0b65a1e7cd74fa961c17554df2d0, type: 3}
   line: {fileID: 5852595896822566798}
+  maxCount: 16
   levelEventChannel: {fileID: 11400000, guid: d9c8adbbfa377e74eb903eebe3950aa7, type: 2}
   toggleTranslationEventChannel: {fileID: 11400000, guid: cda4eb1d39f0b124f983cfd94c643cf2, type: 2}
   toggleGuideEventChannel: {fileID: 11400000, guid: f5d3ca6b2778a6947b81dc33b95263c3, type: 2}
