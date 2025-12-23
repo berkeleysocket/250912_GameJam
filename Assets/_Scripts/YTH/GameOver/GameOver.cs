@@ -9,9 +9,14 @@ namespace _Scripts.YTH.GameOver
 {    
     public class GameOver : MonoBehaviour
     {
-        [SerializeField] private EmptyEventChannel gameOverEventChannel;
+        [Header("GameOver Settings")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip sound;
         [SerializeField] private CanvasGroup panel;
         [SerializeField] private string sceneName;
+
+        [Header("Event Channels")]
+        [SerializeField] private EmptyEventChannel gameOverEventChannel;
 
 
         private void Awake()
@@ -33,6 +38,7 @@ namespace _Scripts.YTH.GameOver
 
         public void ToggleGameOver(Empty empty)
         {
+            audioSource.PlayOneShot(sound);
             Logging.Log("Die");
             if (panel != null)
             {    

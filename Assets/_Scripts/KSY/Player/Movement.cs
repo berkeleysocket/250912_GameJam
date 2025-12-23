@@ -36,7 +36,7 @@ namespace Ksy.Scripts._Player
         private void Awake()
         {
             if(!gameObject.TryGetComponent(out _body)) _body = gameObject.AddComponent<Rigidbody2D>();
-                speedDataEventChannel.OnEvent += SpeedUp;
+            speedDataEventChannel.OnEvent += SpeedUp;
         }
         private void Update()
         {
@@ -85,7 +85,7 @@ namespace Ksy.Scripts._Player
                 currentVelocity -= _deacceleration * Time.deltaTime / 1.3f;
             }
 
-            return Mathf.Clamp(currentVelocity, 0, CurrentSpeed);
+            return Mathf.Clamp(currentVelocity, 0, maxSpeed);
         }
     }
 }
