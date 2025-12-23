@@ -5,13 +5,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
-      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/DirectorDoorDetector.cs" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/DirectorDoorDetector.cs.meta" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Animation/KSY/Door/Sheet.controller" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Animation/KSY/Door/Sheet.controller" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/KSY/Tilemap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/KSY/Tilemap.unity" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/Assets/_Scenes/KSY/Tilemap/Global Volume Profile.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/KSY/Tilemap/Global Volume Profile.asset" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scripts/KSY/TraceSystem/Trace.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scripts/KSY/TraceSystem/Trace.cs" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
