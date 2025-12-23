@@ -49,11 +49,12 @@ namespace Ksy.Scripts
                 if(TryClear())
                 {
                     //Show Clear UI
+                    alertDataEventChannel.Raise(new AlertData("- 퇴근 성공! -", "\"퇴근 성공!\"", 2.5f, 0.5f));
                 }
                 else
                 {
                     //Show Clear Condition UI
-                    alertDataEventChannel.Raise(new AlertData("- 퇴근할 수 없습니다! -", "\"업무를 7개 완료하고 열쇠를 찾아야지 탈출할 수 있겠어...\"", 2.5f, 0.5f));
+                    alertDataEventChannel.Raise(new AlertData("- 퇴근할 수 없습니다! -", "\"업무를 모두 완료하고 열쇠를 찾아 다시오세요.\"", 2.5f, 0.5f));
                 }
             }
         }

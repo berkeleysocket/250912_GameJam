@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 921fb2106432afb47bb0e6012968159c, type: 3}
   m_Name: DoorKey
   m_EditorClassIdentifier: 
-  <ItemName>k__BackingField: "\uC5F4\uC1E0"
-  <Description>k__BackingField: "\uC7A0\uAE34 \uBB38\uC744 \uC5F4 \uC218 \uC788\uB2E4."
-  <Icon>k__BackingField: {fileID: 3823145881913574723, guid: b7c3821fb7f75a84492624a053835d63, type: 3}
+  <ItemName>k__BackingField: "\uBC29 \uC5F4\uC1E0"
+  <Description>k__BackingField: "\uC7A0\uAE34 \uBC29\uC758 \uBB38\uC744 \uC5F4 \uC218
+    \uC788\uB2E4."
+  <Icon>k__BackingField: {fileID: 1694913177206695654, guid: 24e63dbc4ebad0c40be599e8149282c3, type: 3}
   <ItemID>k__BackingField: 11111
-  <UseEffects>k__BackingField:
-  - {fileID: 0}
+  <UseEffects>k__BackingField: []

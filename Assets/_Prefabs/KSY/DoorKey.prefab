@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 267585445
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -4657369681490478202, guid: b7c3821fb7f75a84492624a053835d63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -96,8 +96,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1009203895656485487}
-  - component: {fileID: 8677638155923183949}
   - component: {fileID: 4063859684216098640}
+  - component: {fileID: 8677638155923183949}
   - component: {fileID: 8036729797910001830}
   m_Layer: 0
   m_Name: DoorKey
@@ -122,6 +122,28 @@ Transform:
   - {fileID: 2428488517529299406}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4063859684216098640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6388167504561423063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 14f3a689e8a8e2f4ebaf209fc87085f1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  <ItemData>k__BackingField: {fileID: 11400000, guid: 4c772881acffbd14197d510d086a3373, type: 2}
+  pickupDistance: 2
+  inputSO: {fileID: 11400000, guid: 262d5d1924d13f84a80c468f9dfbbbbe, type: 2}
+  keyPrompt: {fileID: 5583511780128814760}
+  spriteRenderer: {fileID: 8677638155923183949}
+  itemCollider: {fileID: 8036729797910001830}
+  canAddItemEventChannel: {fileID: 11400000, guid: c19bf9f6306bc304c9de21ee81626def, type: 2}
+  addItemEventChannel: {fileID: 11400000, guid: 4305d89cb6247ff4ebb4f814ecc1c31f, type: 2}
+  inventoryUpdateEventChannel: {fileID: 11400000, guid: 8b86a98f841ab3d429b6f6da616d7f96, type: 2}
+  alertDataEventChannel: {fileID: 11400000, guid: a2177a797e00e654ca09e9cd77c836c9, type: 2}
 --- !u!212 &8677638155923183949
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,42 +185,20 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 267585445
+  m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 1694913177206695654, guid: 24e63dbc4ebad0c40be599e8149282c3, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 1, y: 1}
+  m_Size: {x: 0.44, y: 0.96}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 0
+  m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &4063859684216098640
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6388167504561423063}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 14f3a689e8a8e2f4ebaf209fc87085f1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  <ItemData>k__BackingField: {fileID: 11400000, guid: 4c772881acffbd14197d510d086a3373, type: 2}
-  pickupDistance: 2
-  inputSO: {fileID: 11400000, guid: 262d5d1924d13f84a80c468f9dfbbbbe, type: 2}
-  keyPrompt: {fileID: 5583511780128814760}
-  spriteRenderer: {fileID: 8677638155923183949}
-  itemCollider: {fileID: 8036729797910001830}
-  canAddItemEventChannel: {fileID: 11400000, guid: c19bf9f6306bc304c9de21ee81626def, type: 2}
-  addItemEventChannel: {fileID: 11400000, guid: 4305d89cb6247ff4ebb4f814ecc1c31f, type: 2}
-  inventoryUpdateEventChannel: {fileID: 11400000, guid: 8b86a98f841ab3d429b6f6da616d7f96, type: 2}
-  alertDataEventChannel: {fileID: 11400000, guid: a2177a797e00e654ca09e9cd77c836c9, type: 2}
 --- !u!58 &8036729797910001830
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -234,4 +234,4 @@ CircleCollider2D:
   m_CompositeOperation: 0
   m_CompositeOrder: 0
   m_Offset: {x: 0, y: 0}
-  m_Radius: 0.5
+  m_Radius: 0.48
