@@ -6,6 +6,10 @@ using AJ._01.Scripts;
 using Ksy.Scripts.TraceSystem;
 using Ksy.Scripts._Player;
 using UnityEngine.Events;
+using System.Drawing;
+using _Scripts.YTH.Alert;
+using _Scripts.Core.Events;
+using _Scripts.YTH.Inventory;
 
 namespace Ksy.Scripts.Object
 {
@@ -13,13 +17,18 @@ namespace Ksy.Scripts.Object
     {
         [SerializeField] private bool NeedKey = false;
         [SerializeField] private bool NeedDirector = false;
+        [SerializeField] private AlertDataEventChannel alertDataEventChannel;
+        [SerializeField] private ItemDataEventChannel itemCanRemoveEventChannel;
+        [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
+        [SerializeField] private ItemDataEventChannel itemRemoveEventChannel;
+        [SerializeField] private ItemDataSO keyItem;
         private Animator _animator;
         private BoxCollider2D _colider;
         private SpriteRenderer _frameReanderer;
+        private bool _canOpen;
         public bool IsOpen {get; private set;}
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
-        public event Action<string> OnFailedOpen;
             
 
         void Awake()
@@ -35,15 +44,12 @@ namespace Ksy.Scripts.Object
             {
                 if(NeedKey)
                 {
-                    if(Player.keyCount <= 0) 
+                    Check();
+                    if(_canOpen)
                     {
-                        OnFailedOpen?.Invoke("열쇠가 필요한 문입니다.");
-                        return;
+                        itemRemoveEventChannel.Raise(new ItemData(keyItem.ItemID));
+                        alertDataEventChannel.Raise(new AlertData("- 잠긴 문입니다. -", "다른 누군가가 열 수 있을지도..", 2.5f, 0.5f));
                     }
-                }
-                else if(NeedDirector)
-                {
-                    OnFailedOpen?.Invoke("잠긴 문입니다. 다른 누군가가 열 수 있을지도..");
                     return;
                 }
             }
@@ -53,6 +59,18 @@ namespace Ksy.Scripts.Object
             if(_colider != null)
                 _colider.isTrigger = true;
             OnOpend?.Invoke();
+        }
+        
+        public void Check()
+        {
+            InventoryUpdateEventChannel.OnEvent += OnCheck;
+            itemCanRemoveEventChannel.Raise(new ItemData(keyItem.ItemID));
+        }
+
+        private void OnCheck(bool active)
+        {
+            _canOpen = active;
+            InventoryUpdateEventChannel.OnEvent -= OnCheck;
         }
 
         public GameObject GetGameObject() => gameObject; 
