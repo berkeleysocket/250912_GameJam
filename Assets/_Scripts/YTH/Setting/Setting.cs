@@ -11,6 +11,8 @@ namespace _Scripts.YTH.Setting
         [Header("Setting Settings")]
         [SerializeField] private RectTransform setting;
         [SerializeField] private InputSO inputSO;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip openSound;
 
         [Header("Event Channel")]
         [SerializeField] private EmptyEventChannel toggleSettingEventChannel;
@@ -33,6 +35,7 @@ namespace _Scripts.YTH.Setting
 
         public void ToggleSetting()
         {
+            audioSource.PlayOneShot(openSound);
             m_isSettingActive = !m_isSettingActive;
             
             if (m_isSettingActive)

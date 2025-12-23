@@ -20,6 +20,9 @@ namespace _Scripts.YTH.Inventory
         [SerializeField] private InputSO inputSO;
         [SerializeField] private GameObject inventory;
         [SerializeField] private TextMeshProUGUI currentTranslationText;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip openSound;
+        [SerializeField] private AudioClip addSound;
 
         [Header("Event Channel")]
         [SerializeField] private ItemDataEventChannel itemAddEventChannel;
@@ -201,6 +204,7 @@ namespace _Scripts.YTH.Inventory
 
         public void SpawnNewItem(ItemDataSO item, InventorySlot slot)
         {
+            audioSource.PlayOneShot(addSound);
             InventoryItem newItem  = Instantiate(prefab);
             newItem.transform.SetParent(slot.transform);
             newItem.transform.localScale = Vector3.one;
@@ -210,6 +214,7 @@ namespace _Scripts.YTH.Inventory
 
         public void OnInventory()
         {
+            audioSource.PlayOneShot(openSound);
             m_acvite = !m_acvite;
             
             if (m_acvite)

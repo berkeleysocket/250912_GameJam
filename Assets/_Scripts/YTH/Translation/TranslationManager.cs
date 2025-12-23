@@ -24,8 +24,10 @@ namespace _Scripts.YTH.Translation
         [SerializeField] private Image iconPrefab;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private int level = 3;
+        [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip checkSound;
         [SerializeField] private AudioClip xSound;
+        [SerializeField] private AudioClip openSound;
         [SerializeField] private Image line;
 
         [Header("Event Channel")]
@@ -68,6 +70,7 @@ namespace _Scripts.YTH.Translation
                 line.fillAmount = 1 - ( m_time / m_endTime );
                 if (m_time >= m_endTime)
                 {
+                    audioSource.PlayOneShot(xSound);
                     titleDataEventChannel.Raise(new TitleData(
                         failIcon,
                         "- 실패했습니다. -", 
@@ -80,6 +83,7 @@ namespace _Scripts.YTH.Translation
                     UpLevel(new());
                     ToggleTranslation(new Empty());
                     doneTranslationEventChannel.Raise(new Empty());
+                    directorSpeedUpEventChannel.Raise(new Empty());
                     directorSpeedUpEventChannel.Raise(new Empty());
                     m_working = false;
                 }
@@ -130,6 +134,7 @@ namespace _Scripts.YTH.Translation
 
             if (userInput.Equals(result.ToString(), StringComparison.OrdinalIgnoreCase))
             {
+                audioSource.PlayOneShot(checkSound);
                 titleDataEventChannel.Raise(new TitleData(
                     checkIcon,
                     "- 성공했습니다. -", 
@@ -141,9 +146,11 @@ namespace _Scripts.YTH.Translation
                 UpLevel(new());
                 ToggleTranslation(new Empty());
                 doneTranslationEventChannel.Raise(new Empty());
+                directorSpeedUpEventChannel.Raise(new Empty());
             }
             else
             {
+                audioSource.PlayOneShot(xSound);
                 titleDataEventChannel.Raise(new TitleData(
                     failIcon,
                     "- 실패했습니다. -", 
@@ -156,6 +163,7 @@ namespace _Scripts.YTH.Translation
                 UpLevel(new());
                 ToggleTranslation(new Empty());
                 doneTranslationEventChannel.Raise(new Empty());
+                directorSpeedUpEventChannel.Raise(new Empty());
                 directorSpeedUpEventChannel.Raise(new Empty());
                 
 
@@ -189,6 +197,7 @@ namespace _Scripts.YTH.Translation
 
         public void ToggleTranslation(Empty empty)
         {
+            audioSource.PlayOneShot(openSound);
             m_isTranslationActive = !m_isTranslationActive;
 
             translationDatas.Clear();
