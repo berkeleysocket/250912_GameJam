@@ -1,12 +1,6 @@
 using UnityEngine;
 using System;
 
-using _Scripts.Core.Structs;
-using AJ._01.Scripts;
-using Ksy.Scripts.TraceSystem;
-using Ksy.Scripts._Player;
-using UnityEngine.Events;
-using System.Drawing;
 using _Scripts.YTH.Alert;
 using _Scripts.Core.Events;
 using _Scripts.YTH.Inventory;
@@ -48,8 +42,16 @@ namespace Ksy.Scripts.Object
                     if(_canOpen)
                     {
                         itemRemoveEventChannel.Raise(new ItemData(keyItem.ItemID));
-                        alertDataEventChannel.Raise(new AlertData("- 잠긴 문입니다. -", "다른 누군가가 열 수 있을지도..", 2.5f, 0.5f));
                     }
+                    else
+                    {
+                        alertDataEventChannel.Raise(new AlertData("- 잠긴 문입니다. -", "열쇠가 필요합니다.", 2.5f, 0.5f));
+                        return;
+                    }
+                }
+                else if(NeedDirector)
+                {
+                    alertDataEventChannel.Raise(new AlertData("- 잠긴 문입니다. -", "다른 누군가가 열 수 있을지도...", 2.5f, 0.5f));
                     return;
                 }
             }

@@ -159,6 +159,14 @@ PrefabInstance:
     m_TransformParent: {fileID: 839037510}
     m_Modifications:
     - target: {fileID: 549853577018510102, guid: 03246b518c640ad4987e664a4a7050a6, type: 3}
+      propertyPath: NeedKey
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 549853577018510102, guid: 03246b518c640ad4987e664a4a7050a6, type: 3}
+      propertyPath: itemRemoveEventChannel
+      value: 
+      objectReference: {fileID: 11400000, guid: 5a3d217761767e54bb5b742c0fa09404, type: 2}
+    - target: {fileID: 549853577018510102, guid: 03246b518c640ad4987e664a4a7050a6, type: 3}
       propertyPath: OnOpend.m_PersistentCalls.m_Calls.Array.size
       value: 0
       objectReference: {fileID: 0}
@@ -75520,6 +75528,10 @@ PrefabInstance:
     - target: {fileID: 549853577018510102, guid: 03246b518c640ad4987e664a4a7050a6, type: 3}
       propertyPath: openDir
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 549853577018510102, guid: 03246b518c640ad4987e664a4a7050a6, type: 3}
+      propertyPath: NeedDirector
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2023445832933329779, guid: 03246b518c640ad4987e664a4a7050a6, type: 3}
       propertyPath: m_Name
