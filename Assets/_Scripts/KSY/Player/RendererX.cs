@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ksy.Scripts.Player
+namespace Ksy.Scripts._Player
 {
     [RequireComponent(typeof(SpriteRenderer))]
     public class RendererX : MonoBehaviour

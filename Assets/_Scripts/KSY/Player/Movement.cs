@@ -1,12 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using Ksy.Scripts.StressSystem;
-using Ksy.Utility;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Ksy.Scripts.Player
+using Ksy.Scripts.StressSystem;
+using Ksy.Utility;
+
+namespace Ksy.Scripts._Player
 {
     public class Movement : MonoBehaviour
     {
@@ -28,7 +27,7 @@ namespace Ksy.Scripts.Player
         public NotifyValue<bool> notify_IsMove {get; private set;} = new NotifyValue<bool>();
         public NotifyValue<Vector2> notify_Dir {get; private set;} = new NotifyValue<Vector2>();
 
-        private List<Coroutine> _movementBuffs = new List<Coroutine>();
+        //private List<Coroutine> _movementBuffs = new List<Coroutine>();
         private Rigidbody2D _body;
         private float _acceleration = 50;
         private float _deacceleration = 50;
@@ -66,11 +65,9 @@ namespace Ksy.Scripts.Player
             if(this.currentSpeed >= maxSpeed) return;
 
             var buff = StartCoroutine(_speedUp(speed,duration));
-            _movementBuffs.Add(buff);
         }
         private IEnumerator _speedUp(float speed, float duration)
         {
-            float beforeSpeed = CurrentSpeed;
             CurrentSpeed += speed;
 
             yield return new WaitForSeconds(duration);
@@ -81,11 +78,11 @@ namespace Ksy.Scripts.Player
         {
             if(inputDir.sqrMagnitude > 0)
             {
-                currentVelocity += _acceleration * Time.deltaTime / 1.5f;
+                currentVelocity += _acceleration * Time.deltaTime / 1.3f;
             }
             else
             {
-                currentVelocity -= _deacceleration * Time.deltaTime / 1.5f;
+                currentVelocity -= _deacceleration * Time.deltaTime / 1.3f;
             }
 
             return Mathf.Clamp(currentVelocity, 0, CurrentSpeed);
