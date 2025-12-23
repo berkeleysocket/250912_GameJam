@@ -4,10 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" afterDir="false" />
-    </list>
+    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
