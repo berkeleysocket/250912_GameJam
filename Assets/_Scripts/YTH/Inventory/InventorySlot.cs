@@ -1,3 +1,4 @@
+using UnityEditor.Purchasing;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,15 @@ namespace _Scripts.YTH.Inventory
         protected virtual void OnTransformChildrenChanged()
         {
             InventoryItem = GetComponentInChildren<InventoryItem>();
+        }
+
+        public void Reset()
+        {
+            if (InventoryItem != null)
+            {
+                Destroy(InventoryItem.gameObject);
+            }
+            InventoryItem = null;
         }
 
         public virtual void Initialize(InventoryManager inventoryManager)
