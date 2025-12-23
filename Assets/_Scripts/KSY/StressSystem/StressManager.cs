@@ -20,6 +20,7 @@ namespace Ksy.Scripts.StressSystem
         [field : SerializeField] public int MinStress {get; private set;} = 0;
         [SerializeField] private IntEventChannel stressDownEventChannel;
         [SerializeField] private IntEventChannel stressUpEventChannel;
+        [SerializeField] private IntEventChannel stressUpdateEventChannel;
 
         #region UnityEvent
         protected override void Awake()
@@ -58,6 +59,7 @@ namespace Ksy.Scripts.StressSystem
 
             StressIncreased?.Invoke(args);
             if(CurrentStress == MaxStress) StressReachedMax?.Invoke(args);
+            stressUpdateEventChannel.Raise(CurrentStress);
         }   
         public void DecreaseStress(int value)
         {
@@ -76,6 +78,7 @@ namespace Ksy.Scripts.StressSystem
 
             StressDecreased?.Invoke(args);
             if(CurrentStress == MinStress) StressReachedMin?.Invoke(args);
+            stressUpdateEventChannel.Raise(CurrentStress);
         }
     }
 }

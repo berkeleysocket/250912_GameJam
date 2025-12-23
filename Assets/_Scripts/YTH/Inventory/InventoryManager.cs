@@ -20,6 +20,7 @@ namespace _Scripts.YTH.Inventory
         [SerializeField] private InputSO inputSO;
         [SerializeField] private GameObject inventory;
         [SerializeField] private TextMeshProUGUI currentTranslationText;
+        [SerializeField] private TextMeshProUGUI currentStressText;
         [SerializeField] private AudioSource audioSource;
         [SerializeField] private AudioClip openSound;
         [SerializeField] private AudioClip addSound;
@@ -34,6 +35,7 @@ namespace _Scripts.YTH.Inventory
         [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
         [SerializeField] private AlertDataEventChannel alertDataEventChannel;
         [SerializeField] private IntEventChannel currentTranslationEventChannel;
+        [SerializeField] private IntEventChannel stressUpdateEventChannel;
 
         private List<InventorySlot> m_inventorySlots;
         private bool m_acvite;
@@ -52,6 +54,7 @@ namespace _Scripts.YTH.Inventory
             inputSO.OnNumbersPressed += SelecteSlot;
             inputSO.OnUsed += UseSelectedItem;
             currentTranslationEventChannel.OnEvent += UpdateCurrentTranslationText;
+            stressUpdateEventChannel.OnEvent += UpdateCurrentStressText;
         }
 
         private void Start()
@@ -75,6 +78,12 @@ namespace _Scripts.YTH.Inventory
             inputSO.OnNumbersPressed -= SelecteSlot;
             inputSO.OnUsed -= UseSelectedItem;
             currentTranslationEventChannel.OnEvent -= UpdateCurrentTranslationText;
+            stressUpdateEventChannel.OnEvent -= UpdateCurrentStressText;
+        }
+
+        private void UpdateCurrentStressText(int count)
+        {
+            currentStressText.text = $"현재 스트레스 지수 : {count}";
         }
 
         private void UpdateCurrentTranslationText(int count)
@@ -211,6 +220,7 @@ namespace _Scripts.YTH.Inventory
             newItem.transform.localPosition = Vector3.zero;
             newItem.Initialize(this, item);
         }
+        
 
         public void OnInventory()
         {
