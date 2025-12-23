@@ -129,12 +129,12 @@ namespace _Scripts.YTH.Translation
 
         private void DownLevel(Empty empty)
         {
-            level = Math.Max(3, level - 1);
+            level = UnityEngine.Random.Range(1, level);
         }
 
         private void UpLevel(Empty empty)
         {
-            level = Math.Min(level, level + 5);
+            level = UnityEngine.Random.Range(level, level + 3);
         }
 
         public void ToggleGuide()
