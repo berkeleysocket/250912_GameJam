@@ -29,8 +29,6 @@ namespace Ksy.Scripts.Player
             }
             StressManager.Instance.StressIncreased += (args)=> MovementCompo.MaxSpeed -= args.applyValue;
             StressManager.Instance.StressDecreased += (args)=> MovementCompo.MaxSpeed += args.applyValue;
-
-            StressManager.Instance.StressIncreased += (args)=> MovementCompo.MaxSpeed -= args.applyValue;
         }
 
         void OnDisable()

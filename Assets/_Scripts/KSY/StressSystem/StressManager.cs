@@ -34,7 +34,6 @@ namespace Ksy.Scripts.StressSystem
             if(value <= 0) return;
             if(CurrentStress >= MaxStress) return;
 
-            Debug.Log("IncreaseStress");
 
             int before = CurrentStress;
             int after = 0;
@@ -54,8 +53,6 @@ namespace Ksy.Scripts.StressSystem
             if(value <= 0) return;
             if(CurrentStress <= MinStress) return;
 
-            Debug.Log("DecreaseStress");
-
             int before = CurrentStress;
             int after = 0;
             int decreaseValue = 0;
@@ -63,6 +60,7 @@ namespace Ksy.Scripts.StressSystem
             CurrentStress = Mathf.Clamp(CurrentStress - value, MinStress, MaxStress);
             after = CurrentStress;
             decreaseValue = before - after;
+            Debug.Log($"Apply Value : {decreaseValue}");
 
             var args = new StressEventArgs(CurrentStress, decreaseValue);
 
