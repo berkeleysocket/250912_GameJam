@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea15bab08ec9ee840a0831efa6b287ab, type: 3}
+  m_Name: TraceUseEffectSO
+  m_EditorClassIdentifier: 
+  <Efficacy>k__BackingField: 1
+  traceAudioClip: {fileID: 0}
+  icon: {fileID: -961778442128698377, guid: 2133fbfda3057424b8bd206ae6b44e41, type: 3}
+  traveEventChannel: {fileID: 11400000, guid: 7489d2ed5d612ca4d9e89bd07389e4c5, type: 2}
+  titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
