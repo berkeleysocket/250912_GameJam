@@ -5,6 +5,7 @@ using System.Text;
 using _Scripts.Core.Events;
 using _Scripts.Core.Input;
 using _Scripts.Core.Structs;
+using _Scripts.YTH.Title;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace _Scripts.YTH.Translation
     public class TranslationManager : MonoBehaviour
     {
         [Header("Translation Manager Settings")]
+        [SerializeField] private Sprite checkIcon;
+        [SerializeField] private Sprite failIcon;
         [SerializeField] private InputSO inputSO;
         [SerializeField] private RectTransform panel;
         [SerializeField] private Transform content;
@@ -23,11 +26,18 @@ namespace _Scripts.YTH.Translation
         [SerializeField] private int level = 5;
 
         [Header("Event Channel")]
+        [SerializeField] private IntEventChannel levelEventChannel;
         [SerializeField] private EmptyEventChannel toggleTranslationEventChannel;
         [SerializeField] private EmptyEventChannel toggleGuideEventChannel;
+        [SerializeField] private EmptyEventChannel levelDownEventChannel;
+        [SerializeField] private EmptyEventChannel levelUpEventChannel;
+        [SerializeField] private TitleDataEventChannel titleDataEventChannel;
+        [SerializeField] private EmptyEventChannel doneTranslationEventChannel;
+        [SerializeField] private IntEventChannel currentTranslationEventChannel;
 
         private List<TranslationDataSO> translationDatas = new();
         private bool m_isTranslationActive = false;
+        private int m_currentTranslation = 0;
 
         private void Awake()
         {
@@ -35,17 +45,28 @@ namespace _Scripts.YTH.Translation
             panel.anchoredPosition = new Vector2(0, 1000);
             
             toggleTranslationEventChannel.OnEvent += ToggleTranslation;
+            levelEventChannel.OnEvent += SetLevel;
+            levelDownEventChannel.OnEvent += DownLevel;
+            levelUpEventChannel.OnEvent += UpLevel;
         }
 
         private void OnDestroy()
         {
             toggleTranslationEventChannel.OnEvent -= ToggleTranslation;
+            levelEventChannel.OnEvent -= SetLevel;
+            levelDownEventChannel.OnEvent -= DownLevel;
+            levelUpEventChannel.OnEvent -= UpLevel;
         }
         
-
-        [ContextMenu("Test")]
-        public void Test()
+        public void Work()
         {
+            translationDatas.Clear();
+            foreach (Transform child in content)
+            {
+                Destroy(child.gameObject);
+            }
+            inputField.text = string.Empty;
+            
             for (int i = 0; i < level; i++)
             {
                 var translationData = TranslationText.Instance.GetRandomTranslationData();
@@ -69,12 +90,51 @@ namespace _Scripts.YTH.Translation
 
             if (userInput.Equals(result.ToString(), StringComparison.OrdinalIgnoreCase))
             {
-                Debug.Log("Correct!");
+                titleDataEventChannel.Raise(new TitleData(
+                    checkIcon,
+                    "- 성공했습니다. -", 
+                    $"업무 난이도가 상승합니다. 남은 업무 : {6-m_currentTranslation}개", 
+                    null,
+                    2.5f,
+                    0.5f
+                ));
+                ToggleTranslation(new Empty());
+                doneTranslationEventChannel.Raise(new Empty());
             }
             else
             {
-                Debug.Log($"Incorrect! Correct answer is: {result}");
+                UpLevel(new());
+                titleDataEventChannel.Raise(new TitleData(
+                    failIcon,
+                    "- 실패했습니다. -", 
+                    $"업무 난이도가 상승합니다. (정답: {result}), 남은 업무 : {6-m_currentTranslation}개", 
+                    null,
+                    2.5f,
+                    0.5f
+                ));
+                UpLevel(new());
+                ToggleTranslation(new Empty());
+                doneTranslationEventChannel.Raise(new Empty());
             }
+
+            m_currentTranslation++;
+            currentTranslationEventChannel.Raise(m_currentTranslation);
+
+        }
+
+        private void SetLevel(int level)
+        {
+            this.level = level;
+        }
+
+        private void DownLevel(Empty empty)
+        {
+            level = Math.Max(3, level - 1);
+        }
+
+        private void UpLevel(Empty empty)
+        {
+            level = Math.Min(level, level + 5);
         }
 
         public void ToggleGuide()
@@ -85,6 +145,13 @@ namespace _Scripts.YTH.Translation
         public void ToggleTranslation(Empty empty)
         {
             m_isTranslationActive = !m_isTranslationActive;
+
+            translationDatas.Clear();
+            foreach (Transform child in content)
+            {
+                Destroy(child.gameObject);
+            }
+            inputField.text = string.Empty;
             
             if (m_isTranslationActive)
             {
@@ -95,6 +162,7 @@ namespace _Scripts.YTH.Translation
                     sequence.AppendCallback(() => panel.gameObject.SetActive(m_isTranslationActive));
                     sequence.Append(panel.DOAnchorPosY(0, 0.25f).SetEase(Ease.OutCubic));
                     sequence.AppendCallback(() => inputSO.Controls.Disable());
+                    sequence.AppendCallback(() => Work());
                 }
             }
             else

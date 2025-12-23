@@ -2,7 +2,9 @@ using System.Collections.Generic;
 using System.Linq;
 using _Scripts.Core.Events;
 using _Scripts.Core.Input;
+using _Scripts.YTH.Alert;
 using DG.Tweening;
+using TMPro;
 using UnityEngine;
 
 namespace _Scripts.YTH.Inventory
@@ -17,6 +19,7 @@ namespace _Scripts.YTH.Inventory
         [SerializeField] private InventoryItem prefab;
         [SerializeField] private InputSO inputSO;
         [SerializeField] private GameObject inventory;
+        [SerializeField] private TextMeshProUGUI currentTranslationText;
 
         [Header("Event Channel")]
         [SerializeField] private ItemDataEventChannel itemAddEventChannel;
@@ -27,6 +30,7 @@ namespace _Scripts.YTH.Inventory
         [SerializeField] private BoolEventChannel InventoryOpenEventChannel;
         [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
         [SerializeField] private AlertDataEventChannel alertDataEventChannel;
+        [SerializeField] private IntEventChannel currentTranslationEventChannel;
 
         private List<InventorySlot> m_inventorySlots;
         private bool m_acvite;
@@ -44,6 +48,7 @@ namespace _Scripts.YTH.Inventory
             inputSO.OnInventoryed += OnInventory;
             inputSO.OnNumbersPressed += SelecteSlot;
             inputSO.OnUsed += UseSelectedItem;
+            currentTranslationEventChannel.OnEvent += UpdateCurrentTranslationText;
         }
 
         private void Start()
@@ -66,6 +71,17 @@ namespace _Scripts.YTH.Inventory
             inputSO.OnInventoryed -= OnInventory;
             inputSO.OnNumbersPressed -= SelecteSlot;
             inputSO.OnUsed -= UseSelectedItem;
+            currentTranslationEventChannel.OnEvent -= UpdateCurrentTranslationText;
+        }
+
+        private void UpdateCurrentTranslationText(int count)
+        {
+            currentTranslationText.text = $"업무 : {count} / 7";
+
+            if (count >= 7)
+            {
+                alertDataEventChannel.Raise(new AlertData("- 모든 업무를 수행했습니다. -","비밀번호를 찾아 정문으로 퇴근하세요!", 2.5f, 0.5f));
+            }
         }
 
         public void SelecteSlot(int index)
