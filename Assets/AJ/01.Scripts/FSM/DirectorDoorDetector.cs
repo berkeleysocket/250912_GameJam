@@ -37,7 +37,7 @@ namespace AJ._01.Scripts.FSM
                 Door door = hit.collider.GetComponent<Door>();
                 if (door != null && !door.IsOpen)
                 {
-                    door.Reactive(gameObject);
+                    door.Open(gameObject);
                     Logging.Log($"Door opened: {door.name}");
                 }
             }

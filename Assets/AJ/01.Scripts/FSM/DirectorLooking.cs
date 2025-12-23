@@ -1,9 +1,4 @@
-using System;
-using DG.Tweening.Core.Easing;
-using Ksy.Scripts.Object;
-using Ksy.Scripts.Player;
 using UnityEngine;
-using Object = System.Object;
 
 namespace AJ._01.Scripts.FSM
 {
@@ -39,11 +34,6 @@ namespace AJ._01.Scripts.FSM
             var d = _fov.TryGetEvidenceInFov(out Transform s);
             if (d)
                 _director.Target = s;
-            else
-            {
-                _director.AgentCompo.SetDestination(transform.position);
-                
-            }
         }
     }
 }
