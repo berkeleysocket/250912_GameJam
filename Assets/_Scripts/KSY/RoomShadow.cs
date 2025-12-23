@@ -18,7 +18,9 @@ namespace Ksy.Scripts
         void Awake()
         {
             _roomShadow = GetComponent<SpriteRenderer>();
-            _doorShadow = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
+            
+            if(gameObject.transform.childCount != 0)
+                _doorShadow = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
             var door = gameObject.GetComponentInParent<Door>();
         }
