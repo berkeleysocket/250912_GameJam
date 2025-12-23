@@ -47,6 +47,7 @@ namespace AJ._01.Scripts
         [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
         [SerializeField] private EmptyEventChannel directorSpeedUpEventChannel;
         [SerializeField] private EmptyEventChannel directorSpeedDownEventChannel;
+        [SerializeField] private EmptyEventChannel bossCallEventChannel;
         public bool CanMove => canMove;
         public AudioSource AudioCompo { get; private set; }
         public NavMeshAgent AgentCompo { get; private set; }
@@ -63,6 +64,7 @@ namespace AJ._01.Scripts
             AnimCompo = GetComponentInChildren<Animator>();
             RendererCompo = GetComponentInChildren<DirectorRenderer>();
             FieldOfview = GetComponentInChildren<FieldOfView>();
+            
             Player = Target;
             if(AgentCompo != null)
             {
@@ -78,18 +80,24 @@ namespace AJ._01.Scripts
             FieldOfview.onTargetInFov += HandleChangeTarget;
             directorSpeedUpEventChannel.OnEvent += SpeedUp;
             directorSpeedDownEventChannel.OnEvent += SpeedDown;
-            if(traceChannel != null)
-                traceChannel.OnEvent += HandleFind;
+            traceChannel.OnEvent += HandleFind;
+            bossCallEventChannel.OnEvent += HandleBossCall;
         }
 
+        
         private void OnDisable()
         {
             FieldOfview.onTargetInFov -= HandleChangeTarget;
             directorSpeedUpEventChannel.OnEvent -= SpeedUp;
             directorSpeedDownEventChannel.OnEvent -= SpeedDown;
-            if(traceChannel != null)
-                traceChannel.OnEvent -= HandleFind;
+            traceChannel.OnEvent -= HandleFind;
+            bossCallEventChannel.OnEvent -= HandleBossCall;
         }
+        private void HandleBossCall(Empty m)
+        {
+            bossCall = true;
+        }
+
         public void SpeedUp(Empty empty)
         {
             Speed += 1;
