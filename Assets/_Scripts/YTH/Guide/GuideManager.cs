@@ -56,20 +56,20 @@ namespace _Scripts.YTH.Guide
             {
                 if (guide != null)
                 {    
-                    Sequence sequence = DOTween.Sequence();
+                    Sequence sequence = DOTween.Sequence().SetUpdate(true);
                     guide.DOKill();
-                    sequence.AppendCallback(() => guide.gameObject.SetActive(m_isGuideActive));
-                    sequence.Append(guide.DOAnchorPosX(-0, 0.25f).SetEase(Ease.OutCubic));
+                    sequence.AppendCallback(() => guide.gameObject.SetActive(m_isGuideActive)).SetUpdate(true);
+                    sequence.Append(guide.DOAnchorPosX(-0, 0.25f).SetEase(Ease.OutCubic)).SetUpdate(true);
                 }
             }
             else
             {
                 if (guide != null)
                 { 
-                    Sequence sequence = DOTween.Sequence();
+                    Sequence sequence = DOTween.Sequence().SetUpdate(true);
                     guide.DOKill();
-                    sequence.Append(guide.DOAnchorPosX(850, 0.25f).SetEase(Ease.OutCubic));
-                    sequence.AppendCallback(() => guide.gameObject.SetActive(m_isGuideActive));
+                    sequence.Append(guide.DOAnchorPosX(850, 0.25f).SetEase(Ease.OutCubic)).SetUpdate(true);
+                    sequence.AppendCallback(() => guide.gameObject.SetActive(m_isGuideActive)).SetUpdate(true);
                 }
             }
         }
