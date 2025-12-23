@@ -30,20 +30,20 @@ namespace _Scripts.YTH.Alert
         {
             if (parentTransform != null)
             {
-                Sequence sequence = DOTween.Sequence();
+                Sequence sequence = DOTween.Sequence().SetUpdate(true);
                 parentTransform.DOKill();
                 sequence.AppendCallback(() =>
                 {
                     titleText.text = alertData.title;
                     subTitleText.text = alertData.subTitle;
-                });
-                sequence.Append(parentTransform.DOAnchorPosY(80, alertData.animationDuration).SetEase(Ease.OutBack));
-                sequence.Join(titleText.DOFade(1f, alertData.animationDuration).SetEase(Ease.OutBack));
-                sequence.Join(subTitleText.DOFade(1f, alertData.animationDuration).SetEase(Ease.OutBack));
-                sequence.AppendInterval(alertData.duration);
-                sequence.Append(parentTransform.DOAnchorPosY(-120, alertData.animationDuration).SetEase(Ease.OutBack));
-                sequence.Join(titleText.DOFade(0f, alertData.animationDuration).SetEase(Ease.OutBack));
-                sequence.Join(subTitleText.DOFade(0f, alertData.animationDuration).SetEase(Ease.OutBack));
+                }).SetUpdate(true);
+                sequence.Append(parentTransform.DOAnchorPosY(80, alertData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.Join(titleText.DOFade(1f, alertData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.Join(subTitleText.DOFade(1f, alertData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.AppendInterval(alertData.duration).SetUpdate(true);
+                sequence.Append(parentTransform.DOAnchorPosY(-120, alertData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.Join(titleText.DOFade(0f, alertData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.Join(subTitleText.DOFade(0f, alertData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
             }
         }
 
