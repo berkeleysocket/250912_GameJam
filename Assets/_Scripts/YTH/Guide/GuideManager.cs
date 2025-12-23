@@ -14,6 +14,8 @@ namespace _Scripts.YTH.Guide
         [SerializeField] private RectTransform guide;
         [SerializeField] private InputSO inputSO;
         [SerializeField] private List<TranslationDataSO> guideDataList;
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip openSound;
 
         [Header("Event Channel")]
         [SerializeField] private EmptyEventChannel toggleGuideEventChannel;
@@ -50,6 +52,7 @@ namespace _Scripts.YTH.Guide
 
         public void ToggleGuide(Empty empty)
         {
+            audioSource.PlayOneShot(openSound);
             m_isGuideActive = !m_isGuideActive;
             
             if (m_isGuideActive)
