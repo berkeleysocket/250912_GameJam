@@ -1,13 +1,11 @@
 using System.Collections;
-using System.Collections.Generic;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Ksy.Scripts.StressSystem;
-using Ksy.Utility;
-using Unity.VisualScripting.Dependencies.NCalc;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-namespace Ksy.Scripts.Player
+using Ksy.Scripts.StressSystem;
+using Ksy.Utility;
+
+namespace Ksy.Scripts._Player
 {
     public class Movement : MonoBehaviour
     {

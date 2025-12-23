@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Ksy.Scripts.Player
+namespace Ksy.Scripts._Player
 {
     public class AnimationX : MonoBehaviour
     {

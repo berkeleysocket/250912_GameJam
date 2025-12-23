@@ -1,12 +1,12 @@
- using System;
- using System.Collections.Generic;
- using _Scripts.Core.Structs;
- using UnityEngine;
+using System.Collections.Generic;
+using UnityEngine;
 
+using DG.Tweening;
+
+using _Scripts.Core.Structs;
 using _Scripts.Core.Utility;
 using AJ._01.Scripts;
-using DG.Tweening;
-using UnityEngine.InputSystem;
+using Ksy.Scripts.Object;
 
 namespace Ksy.Scripts.TraceSystem
 {
@@ -33,11 +33,10 @@ namespace Ksy.Scripts.TraceSystem
 
         public void Interaction(GameObject interactor)
         {
-            var traceReactiveObj = FindInteractionObject();
+            var traceReactiveObj = FindDoor();
 
             if (traceReactiveObj != null)
             {
-                traceReactiveObj.Reactive(interactor);
                 if (count < 2)
                 {
                     GetComponent<SpriteRenderer>().DOFade(0f, 0.5f);
@@ -55,7 +54,7 @@ namespace Ksy.Scripts.TraceSystem
             else
                 Logging.Log("traceReactiveObj is null");
         }
-        private ITraceReactive FindInteractionObject()
+        private Door FindDoor()
         {
             Vector2 pos = transform.position;
             Vector2 size = Vector2.one * findSize; 
@@ -64,7 +63,7 @@ namespace Ksy.Scripts.TraceSystem
             Collider2D[] objects = Physics2D.OverlapBoxAll(pos, size, angle, findLayer);
             if(objects.Length == 0) return null;
             List<float> sortDistances = new List<float>(objects.Length);
-            Dictionary<float,ITraceReactive> objectAndDistances = new Dictionary<float, ITraceReactive>();
+            Dictionary<float,Door> objectAndDistances = new Dictionary<float, Door>();
 
             foreach(var obj in objects)
             {
@@ -72,7 +71,7 @@ namespace Ksy.Scripts.TraceSystem
 
                 var dis = Vector2.Distance(transform.position, obj.transform.position);
                 if (obj.transform.parent == null) continue;
-                if(!objectAndDistances.ContainsKey(dis) && obj.transform.parent.TryGetComponent(out ITraceReactive sc))
+                if(!objectAndDistances.ContainsKey(dis) && obj.transform.parent.TryGetComponent(out Door sc))
                 {
                     sortDistances.Add(dis);
                     objectAndDistances.Add(dis,sc);
