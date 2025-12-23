@@ -5,10 +5,8 @@ namespace AJ._01.Scripts.FSM.States
 {
     public class DirectorChaseState : DirectorState
     {
-        private float distance;
         public DirectorChaseState(Director director, string animName, DirectorStateMachine stateMachine) : base(director, animName, stateMachine)
         {
-            distance = director.AgentCompo.stoppingDistance;
         }
 
         public override void Enter()
@@ -33,7 +31,6 @@ namespace AJ._01.Scripts.FSM.States
 
         public override void Exit()
         {
-            Director.AgentCompo.stoppingDistance = distance;
             base.Exit();
         }
     }
