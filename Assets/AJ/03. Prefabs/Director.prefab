@@ -74,8 +74,12 @@ MonoBehaviour:
   traceChannel: {fileID: 11400000, guid: 275c420bffc617b43950cdb916be1af7, type: 2}
   <FindPlayer>k__BackingField: 0
   <FieldOfview>k__BackingField: {fileID: 8409651453279168911}
+  icon: {fileID: 5694927890949390159, guid: 439adcb18d02bbc4894df42dbbc82ea8, type: 3}
+  audioClip: {fileID: 8300000, guid: 8b8003ab3ee77ed47a0dd1f3546c67f6, type: 3}
   directorSpeedUpEventChannel: {fileID: 11400000, guid: 3f67325d2deb25345a7857fb2084022f, type: 2}
   directorSpeedDownEventChannel: {fileID: 11400000, guid: 8966853b134551a4b9c3ed7f46048607, type: 2}
+  bossCallEventChannel: {fileID: 11400000, guid: 890be28ca7c6e6f4c8e64601e780b8c3, type: 2}
+  titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
   walkSound: {fileID: 8300000, guid: e82ecb3488eb4ab48972bc7bb63c2240, type: 3}
 --- !u!114 &7050656808867294501
 MonoBehaviour:
@@ -214,8 +218,8 @@ AudioSource:
   SpatializePostEffects: 0
   Priority: 128
   DopplerLevel: 1
-  MinDistance: 2.18
-  MaxDistance: 4.184275
+  MinDistance: 0.37
+  MaxDistance: 0.77
   Pan2D: 0
   rolloffMode: 0
   BypassEffects: 0
@@ -368,7 +372,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 2081495297
   m_SortingLayer: 4
-  m_SortingOrder: 3
+  m_SortingOrder: 4
   m_Sprite: {fileID: 749978687356632213, guid: 67862176c0a13614bb3f94f8a752a0cc, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0

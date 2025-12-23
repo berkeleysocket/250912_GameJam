@@ -2,6 +2,8 @@ using UnityEngine;
 
 using _Scripts.Core.Input;
 using Ksy.Scripts.StressSystem;
+using JetBrains.Annotations;
+using _Scripts.Core.Events;
 
 namespace Ksy.Scripts._Player
 {
@@ -12,6 +14,7 @@ namespace Ksy.Scripts._Player
         [field: SerializeField] public Movement MovementCompo {get; private set;}
         [field: SerializeField] public RendererX RednererCompo {get; private set;}
         [field: SerializeField] public AnimationX AnimationCompo {get; private set;}
+        [SerializeField] private EmptyEventChannel gameOverEventChannel;
 
         void Start()
         {
@@ -46,6 +49,14 @@ namespace Ksy.Scripts._Player
             {
                 MovementCompo.notify_IsMove.OnChangedValue -= AnimationCompo.SetIsMove;
                 MovementCompo.notify_Dir.OnChangedValue -= AnimationCompo.SetMoveDir;
+            }
+        }
+
+        private void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.CompareTag("Director"))
+            {
+                gameOverEventChannel.Raise(new());
             }
         }
     }
