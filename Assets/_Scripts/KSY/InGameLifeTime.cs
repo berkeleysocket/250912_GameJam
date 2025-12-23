@@ -1,16 +1,16 @@
 using System;
+using Ksy.Utility;
 using UnityEngine;
 
 public class InGameLifeTime : MonoBehaviour
 {
-    [SerializeField] private float startMinute = 1;
-    [SerializeField] private float startSecond = 1;
+    [SerializeField] private float maxMinute = 1;
+    [SerializeField] private float maxSecond = 1;
 
     private float _currentMinute = 0f;
     private float _currentSecond = 0f;
 
-    private float _minuteCount = 0f;
-    private float _secondCount = 0f;
+    public NotifyValue<int> minuteCount {get; private set;} = new NotifyValue<int>();
 
     public bool IsActive {get; private set;} = false;
     public bool IsEnd {get; private set;} = false;
@@ -21,34 +21,24 @@ public class InGameLifeTime : MonoBehaviour
     public void StartTimer()
     {
         IsActive = true;
-        _currentMinute = startMinute * 60f;
-        _currentSecond = startSecond;
 
         OnTimmer?.Invoke();
     }
 
     void Update()
     {
-        if(!IsActive) return;
+        if(!IsActive || IsEnd) return;
 
-        if(_currentSecond > 0)
+        if(_currentSecond <= maxSecond)
         {
-            _currentSecond -= Time.deltaTime;
-            return;  
-        }
-
-        if(_currentMinute > 0)
-        {
-            _currentMinute -= Time.deltaTime;
+            _currentSecond += Time.deltaTime;
             return;
         }
 
-        if(!IsEnd && IsActive)
+        if(_currentMinute / 60 >= maxMinute)
         {
-            IsEnd = true;
-            IsActive = false;
-
-            OnEnd?.Invoke();
+            _currentMinute += Time.deltaTime;
+            //_minuteCount = 
         }
     }
 }
