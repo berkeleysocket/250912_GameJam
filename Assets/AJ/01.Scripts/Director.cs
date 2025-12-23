@@ -45,9 +45,12 @@ namespace AJ._01.Scripts
         [field:SerializeField]public bool FindPlayer { get; set; } 
         
         [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
+        [SerializeField] private Sprite icon;
+        [SerializeField] private AudioClip audioClip;
         [SerializeField] private EmptyEventChannel directorSpeedUpEventChannel;
         [SerializeField] private EmptyEventChannel directorSpeedDownEventChannel;
         [SerializeField] private EmptyEventChannel bossCallEventChannel;
+        [SerializeField] private TitleDataEventChannel titleDataEventChannel;
         public bool CanMove => canMove;
         public AudioSource AudioCompo { get; private set; }
         public NavMeshAgent AgentCompo { get; private set; }
@@ -96,6 +99,14 @@ namespace AJ._01.Scripts
         private void HandleBossCall(Empty m)
         {
             bossCall = true;
+            titleDataEventChannel.Raise(new(
+                icon,
+                "- 김부장이 사장님께 끌려갔습니다. -",
+                $"{bossCallTime}초 동안 사장님과 면담합니다.",
+                audioClip,
+                2.5f,
+                0.5f
+            ));
         }
 
         public void SpeedUp(Empty empty)
