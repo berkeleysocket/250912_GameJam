@@ -1,6 +1,5 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 using Ksy.Scripts.Object;
 
@@ -8,68 +7,84 @@ namespace Ksy.Scripts
 {
     public class RoomShadow : MonoBehaviour
     {
-        private SpriteRenderer _spRenderer;
+        private SpriteRenderer _roomShadow;
+        private SpriteRenderer _doorShadow;
         private Coroutine _currentFade;
         private Coroutine _currentShow;
 
+        private bool InPlayer;
+        private bool IsFade; 
+
         void Awake()
         {
-            _spRenderer = GetComponent<SpriteRenderer>();
+            _roomShadow = GetComponent<SpriteRenderer>();
+            _doorShadow = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
             var door = gameObject.GetComponentInParent<Door>();
         }
-        // void Update()
-        // {
-        //     if(Keyboard.current.lKey.wasPressedThisFrame) Fade();
-        //     if(Keyboard.current.oKey.wasPressedThisFrame) Show();
-        // }
+        void Update()
+        {
+            if(!IsFade && InPlayer)
+                Fade();
+            else if(IsFade && !InPlayer)
+                Show();
+        }
         void OnTriggerEnter2D(Collider2D collision)
         {
             if(collision.gameObject.tag == "Player")
             {
-                Fade();
+                InPlayer = true;
             }
         }
         void OnTriggerExit2D(Collider2D collision)
         {
             if(collision.gameObject.tag == "Player")
             {
-                Show();
+                InPlayer = false;
             }
         }
         public void Fade()
         {
-            if(_currentFade == null && _currentFade == null)
+            if(_currentFade == null && _currentShow == null)
                 _currentFade = StartCoroutine(_fade());
+            
         }
         public void Show()
         {
-            if(_currentFade == null && _currentFade == null)
+            if(_currentFade == null && _currentShow == null)
                 _currentShow = StartCoroutine(_show());
         }
         private IEnumerator _fade()
         {
-            while(_spRenderer.color.a > 0.5)
+            while(_roomShadow.color.a > 0.5)
             {
-                var color = _spRenderer.color;
-                color.a -= 0.01f;
-                _spRenderer.color = color;
+                var colorR = _roomShadow.color;
+                var colorD = _doorShadow.color;
+                colorR.a -= 0.01f;
+                colorD.a -= 0.01f;
+                _roomShadow.color = colorR;
+                _doorShadow.color = colorD;
                 yield return new WaitForSeconds(0.005f);
             }
 
             _currentFade = null;
+            IsFade = true;
         }
         private IEnumerator _show()
         {
-            while(_spRenderer.color.a < 1)
+            while(_roomShadow.color.a < 1)
             {
-                var color = _spRenderer.color;
-                color.a += 0.01f;
-                _spRenderer.color = color;
+                var colorR = _roomShadow.color;
+                var colorD = _doorShadow.color;
+                colorR.a += 0.01f;
+                colorD.a += 0.01f;
+                _roomShadow.color = colorR;
+                _doorShadow.color = colorD;
                 yield return new WaitForSeconds(0.005f);
             }
 
             _currentShow = null;
+            IsFade = false;
         }
     }
 }

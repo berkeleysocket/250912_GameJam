@@ -20,10 +20,16 @@ public class DoorCaster : MonoBehaviour
         {
             InDoor = true;
             this._door = door;
+            Debug.Log($"{InDoor} , {_door?.gameObject.name}");
         }
     }
     void OnTriggerExit2D(Collider2D collision)
     {
-        _door = null;
+        if(collision.TryGetComponent(out Door door))
+        {
+            InDoor = false;
+            _door = null;
+            Debug.Log($"{InDoor} , {_door?.gameObject.name}");
+        }
     }
 }
