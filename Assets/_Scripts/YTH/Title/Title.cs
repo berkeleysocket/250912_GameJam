@@ -35,7 +35,7 @@ namespace _Scripts.YTH.Title
         {
             if (parentTransform != null)
             {
-                Sequence sequence = DOTween.Sequence();
+                Sequence sequence = DOTween.Sequence().SetUpdate(true);
                 parentTransform.DOKill();
                 sequence.AppendCallback(() =>
                 {
@@ -47,22 +47,22 @@ namespace _Scripts.YTH.Title
                     {
                         audioSource.PlayOneShot(titleData.audioClip);
                     }
-                });
-                sequence.Append(parentTransform.DOScaleY(1f, titleData.animationDuration).SetEase(Ease.OutBack));
+                }).SetUpdate(true);
+                sequence.Append(parentTransform.DOScaleY(1f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
                 if (iconImage != null && titleData.iconImage != null)
                 {
-                    sequence.Join(iconImage.DOFade(1f, titleData.animationDuration).SetEase(Ease.OutBack));
+                    sequence.Join(iconImage.DOFade(1f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
                 }
-                sequence.Join(titleText.DOFade(1f, titleData.animationDuration).SetEase(Ease.OutBack));
-                sequence.Join(subTitleText.DOFade(1f, titleData.animationDuration).SetEase(Ease.OutBack));
+                sequence.Join(titleText.DOFade(1f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.Join(subTitleText.DOFade(1f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
                 sequence.AppendInterval(titleData.duration);
-                sequence.Append(parentTransform.DOScaleY(0f, titleData.animationDuration).SetEase(Ease.OutBack));
+                sequence.Append(parentTransform.DOScaleY(0f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
                 if (iconImage != null && titleData.iconImage != null)
                 {
-                    sequence.Join(iconImage.DOFade(0f, titleData.animationDuration).SetEase(Ease.OutBack));
+                    sequence.Join(iconImage.DOFade(0f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
                 }
-                sequence.Join(titleText.DOFade(0f, titleData.animationDuration).SetEase(Ease.OutBack));
-                sequence.Join(subTitleText.DOFade(0f, titleData.animationDuration).SetEase(Ease.OutBack));
+                sequence.Join(titleText.DOFade(0f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
+                sequence.Join(subTitleText.DOFade(0f, titleData.animationDuration).SetEase(Ease.OutBack)).SetUpdate(true);
             }
         }
     }

@@ -40,13 +40,13 @@ namespace _Scripts.YTH.Guide
                 }
             }
 
-            inputSO.OnGuidePressed += () => ToggleGuide(new Empty());
+            inputSO.OnGuidePressed += OnGuide;
             toggleGuideEventChannel.OnEvent += ToggleGuide;
         }
 
         private void OnDestroy()
         {
-            inputSO.OnGuidePressed -= () => ToggleGuide(new Empty());
+            inputSO.OnGuidePressed -= OnGuide;
             toggleGuideEventChannel.OnEvent -= ToggleGuide;
         }
 
@@ -75,6 +75,11 @@ namespace _Scripts.YTH.Guide
                     sequence.AppendCallback(() => guide.gameObject.SetActive(m_isGuideActive)).SetUpdate(true);
                 }
             }
+        }
+
+        private void OnGuide()
+        {
+            ToggleGuide(new Empty());
         }
     }
 }
