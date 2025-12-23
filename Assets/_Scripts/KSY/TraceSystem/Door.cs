@@ -12,7 +12,7 @@ namespace Ksy.Scripts.Object
     public class Door : MonoBehaviour
     {
         [SerializeField] private bool NeedKey = false;
-        [SerializeField] private bool NeedBoss = false;
+        [SerializeField] private bool NeedDirector = false;
         private Animator _animator;
         private BoxCollider2D _colider;
         private SpriteRenderer _frameReanderer;
@@ -41,7 +41,7 @@ namespace Ksy.Scripts.Object
                         return;
                     }
                 }
-                else if(NeedBoss)
+                else if(NeedDirector)
                 {
                     OnFailedOpen?.Invoke("잠긴 문입니다. 다른 누군가가 열 수 있을지도..");
                     return;
