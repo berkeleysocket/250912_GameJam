@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5f8f3dbd1baff3347ab7e8c51c148013, type: 3}
   m_Name: PowerAde
   m_EditorClassIdentifier: 
-  <Efficacy>k__BackingField: 1
-  <Duration>k__BackingField: 1
+  <Efficacy>k__BackingField: 7
+  <Duration>k__BackingField: 2.5
+  icon: {fileID: -1344053862893166480, guid: f4b67b4622d4d3d4ab8fb2784a64c70d, type: 3}
+  speedUpAudioClip: {fileID: 0}
+  titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
+  speedDataEventChannel: {fileID: 11400000, guid: 68abdca464eb0ca4fa9cbaa912c66e46, type: 2}

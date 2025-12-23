@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <Efficacy>k__BackingField: 1
   workDownAudioClip: {fileID: 0}
-  icon: {fileID: 5694927890949390159, guid: 439adcb18d02bbc4894df42dbbc82ea8, type: 3}
+  icon: {fileID: -1850988681521255122, guid: 4049f7538e6d7d44fa5fc8ca0f9025e4, type: 3}
   titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
   levelDownEventChannel: {fileID: 11400000, guid: 745544e36cb6b29408bea5ec794b1b58, type: 2}

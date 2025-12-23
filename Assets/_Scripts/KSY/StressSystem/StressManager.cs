@@ -2,6 +2,7 @@ using System;
 using UnityEngine;
 
 using _Scripts.Core.Utility;
+using _Scripts.Core.Events;
 
 namespace Ksy.Scripts.StressSystem
 {
@@ -17,12 +18,22 @@ namespace Ksy.Scripts.StressSystem
         [field : SerializeField] public int InitStress {get; private set;} = 0;
         [field : SerializeField] public int MaxStress {get; private set;} = 0;
         [field : SerializeField] public int MinStress {get; private set;} = 0;
+        [SerializeField] private IntEventChannel stressDownEventChannel;
+        [SerializeField] private IntEventChannel stressUpEventChannel;
 
         #region UnityEvent
         protected override void Awake()
         {
             base.Awake();
             Initialize();
+            stressDownEventChannel.OnEvent += DecreaseStress;
+            stressUpEventChannel.OnEvent += IncreaseStress;
+        }
+        protected override void OnDestroy()
+        {
+            base.OnDestroy();
+            stressDownEventChannel.OnEvent -= DecreaseStress;
+            stressUpEventChannel.OnEvent -= IncreaseStress;
         }
         #endregion
         public void Initialize()
