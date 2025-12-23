@@ -23,11 +23,15 @@ namespace Ksy.Scripts
         {
             if(_volume.profile.TryGet(out Vignette vignette))
                 vignette.intensity.value += 0.1f;
+            if (_volume.profile.TryGet(out ChromaticAberration ca))
+                ca.intensity.value += 0.2f;
         }
         public void WidenView()
         {
             if(_volume.profile.TryGet(out Vignette vignette))
                 vignette.intensity.value -= 0.1f;
+            if (_volume.profile.TryGet(out ChromaticAberration ca))
+                ca.intensity.value -= 0.2f;
         }
     }
 }
