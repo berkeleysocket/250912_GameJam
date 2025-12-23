@@ -62,6 +62,7 @@ namespace _Scripts.YTH.Object
 
         public void Interact()
         {
+            Destroy(this.gameObject);
             InteractedEventChannel.Raise(new());
         }
 
