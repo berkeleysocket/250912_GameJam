@@ -47,10 +47,6 @@ namespace AJ._01.Scripts.FSM
                     }
                 }
             }
-            else
-            {
-                Director.HandleChangeTarget(Director.Player);
-            }
         }
         
 
