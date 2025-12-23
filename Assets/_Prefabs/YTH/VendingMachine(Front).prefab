@@ -383,7 +383,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fa2deb25c028e3645aad60fa35cef956, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  resultItem: {fileID: 11400000, guid: a2e77df87ceff4548886ec0acde1bcf6, type: 2}
+  resultItem: {fileID: 11400000, guid: 6e6468174fdb6914c92937d790d7dbbe, type: 2}
   costItem: {fileID: 11400000, guid: 4f9a70a864385ef429ed3cea8437a429, type: 2}
   keyPrompt: {fileID: 6928517244240028945}
   inputSO: {fileID: 11400000, guid: 262d5d1924d13f84a80c468f9dfbbbbe, type: 2}

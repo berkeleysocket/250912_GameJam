@@ -59,7 +59,7 @@ namespace _Scripts.YTH.Guide
                     Sequence sequence = DOTween.Sequence();
                     guide.DOKill();
                     sequence.AppendCallback(() => guide.gameObject.SetActive(m_isGuideActive));
-                    sequence.Append(guide.DOAnchorPosX(-50, 0.25f).SetEase(Ease.OutCubic));
+                    sequence.Append(guide.DOAnchorPosX(-0, 0.25f).SetEase(Ease.OutCubic));
                 }
             }
             else
