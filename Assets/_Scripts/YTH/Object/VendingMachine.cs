@@ -17,7 +17,6 @@ namespace _Scripts.YTH.Object
         [Header("Event Channels")]
         [SerializeField] private ItemDataEventChannel canRemoveItemEventChannel;
         [SerializeField] private ItemDataEventChannel removeItemEventChannel;
-        [SerializeField] private ItemDataEventChannel canAddItemEventChannel;
         [SerializeField] private ItemDataEventChannel addItemEventChannel;
         [SerializeField] private BoolEventChannel inventoryUpdateEventChannel;
         [SerializeField] private AlertDataEventChannel alertDataEventChannel;
@@ -74,12 +73,11 @@ namespace _Scripts.YTH.Object
             if (m_playerinRange)
             {    
                 Remove();
-                Add();
-                if (m_CanBuy && m_CanSell)
+                if (m_CanSell)
                 {
                     removeItemEventChannel.Raise(new ItemData(costItem.ItemID));
-                    addItemEventChannel.Raise(new ItemData(resultItem.ItemID));
                     alertDataEventChannel.Raise(new($"- 아이템을 구매했습니다 -", $"{resultItem.ItemName}", 2.5f, 0.25f));
+                    addItemEventChannel.Raise(new ItemData(resultItem.ItemID));
                 }
             }
         }
@@ -94,18 +92,6 @@ namespace _Scripts.YTH.Object
         {
             m_CanSell = active;
             inventoryUpdateEventChannel.OnEvent -= OnRemove;
-        }
-
-        public void Add()
-        {
-            inventoryUpdateEventChannel.OnEvent += OnAdd;
-            canAddItemEventChannel.Raise(new ItemData(resultItem.ItemID));
-        }
-
-        private void OnAdd(bool active)
-        {
-            m_CanBuy = active;
-            inventoryUpdateEventChannel.OnEvent -= OnAdd;
         }
     }
 }

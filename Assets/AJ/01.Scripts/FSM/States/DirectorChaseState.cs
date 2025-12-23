@@ -16,7 +16,6 @@ namespace AJ._01.Scripts.FSM.States
             base.Enter();
             Logging.Log("Chase");
             Director.SetMove(true);
-            Director.AgentCompo.stoppingDistance = 0.5f;
         }
         public override void Update()
         {
