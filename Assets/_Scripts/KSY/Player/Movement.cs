@@ -4,11 +4,14 @@ using UnityEngine.InputSystem;
 
 using Ksy.Scripts.StressSystem;
 using Ksy.Utility;
+using _Scripts.Core.Structs;
+using _Scripts.Core.Events;
 
 namespace Ksy.Scripts._Player
 {
     public class Movement : MonoBehaviour
     {
+        [SerializeField] private SpeedDataEventChannel speedDataEventChannel;
         [SerializeField] private float currentSpeed = 5f;
         [SerializeField] private float maxSpeed = 15f;
         [SerializeField] private float currentVelocity = 0f;
@@ -37,6 +40,7 @@ namespace Ksy.Scripts._Player
         private void Awake()
         {
             if(!gameObject.TryGetComponent(out _body)) _body = gameObject.AddComponent<Rigidbody2D>();
+            speedDataEventChannel.OnEvent += SpeedUp;
         }
         private void Update()
         {
@@ -44,12 +48,16 @@ namespace Ksy.Scripts._Player
 
             if(Keyboard.current.spaceKey.wasPressedThisFrame) StressManager.Instance?.IncreaseStress(1);
             if(Keyboard.current.fKey.wasPressedThisFrame) StressManager.Instance?.DecreaseStress(1);
-            if(Keyboard.current.eKey.wasPressedThisFrame) SpeedUp(1f,3f);
+            if(Keyboard.current.eKey.wasPressedThisFrame) SpeedUp(new SpeedData(1f, 3f));
         }
         private void FixedUpdate()
         {
             if(_body != null)
                 _body.linearVelocity = (notify_Dir.Value * currentVelocity);
+        }
+        private void OnDestroy()
+        {
+            speedDataEventChannel.OnEvent -= SpeedUp;
         }
         #endregion
         public void Move(Vector2 dir)
@@ -60,19 +68,19 @@ namespace Ksy.Scripts._Player
                 notify_IsMove.Value = true;
             else notify_IsMove.Value = false;
         }
-        public void SpeedUp(float speed, float duration)
+        public void SpeedUp(SpeedData speedData)
         {
             if(this.currentSpeed >= maxSpeed) return;
 
-            var buff = StartCoroutine(_speedUp(speed,duration));
+            var buff = StartCoroutine(_speedUp(speedData));
         }
-        private IEnumerator _speedUp(float speed, float duration)
+        private IEnumerator _speedUp(SpeedData speedData)
         {
-            CurrentSpeed += speed;
+            CurrentSpeed += speedData.Speed;
 
-            yield return new WaitForSeconds(duration);
+            yield return new WaitForSeconds(speedData.Duration);
 
-            CurrentSpeed -= speed;
+            CurrentSpeed -= speedData.Speed;
         }
         private float CalculateSpeed(Vector2 inputDir)
         {

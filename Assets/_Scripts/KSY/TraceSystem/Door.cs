@@ -5,6 +5,7 @@ using _Scripts.Core.Structs;
 using AJ._01.Scripts;
 using Ksy.Scripts.TraceSystem;
 using Ksy.Scripts._Player;
+using UnityEngine.Events;
 
 namespace Ksy.Scripts.Object
 {
@@ -19,6 +20,7 @@ namespace Ksy.Scripts.Object
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
         public event Action<string> OnFailedOpen;
+            
 
         void Awake()
         {
@@ -27,10 +29,9 @@ namespace Ksy.Scripts.Object
             _frameReanderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         }
 
-        [ContextMenu("Open")]
         public void Open(GameObject actor)
         {
-            if(actor.tag == "Player")
+            if(actor != null && actor.tag == "Player")
             {
                 if(NeedKey)
                 {

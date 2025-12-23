@@ -64,6 +64,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03adcbd83ac2bdd408a8675cfdb54e32, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  speedDataEventChannel: {fileID: 11400000, guid: 68abdca464eb0ca4fa9cbaa912c66e46, type: 2}
   currentSpeed: 5
   maxSpeed: 15
   currentVelocity: 0

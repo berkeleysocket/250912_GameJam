@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 843151400a99df840afd861aabcf4f8b, type: 3}
-  m_Name: Master
+  m_Name: MASTER
   m_EditorClassIdentifier: 
   <TargetMixer>k__BackingField: {fileID: 24100000, guid: e129f9750280a8a4f9eeb74b379e3ac3, type: 2}
-  parameterName: Master
+  parameterName: MASTER
