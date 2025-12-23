@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -17,6 +18,11 @@ namespace Ksy.Scripts.TraceSystem
         public float distance = 2f;
         private int count = 0;
         public TraceChannel traceChannel;
+
+        private void OnEnable()
+        {
+            Destroy(gameObject, 5f);
+        }
 
         private void OnTriggerEnter2D(Collider2D other)
         {
