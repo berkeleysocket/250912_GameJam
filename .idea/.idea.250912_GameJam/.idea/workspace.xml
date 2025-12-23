@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="" />
+    <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/AJ/03. Prefabs/Director.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/03. Prefabs/Director.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Scenes/KSY/Tilemap.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Scenes/KSY/Tilemap.unity" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -105,6 +109,7 @@
       <workItem from="1766363024927" duration="7072000" />
       <workItem from="1766401911375" duration="1593000" />
       <workItem from="1766409410455" duration="5652000" />
+      <workItem from="1766449885034" duration="514000" />
     </task>
     <servers />
   </component>
