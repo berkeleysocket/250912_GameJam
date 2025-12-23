@@ -468,6 +468,8 @@ MonoBehaviour:
   iconPrefab: {fileID: 2346264920014986291, guid: 61df86666782d5f44b11d6be7e373cd2, type: 3}
   inputField: {fileID: 6686120767013813569}
   level: 5
+  checkSound: {fileID: 8300000, guid: 8b8003ab3ee77ed47a0dd1f3546c67f6, type: 3}
+  xSound: {fileID: 8300000, guid: fdf8d5ba08da1b648b62d24093a5d8df, type: 3}
   levelEventChannel: {fileID: 11400000, guid: d9c8adbbfa377e74eb903eebe3950aa7, type: 2}
   toggleTranslationEventChannel: {fileID: 11400000, guid: cda4eb1d39f0b124f983cfd94c643cf2, type: 2}
   toggleGuideEventChannel: {fileID: 11400000, guid: f5d3ca6b2778a6947b81dc33b95263c3, type: 2}
@@ -476,6 +478,7 @@ MonoBehaviour:
   titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
   doneTranslationEventChannel: {fileID: 11400000, guid: 5ac23d8c59223484ea83d6b8dd2eb9a3, type: 2}
   currentTranslationEventChannel: {fileID: 11400000, guid: 15a6649f658ae584b9129aae88e99a6e, type: 2}
+  directorSpeedUpEventChannel: {fileID: 11400000, guid: 3f67325d2deb25345a7857fb2084022f, type: 2}
 --- !u!1 &2570759134330831912
 GameObject:
   m_ObjectHideFlags: 0

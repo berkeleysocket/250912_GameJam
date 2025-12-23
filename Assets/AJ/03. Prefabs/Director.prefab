@@ -65,7 +65,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  speed: 5
+  speed: 3
   canMove: 1
   <BossCallTransform>k__BackingField: {fileID: 0}
   bossCall: 0
@@ -73,6 +73,9 @@ MonoBehaviour:
   traceChannel: {fileID: 11400000, guid: 275c420bffc617b43950cdb916be1af7, type: 2}
   <FindPlayer>k__BackingField: 0
   <FieldOfview>k__BackingField: {fileID: 8409651453279168911}
+  velocity: {x: 0, y: 0}
+  directorSpeedUpEventChannel: {fileID: 11400000, guid: 3f67325d2deb25345a7857fb2084022f, type: 2}
+  directorSpeedDownEventChannel: {fileID: 11400000, guid: 8966853b134551a4b9c3ed7f46048607, type: 2}
 --- !u!114 &7050656808867294501
 MonoBehaviour:
   m_ObjectHideFlags: 0
