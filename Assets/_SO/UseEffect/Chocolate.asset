@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Chocolate
   m_EditorClassIdentifier: 
   <Efficacy>k__BackingField: 4
-  StreesDownAudioClip: {fileID: 0}
+  StreesDownAudioClip: {fileID: 8300000, guid: 2ed556644a2bea24ba5dbdfb8437f742, type: 3}
   icon: {fileID: -6057307892391933701, guid: 38bee9b4132d41444a23b48a1c518a23, type: 3}
   titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
   stressDownEventChannel: {fileID: 11400000, guid: 9a0e8a12f0d299d45a2cc32c8a452500, type: 2}

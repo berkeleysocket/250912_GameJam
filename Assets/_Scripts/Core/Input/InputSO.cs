@@ -17,6 +17,7 @@ namespace _Scripts.Core.Input
         public event Action OnInteracted;
         public event Action OnUsed;
         public event Action OnGuidePressed;
+        public event Action OnSettingPressed;
 
         public Vector2 MoveDir { get; private set; }
 
@@ -88,6 +89,11 @@ namespace _Scripts.Core.Input
         public void OnGuide(InputAction.CallbackContext context)
         {
             if (context.performed) OnGuidePressed?.Invoke();
+        }
+
+        public void OnSetting(InputAction.CallbackContext context)
+        {
+            if (context.performed) OnSettingPressed?.Invoke();
         }
     }
 }
