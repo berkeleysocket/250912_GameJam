@@ -57,6 +57,8 @@ MonoBehaviour:
   <AnimationCompo>k__BackingField: {fileID: 3756595430484980308}
   <AudioSourceCompo>k__BackingField: {fileID: 1178265394283396273}
   gameOverEventChannel: {fileID: 11400000, guid: 75512332a45fb1846940c1287def3a18, type: 2}
+  traceEventChannel: {fileID: 11400000, guid: 7489d2ed5d612ca4d9e89bd07389e4c5, type: 2}
+  tracePrefab: {fileID: 7608876723824878992, guid: e3bca0535c04e2145ba8f0632a2f4c49, type: 3}
 --- !u!114 &885515451465885083
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -71,8 +73,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speedDataEventChannel: {fileID: 11400000, guid: 68abdca464eb0ca4fa9cbaa912c66e46, type: 2}
   currentSpeed: 10
-  maxSpeed: 15
   currentVelocity: 0
+  maxSpeed: 15
 --- !u!114 &8700394736939757198
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -258,7 +260,7 @@ GameObject:
   - component: {fileID: 7650758397733097871}
   - component: {fileID: 3756595430484980308}
   - component: {fileID: 757204576033855154}
-  - component: {fileID: 822218744913922268}
+  - component: {fileID: 7808854685327485339}
   m_Layer: 15
   m_Name: Visual
   m_TagString: Untagged
@@ -354,13 +356,13 @@ SpriteRenderer:
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 0.09, y: 0.3}
+  m_Size: {x: 0.36, y: 1.2}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!95 &822218744913922268
+--- !u!95 &7808854685327485339
 Animator:
   serializedVersion: 7
   m_ObjectHideFlags: 0

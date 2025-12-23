@@ -14,6 +14,12 @@ namespace Ksy.Scripts._Player
         [field: SerializeField] public AnimationX AnimationCompo {get; private set;}
         [field: SerializeField] public AudioSource AudioSourceCompo {get; private set;}
         [SerializeField] private EmptyEventChannel gameOverEventChannel;
+        [SerializeField] private Vector3EventChannel traceEventChannel; 
+        [SerializeField] private GameObject tracePrefab;
+        private void Awake()
+        {
+            traceEventChannel.OnEvent += Trace;
+        }
 
         void Start()
         {
@@ -56,6 +62,7 @@ namespace Ksy.Scripts._Player
                 MovementCompo.notify_IsMove.OnChangedValue -= AnimationCompo.SetIsMove;
                 MovementCompo.notify_Dir.OnChangedValue -= AnimationCompo.SetMoveDir;
             }
+            traceEventChannel.OnEvent -= Trace;
         }
 
         private void OnTriggerEnter2D(Collider2D collision)
@@ -72,6 +79,12 @@ namespace Ksy.Scripts._Player
                 AudioSourceCompo.Play();
             else
                 AudioSourceCompo.Stop();
+        }
+
+        private void Trace(Vector3 vector3)
+        {
+            var trace = Instantiate(tracePrefab);
+            trace.transform.position = vector3;
         }
     }
 }
