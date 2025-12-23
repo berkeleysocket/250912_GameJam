@@ -56,14 +56,21 @@ namespace Ksy.Scripts
         }
         private IEnumerator _fade()
         {
+            if(_roomShadow == null) yield break;
+
             while(_roomShadow.color.a > 0.5)
             {
                 var colorR = _roomShadow.color;
-                var colorD = _doorShadow.color;
                 colorR.a -= 0.01f;
-                colorD.a -= 0.01f;
                 _roomShadow.color = colorR;
-                _doorShadow.color = colorD;
+
+                if(_doorShadow != null)
+                {
+                    var colorD = _doorShadow.color;
+                    colorD.a -= 0.01f;
+                    _doorShadow.color = colorD;
+                }
+
                 yield return new WaitForSeconds(0.005f);
             }
 
@@ -72,14 +79,21 @@ namespace Ksy.Scripts
         }
         private IEnumerator _show()
         {
+            if(_roomShadow == null) yield break;
+
             while(_roomShadow.color.a < 1)
             {
                 var colorR = _roomShadow.color;
-                var colorD = _doorShadow.color;
                 colorR.a += 0.01f;
-                colorD.a += 0.01f;
                 _roomShadow.color = colorR;
-                _doorShadow.color = colorD;
+
+                if(_doorShadow != null)
+                {
+                    var colorD = _doorShadow.color;
+                    colorD.a += 0.01f;
+                    _doorShadow.color = colorD;
+                }
+
                 yield return new WaitForSeconds(0.005f);
             }
 
