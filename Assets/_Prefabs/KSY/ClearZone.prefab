@@ -152,3 +152,4 @@ MonoBehaviour:
   InventoryUpdateEventChannel: {fileID: 11400000, guid: 8b86a98f841ab3d429b6f6da616d7f96, type: 2}
   itemRemoveEventChannel: {fileID: 11400000, guid: 51334d64e927d2340ae9d398de815400, type: 2}
   keyItem: {fileID: 11400000, guid: 831a538e0e698244d99d8dd790e168a7, type: 2}
+  currentTranslationEventChannel: {fileID: 11400000, guid: 15a6649f658ae584b9129aae88e99a6e, type: 2}
