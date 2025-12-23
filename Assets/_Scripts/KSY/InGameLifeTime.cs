@@ -1,4 +1,6 @@
 using System;
+using _Scripts.Core.Events;
+using _Scripts.YTH.Alert;
 using Ksy.Scripts.StressSystem;
 using Ksy.Utility;
 using UnityEngine;
@@ -7,6 +9,8 @@ public class InGameLifeTime : MonoBehaviour
 {
     [SerializeField] private float maxMinute = 1;
     [SerializeField] private float maxSecond = 1;
+
+    [SerializeField] private AlertDataEventChannel alertDataEventChannel;
 
     private float _maxTime = 0f; 
     private float _currentTime = 0f;
@@ -20,6 +24,7 @@ public class InGameLifeTime : MonoBehaviour
 
     public NotifyValue<int> SecondCount {get; private set;} = new NotifyValue<int>();
     public NotifyValue<int> MinuteCount {get; private set;} = new NotifyValue<int>();
+
 
     public bool IsActive {get; private set;} = false;
     public bool IsEnd {get; private set;} = false;
@@ -56,35 +61,36 @@ public class InGameLifeTime : MonoBehaviour
 
     private void StressUp()
     {
-        if(!_stressIncrease01 && SecondCount.Value >= 1)
+        if(!_stressIncrease01 && MinuteCount.Value >= 1)
         {
             _stressIncrease01 = true;
             StressManager.Instance?.IncreaseStress(1);
+            alertDataEventChannel.Raise(new AlertData("- 스트레스 증가! -", "시야와 속도가 감소합니다.", 2.5f, 0.5f));
 
         }
-        if(!_stressIncrease02 && SecondCount.Value >= 2)
+        if(!_stressIncrease02 && MinuteCount.Value >= 2)
         {
             _stressIncrease02 = true;
             StressManager.Instance?.IncreaseStress(1);
-
+            alertDataEventChannel.Raise(new AlertData("- 스트레스 증가! -", "시야와 속도가 감소합니다.", 2.5f, 0.5f));
         }
-        if(!_stressIncrease03 && SecondCount.Value >= 3)
+        if(!_stressIncrease03 && MinuteCount.Value >= 3)
         {
             _stressIncrease03 = true;
             StressManager.Instance?.IncreaseStress(1);
-
+            alertDataEventChannel.Raise(new AlertData("- 스트레스 증가! -", "시야와 속도가 감소합니다.", 2.5f, 0.5f));
         }
-        if(!_stressIncrease04 && SecondCount.Value >= 4)
+        if(!_stressIncrease04 && MinuteCount.Value >= 4)
         {
             _stressIncrease04 = true;
             StressManager.Instance?.IncreaseStress(1);
-
+            alertDataEventChannel.Raise(new AlertData("- 스트레스 증가! -", "시야와 속도가 감소합니다.", 2.5f, 0.5f));
         }
-        if(!_stressIncrease05 && SecondCount.Value >= 5)
+        if(!_stressIncrease05 && MinuteCount.Value >= 5)
         {
             _stressIncrease05 = true;
             StressManager.Instance?.IncreaseStress(1);
-
+            alertDataEventChannel.Raise(new AlertData("- 스트레스 증가! -", "시야와 속도가 감소합니다.", 2.5f, 0.5f));
         }
     }
 }

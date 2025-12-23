@@ -16,6 +16,8 @@ namespace Ksy.Scripts.Object
         [SerializeField] private BoolEventChannel InventoryUpdateEventChannel;
         [SerializeField] private ItemDataEventChannel itemRemoveEventChannel;
         [SerializeField] private ItemDataSO keyItem;
+        [SerializeField] private AudioSource openAudio;
+        [SerializeField] private AudioSource failedopenAudio;
         private Animator _animator;
         private BoxCollider2D _colider;
         private SpriteRenderer _frameReanderer;
@@ -24,19 +26,22 @@ namespace Ksy.Scripts.Object
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
         public event Action OnOpend;
         public event Action OnFailedOpen;
-        private AudioSource audioSourceCompo;
+
             
 
         void Awake()
         {
             _animator = GetComponent<Animator>();
             _colider = GetComponent<BoxCollider2D>();
-            audioSourceCompo = GetComponent<AudioSource>();
             _frameReanderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
 
-            if(audioSourceCompo != null &&  audioSourceCompo.clip != null)
+            if(openAudio != null &&  openAudio.clip != null)
             {
-                OnOpend += audioSourceCompo.Play;
+                OnOpend += openAudio.Play;
+            }
+            if(failedopenAudio != null && failedopenAudio.clip != null)
+            {
+                OnFailedOpen += failedopenAudio.Play;
             }
         }
 
