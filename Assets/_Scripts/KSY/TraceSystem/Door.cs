@@ -5,6 +5,7 @@ using _Scripts.Core.Structs;
 using AJ._01.Scripts;
 using Ksy.Scripts.TraceSystem;
 using Ksy.Scripts._Player;
+using UnityEngine.Events;
 
 namespace Ksy.Scripts.Object
 {
@@ -17,8 +18,8 @@ namespace Ksy.Scripts.Object
         private SpriteRenderer _frameReanderer;
         public bool IsOpen {get; private set;}
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
-        public event Action OnOpend;
-        public event Action<string> OnFailedOpen;
+        public Action OnOpend;
+        public Action<string> OnFailedOpen;
 
         void Awake()
         {
