@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TraceUseEffectSO
   m_EditorClassIdentifier: 
   <Efficacy>k__BackingField: 1
-  traceAudioClip: {fileID: 0}
+  traceAudioClip: {fileID: 8300000, guid: 9dee7594a51d3e645b8ca990bfe8a710, type: 3}
   icon: {fileID: -961778442128698377, guid: 2133fbfda3057424b8bd206ae6b44e41, type: 3}
   traveEventChannel: {fileID: 11400000, guid: 7489d2ed5d612ca4d9e89bd07389e4c5, type: 2}
   titleDataEventChannel: {fileID: 11400000, guid: b73875997908aed47b5ec8c0f9889d1c, type: 2}
