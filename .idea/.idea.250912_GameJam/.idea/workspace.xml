@@ -6,12 +6,7 @@
   <component name="ChangeListManager">
     <list default="true" id="062642e2-440a-4b9c-9f12-e5786b9727ee" name="변경" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/.idea.250912_GameJam/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/00.Scene/New Scene.unity" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/Director.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/DirectorLooking.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/DirectorLooking.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/DirectorState.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FSM/DirectorState.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/01.Scripts/FieldOfView.cs" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Assets/AJ/03. Prefabs/Director.prefab" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/AJ/03. Prefabs/Director.prefab" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Assets/_Fonts/SDF/Galmuri11 SDF.asset" beforeDir="false" afterPath="$PROJECT_DIR$/Assets/_Fonts/SDF/Galmuri11 SDF.asset" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,6 +111,7 @@
       <workItem from="1766401911375" duration="1593000" />
       <workItem from="1766409410455" duration="5652000" />
       <workItem from="1766449885034" duration="2461000" />
+      <workItem from="1766466497820" duration="9000" />
     </task>
     <servers />
   </component>
@@ -124,7 +120,6 @@
   </component>
   <component name="UnityProjectConfiguration" hasMinimizedUI="true" />
   <component name="UnityProjectDiscoverer">
-    <option name="hasUnityReference" value="true" />
     <option name="unityProject" value="true" />
     <option name="unityProjectFolder" value="true" />
   </component>

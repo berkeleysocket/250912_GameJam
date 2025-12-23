@@ -1,6 +1,7 @@
 using _Scripts.Core.Structs;
 using AJ._01.Scripts.FSM;
 using Ksy.Scripts.TraceSystem;
+using Unity.Collections;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -43,6 +44,8 @@ namespace AJ._01.Scripts
         [field:SerializeField]public bool FindPlayer { get; set; } 
         
         [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
+        [SerializeField] private Vector2 velocity;
+        
         public bool CanMove => canMove;
         public NavMeshAgent AgentCompo { get; private set; }
         public Animator AnimCompo { get; private set; }  
@@ -87,6 +90,7 @@ namespace AJ._01.Scripts
         {
             if (AgentCompo != null)
                 AgentCompo.isStopped = !canMove;
+            velocity = AgentCompo.velocity;
         }
         private bool IsValid(Transform t)
         {
