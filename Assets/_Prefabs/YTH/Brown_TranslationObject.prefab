@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9174003167729676771}
   - component: {fileID: 2333876516657357411}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Key Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -73,8 +73,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 267585445
+  m_SortingLayer: 5
   m_SortingOrder: 2
   m_Sprite: {fileID: -4657369681490478202, guid: b7c3821fb7f75a84492624a053835d63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -100,7 +100,7 @@ GameObject:
   - component: {fileID: 4057072341867767474}
   - component: {fileID: 130435232768119703}
   - component: {fileID: 7431374572371247916}
-  m_Layer: 0
+  m_Layer: 16
   m_Name: Brown_TranslationObject
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -164,8 +164,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 267585445
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: 533572491300144185, guid: 041696a0ed9d6ac49b505b95303bd03d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}

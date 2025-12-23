@@ -1,3 +1,4 @@
+using _Scripts.Core.Events;
 using _Scripts.Core.Structs;
 using AJ._01.Scripts.FSM;
 using Ksy.Scripts.TraceSystem;
@@ -44,6 +45,9 @@ namespace AJ._01.Scripts
         [field:SerializeField]public bool FindPlayer { get; set; } 
         
         [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
+        [SerializeField] private Vector2 velocity;
+        [SerializeField] private EmptyEventChannel directorSpeedUpEventChannel;
+        [SerializeField] private EmptyEventChannel directorSpeedDownEventChannel;
         
         public AudioSource AudioCompo { get; private set; }
         public bool CanMove => canMove;
@@ -72,8 +76,28 @@ namespace AJ._01.Scripts
         private void OnEnable()
         {
             FieldOfview.onTargetInFov += HandleChangeTarget;
+            directorSpeedUpEventChannel.OnEvent += SpeedUp;
+            directorSpeedDownEventChannel.OnEvent += SpeedDown;
             if(traceChannel != null)
                 traceChannel.OnEvent += HandleFind;
+        }
+
+        private void OnDisable()
+        {
+            FieldOfview.onTargetInFov -= HandleChangeTarget;
+            directorSpeedUpEventChannel.OnEvent -= SpeedUp;
+            directorSpeedDownEventChannel.OnEvent -= SpeedDown;
+            if(traceChannel != null)
+                traceChannel.OnEvent -= HandleFind;
+        }
+        public void SpeedUp(Empty empty)
+        {
+            Speed += 1;
+        }
+
+        public void SpeedDown(Empty empty)
+        {
+            Speed -= 1;
         }
 
         private void HandleFind(Empty b)
@@ -81,12 +105,6 @@ namespace AJ._01.Scripts
             FindPlayer = true;
         }
 
-        private void OnDisable()
-        {
-            FieldOfview.onTargetInFov -= HandleChangeTarget;
-            if(traceChannel != null)
-                traceChannel.OnEvent -= HandleFind;
-        }
     
         private void Update()
         {

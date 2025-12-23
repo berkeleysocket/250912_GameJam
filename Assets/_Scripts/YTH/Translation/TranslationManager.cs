@@ -24,6 +24,8 @@ namespace _Scripts.YTH.Translation
         [SerializeField] private Image iconPrefab;
         [SerializeField] private TMP_InputField inputField;
         [SerializeField] private int level = 5;
+        [SerializeField] private AudioClip checkSound;
+        [SerializeField] private AudioClip xSound;
 
         [Header("Event Channel")]
         [SerializeField] private IntEventChannel levelEventChannel;
@@ -34,6 +36,7 @@ namespace _Scripts.YTH.Translation
         [SerializeField] private TitleDataEventChannel titleDataEventChannel;
         [SerializeField] private EmptyEventChannel doneTranslationEventChannel;
         [SerializeField] private IntEventChannel currentTranslationEventChannel;
+        [SerializeField] private EmptyEventChannel directorSpeedUpEventChannel;
 
         private List<TranslationDataSO> translationDatas = new();
         private bool m_isTranslationActive = false;
@@ -93,8 +96,8 @@ namespace _Scripts.YTH.Translation
                 titleDataEventChannel.Raise(new TitleData(
                     checkIcon,
                     "- 성공했습니다. -", 
-                    $"업무 난이도가 상승합니다. 남은 업무 : {6-m_currentTranslation}개", 
-                    null,
+                    $"남은 업무 : {6-m_currentTranslation}개", 
+                    checkSound,
                     2.5f,
                     0.5f
                 ));
@@ -108,13 +111,16 @@ namespace _Scripts.YTH.Translation
                     failIcon,
                     "- 실패했습니다. -", 
                     $"업무 난이도가 상승합니다. (정답: {result}), 남은 업무 : {6-m_currentTranslation}개", 
-                    null,
+                    xSound,
                     2.5f,
                     0.5f
                 ));
                 UpLevel(new());
                 ToggleTranslation(new Empty());
                 doneTranslationEventChannel.Raise(new Empty());
+                directorSpeedUpEventChannel.Raise(new Empty());
+                
+
             }
 
             m_currentTranslation++;

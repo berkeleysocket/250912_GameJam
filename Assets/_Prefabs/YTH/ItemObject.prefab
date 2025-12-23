@@ -76,8 +76,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 267585445
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -3042775341902697147, guid: 0e4323864247ccb468920618594c2050, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -111,6 +111,7 @@ MonoBehaviour:
   canAddItemEventChannel: {fileID: 11400000, guid: c19bf9f6306bc304c9de21ee81626def, type: 2}
   addItemEventChannel: {fileID: 11400000, guid: 4305d89cb6247ff4ebb4f814ecc1c31f, type: 2}
   inventoryUpdateEventChannel: {fileID: 11400000, guid: 8b86a98f841ab3d429b6f6da616d7f96, type: 2}
+  alertDataEventChannel: {fileID: 11400000, guid: a2177a797e00e654ca09e9cd77c836c9, type: 2}
 --- !u!58 &6187505647675191992
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -220,8 +221,8 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
+  m_SortingLayerID: 267585445
+  m_SortingLayer: 5
   m_SortingOrder: 0
   m_Sprite: {fileID: -4657369681490478202, guid: b7c3821fb7f75a84492624a053835d63, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
