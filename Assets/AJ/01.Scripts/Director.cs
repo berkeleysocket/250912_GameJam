@@ -45,18 +45,21 @@ namespace AJ._01.Scripts
         [field:SerializeField]public bool FindPlayer { get; set; } 
         
         [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
-        [SerializeField] private Vector2 velocity;
         [SerializeField] private EmptyEventChannel directorSpeedUpEventChannel;
         [SerializeField] private EmptyEventChannel directorSpeedDownEventChannel;
-        
         public bool CanMove => canMove;
+        public AudioSource AudioCompo { get; private set; }
         public NavMeshAgent AgentCompo { get; private set; }
         public Animator AnimCompo { get; private set; }  
         public DirectorRenderer RendererCompo { get; private set; }
         
+        [Header("Sounds")]
+        public AudioClip walkSound;
+        
         private void Awake()
         {
             AgentCompo = GetComponent<NavMeshAgent>();
+            AudioCompo = GetComponent<AudioSource>();
             AnimCompo = GetComponentInChildren<Animator>();
             RendererCompo = GetComponentInChildren<DirectorRenderer>();
             FieldOfview = GetComponentInChildren<FieldOfView>();
@@ -107,7 +110,6 @@ namespace AJ._01.Scripts
         {
             if (AgentCompo != null)
                 AgentCompo.isStopped = !canMove;
-            velocity = AgentCompo.velocity;
         }
         private bool IsValid(Transform t)
         {
@@ -132,6 +134,15 @@ namespace AJ._01.Scripts
         public void UpdateAgentTarget()
         {
             AgentCompo.SetDestination(Target.position);
+            PlaySound();
+        }
+
+        public void PlaySound()
+        {
+            AudioCompo.clip = walkSound;
+            if (AudioCompo.isPlaying) return;
+            if (AgentCompo.velocity == Vector3.zero) AudioCompo.Stop();
+            AudioCompo.PlayOneShot(walkSound);
         }
 
         private void OnTriggerEnter2D(Collider2D other)

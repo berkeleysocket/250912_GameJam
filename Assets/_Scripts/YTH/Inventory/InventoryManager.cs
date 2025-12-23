@@ -193,7 +193,7 @@ namespace _Scripts.YTH.Inventory
                 }
                 if (slot.InventoryItem.Item == itemDataSO)
                 {
-                    Destroy(slot.InventoryItem.gameObject);
+                    slot.Reset();
                     return;
                 }
             }
