@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Scripts.Core.Utility;
+using UnityEngine;
 
 namespace AJ._01.Scripts.FSM
 {
@@ -31,13 +32,13 @@ namespace AJ._01.Scripts.FSM
                 StateMachine.ChangeState(DirectorStateType.Looking);
             if (Director.bossCall)
             {
-                Debug.Log("BossCall");
+                Logging.Log("BossCall");
                 Director.SetMove(true);
                 Director.HandleChangeTarget(Director.BossCallTransform);
                 Director.UpdateAgentTarget();
                 if (Director.AgentCompo.remainingDistance <= Director.AgentCompo.stoppingDistance)
                 {
-                    Debug.Log("Boss Call");
+                    Logging.Log("Boss Call");
                     _timer += Time.deltaTime;
                     if (_timer > Director.bossCallTime)
                     {

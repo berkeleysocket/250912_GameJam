@@ -1,3 +1,4 @@
+using _Scripts.Core.Utility;
 using Ksy.Scripts.Object;
 using UnityEngine;
 
@@ -6,7 +7,8 @@ namespace AJ._01.Scripts.FSM
     public class DirectorDoorDetector : MonoBehaviour
     {
         private Director _director;
-
+        [SerializeField] private bool showGizmos;
+        
         [Header("Door Detection Settings")] 
         [SerializeField]private float detectionDistance = 2f;
         [SerializeField] private float detectionRadius = 0.5f;
@@ -35,13 +37,14 @@ namespace AJ._01.Scripts.FSM
                 Door door = hit.collider.GetComponent<Door>();
                 if (door != null && !door.IsOpen)
                 {
-                    door.Reactive();
-                    Debug.Log($"Door opened: {door.name}");
+                    door.Reactive(gameObject);
+                    Logging.Log($"Door opened: {door.name}");
                 }
             }
         }
         private void OnDrawGizmos()
         {
+            if (!showGizmos) return;
             if (_director == null || _director.AgentCompo == null) return;
             
             Vector2 moveDirection = _director.AgentCompo.velocity.normalized;
