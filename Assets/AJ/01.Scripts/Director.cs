@@ -44,16 +44,18 @@ namespace AJ._01.Scripts
         [field:SerializeField]public bool FindPlayer { get; set; } 
         
         [field:SerializeField] public FieldOfView FieldOfview { get; private set; }
-        [SerializeField] private Vector2 velocity;
         
+        public AudioSource AudioCompo { get; private set; }
         public bool CanMove => canMove;
         public NavMeshAgent AgentCompo { get; private set; }
         public Animator AnimCompo { get; private set; }  
         public DirectorRenderer RendererCompo { get; private set; }
         
+        [SerializeField] private Vector2 velocity;
         private void Awake()
         {
             AgentCompo = GetComponent<NavMeshAgent>();
+            AudioCompo = GetComponent<AudioSource>();
             AnimCompo = GetComponentInChildren<Animator>();
             RendererCompo = GetComponentInChildren<DirectorRenderer>();
             FieldOfview = GetComponentInChildren<FieldOfView>();
