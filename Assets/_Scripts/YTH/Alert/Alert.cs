@@ -2,8 +2,6 @@ using _Scripts.Core.Events;
 using DG.Tweening;
 using TMPro;
 using UnityEngine;
-using UnityEngine.InputSystem.iOS;
-using UnityEngine.PlayerLoop;
 
 namespace _Scripts.YTH.Alert
 {
