@@ -96,7 +96,7 @@ namespace _Scripts.YTH.Translation
         
         public void Work()
         {
-            m_endTime = (5 * level) + 20;
+            m_endTime = (3 * level) + 15;
             m_time = 0;
             m_working = true;
 

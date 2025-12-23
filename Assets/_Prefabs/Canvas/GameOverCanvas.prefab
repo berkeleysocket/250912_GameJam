@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 4709493251722668607}
   - component: {fileID: 92291934651493050}
   - component: {fileID: 1626232884470303822}
-  - component: {fileID: 470845542680879383}
   m_Layer: 5
   m_Name: GameOverCanvas
   m_TagString: Untagged
@@ -117,20 +116,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   gameOverEventChannel: {fileID: 11400000, guid: 75512332a45fb1846940c1287def3a18, type: 2}
-  panel: {fileID: 470845542680879383}
-  sceneName: 
---- !u!225 &470845542680879383
-CanvasGroup:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 263432662730092908}
-  m_Enabled: 1
-  m_Alpha: 1
-  m_Interactable: 1
-  m_BlocksRaycasts: 1
-  m_IgnoreParentGroups: 0
+  panel: {fileID: 6049235403428121304}
+  sceneName: MainMenu
 --- !u!1 &2810969661577360273
 GameObject:
   m_ObjectHideFlags: 0
@@ -489,6 +476,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7766106856796392508}
+  - component: {fileID: 6049235403428121304}
   m_Layer: 5
   m_Name: GameOver
   m_TagString: Untagged
@@ -516,6 +504,18 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!225 &6049235403428121304
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6470330530925807389}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &6884767578533826676
 GameObject:
   m_ObjectHideFlags: 0

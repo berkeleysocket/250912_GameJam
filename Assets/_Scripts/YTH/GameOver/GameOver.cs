@@ -1,5 +1,6 @@
 using _Scripts.Core.Events;
 using _Scripts.Core.Structs;
+using _Scripts.Core.Utility;
 using DG.Tweening;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -26,12 +27,13 @@ namespace _Scripts.YTH.GameOver
 
         public void OnButton()
         {
+            Time.timeScale = 1;
             SceneManager.LoadScene(sceneName);
         }
 
         public void ToggleGameOver(Empty empty)
         {
-
+            Logging.Log("Die");
             if (panel != null)
             {    
                 Sequence sequence = DOTween.Sequence().SetUpdate(true);
