@@ -42,8 +42,8 @@ namespace Ksy.Scripts._Player
             }
             if(StressManager.Instance != null)
             {
-                StressManager.Instance.StressIncreased += (args)=> MovementCompo.maxSpeed -= 1;
-                StressManager.Instance.StressDecreased += (args)=> MovementCompo.maxSpeed += 1;
+                StressManager.Instance.StressIncreased += (args)=> MovementCompo.maxSpeed -= 2;
+                StressManager.Instance.StressDecreased += (args)=> MovementCompo.maxSpeed += 2;
             }
         }
 

@@ -71,7 +71,6 @@ namespace Ksy.Scripts.StressSystem
             CurrentStress = Mathf.Clamp(CurrentStress - value, MinStress, MaxStress);
             after = CurrentStress;
             decreaseValue = before - after;
-            Debug.Log($"Apply Value : {decreaseValue}");
 
             var args = new StressEventArgs(CurrentStress, decreaseValue);
 
