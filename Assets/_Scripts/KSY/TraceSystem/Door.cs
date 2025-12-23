@@ -18,8 +18,9 @@ namespace Ksy.Scripts.Object
         private SpriteRenderer _frameReanderer;
         public bool IsOpen {get; private set;}
         private readonly int _hash_Open = Animator.StringToHash("IsOpen");
-        public Action OnOpend;
-        public Action<string> OnFailedOpen;
+        public event Action OnOpend;
+        public event Action<string> OnFailedOpen;
+            
 
         void Awake()
         {
@@ -28,10 +29,9 @@ namespace Ksy.Scripts.Object
             _frameReanderer = gameObject.transform.GetChild(0).GetComponent<SpriteRenderer>();
         }
 
-        [ContextMenu("Open")]
         public void Open(GameObject actor)
         {
-            if(actor.tag == "Player")
+            if(actor != null && actor.tag == "Player")
             {
                 if(NeedKey)
                 {

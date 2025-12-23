@@ -2,6 +2,8 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
+using Ksy.Scripts.Object;
+
 namespace Ksy.Scripts
 {
     public class RoomShadow : MonoBehaviour
@@ -13,11 +15,27 @@ namespace Ksy.Scripts
         void Awake()
         {
             _spRenderer = GetComponent<SpriteRenderer>();
+
+            var door = gameObject.GetComponentInParent<Door>();
         }
-        void Update()
+        // void Update()
+        // {
+        //     if(Keyboard.current.lKey.wasPressedThisFrame) Fade();
+        //     if(Keyboard.current.oKey.wasPressedThisFrame) Show();
+        // }
+        void OnTriggerEnter2D(Collider2D collision)
         {
-            if(Keyboard.current.lKey.wasPressedThisFrame) Fade();
-            if(Keyboard.current.oKey.wasPressedThisFrame) Show();
+            if(collision.gameObject.tag == "Player")
+            {
+                Fade();
+            }
+        }
+        void OnTriggerExit2D(Collider2D collision)
+        {
+            if(collision.gameObject.tag == "Player")
+            {
+                Show();
+            }
         }
         public void Fade()
         {
