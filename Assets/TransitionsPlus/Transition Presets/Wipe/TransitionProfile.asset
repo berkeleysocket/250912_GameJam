@@ -10,13 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e0f9d22fa85eb43e8af60b22fb69c43c, type: 3}
-  m_Name: WipeRightTextureNoiseToonDot
+  m_Name: TransitionProfile
   m_EditorClassIdentifier: 
-  type: 20
+  type: 0
   invert: 0
   timeMultiplier: 1
-  colorMode: 0
-  color: {r: 1, g: 1, b: 1, a: 1}
+  colorMode: 1
+  color: {r: 0, g: 0, b: 0, a: 1}
   gradient:
     serializedVersion: 2
     key0: {r: 1, g: 1, b: 1, a: 1}
@@ -50,21 +50,21 @@ MonoBehaviour:
   gradientMode: 0
   shapeTexture: {fileID: 2800000, guid: 2873235459d4547b58d76a16bc824b5a, type: 3}
   duration: 2
-  noiseIntensity: 1
-  vignetteIntensity: 0
-  toonGradientIntensity: 1
-  toonDotIntensity: 0.8
-  toonDotRadius: 0.4
+  noiseIntensity: 0.5
+  vignetteIntensity: 1
+  toonGradientIntensity: 71
+  toonDotIntensity: 0.586
+  toonDotRadius: 0.333
   toonDotCount: 32
   rotationMultiplier: 0
   rotation: 0
   distortion: 0
-  splits: 1
+  splits: 2
   center: {x: 0, y: 0}
   keepAspectRatio: 0
   seed: 0
   centersCount: 16
-  texture: {fileID: 2800000, guid: 2bc53f4ba55944f488d17906d42df3bd, type: 3}
+  texture: {fileID: 0}
   cellDivisions: 32
   spread: 64
   noiseScale: {x: 1, y: 1}
